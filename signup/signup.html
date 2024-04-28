@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="favicon" rel="icon" type="image/x-icon" href="cfxfavicon.png">
+    <link rel="stylesheet" type="text/css" href="signup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>Registration</title>
+</head>
+<body>
+    <div class="wrapper" style="background-image: url('../images/bg1_login.jpg')">
+
+        <div class="inner">
+            <div class="img-holder">
+                <img src="../images/bg1_login.jpg">
+            </div>
+            <form method="post" action="signup.php">   
+
+
+
+                <h3>Create Your Account</h3>
+                <div class="form-group">
+                    <input type="text" name="fname" placeholder="First Name" class="form-control" required>
+                    <input type="text" name="lname" placeholder="Last Name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Email" class="form-control" required>
+                    <input type="text" name="username" placeholder="Username" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <select name="gender" id class="form-control" required>
+                        <option value disabled selected>Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="others">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-wrapper">
+                    Birthday
+                    <input type="date" name="dob" class="form-control" required>
+                </div>
+
+                
+                <div class="form-wraper">
+                    <input type="password" name="password" placeholder="Password" class="form-control" required>
+                    
+                </div>
+
+                <div class="form-wrapper">
+                    <input type="text" name="password" placeholder="Confirm-Password" class="form-control" required>
+                </div>
+                <br>
+                <button class="btn-register" name="submit">
+                    Create Account
+                </button>
+                
+                <!-- <div class="login-if">
+                    <p>Already have an account? <a src="../login/login.html"> Log in</a></p>
+                </div> -->
+            </form>
+        </div>
+    </div>
+</body>
+</html>
