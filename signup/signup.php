@@ -36,7 +36,8 @@ if(isset($_POST['submit']))
     $sql1 = "INSERT INTO Customer(customer_id, date_joined, verification_code, is_verified) VALUES (SEQ_CUSTOMER_ID.CURRVAL, SYSDATE, '$code', 0)";
 
     if(oci_execute(oci_parse($connection,$sql)) && oci_execute(oci_parse($connection, $sql1))) {
-        header("Location: login.html");
+        header("Location: ../login/login.html");
+
         exit;
     }
     else {
