@@ -24,7 +24,7 @@ if(isset($_POST['login']))
 
         if ($password == $pass) {
             //$_SESSION['username'] = $username;
-            header("Location: homepage.html");
+            header("Location: ../component/home.php");
             exit;
         }
         else {

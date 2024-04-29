@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="product-card.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="card">
+        <img id="product-image" src="placeholder.jpg" alt="Product Image">
+        <div class="card-content">
+          <h2 id="product-name">Product Name</h2>
+          <p id="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <p class="price">Price: $<span id="product-price">99.99</span></p>
+          <p class="discount">Discount: 10%</p>
+          <input type="file" id="image-upload" accept="image/*" onchange="displayImage(event)">
+          <br>
+          <label for="image-upload" class="upload-btn">Upload Image</label>
+        </div>
+      </div>
+      
+      <script>
+        function displayImage(event) {
+          var image = document.getElementById('product-image');
+          var reader = new FileReader();
+          reader.onload = function(){
+            image.src = reader.result;
+          };
+          reader.readAsDataURL(event.target.files[0]);
+        }
+      </script>
+</body>
+</html>
