@@ -1,0 +1,110 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Add this line to ensure padding and border are included in the element's total width and height */
+}
+
+.wrapper{
+    background-size: cover;
+    height: 100vh;
+    background-image: url('nycity.jpg');
+    font-family:"Sofia", sans-serif;
+    
+}
+
+.container {
+    position: relative;
+    top: 15.5%;
+    width: 97%;
+    height: 70%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #f99f1b;
+    border-radius: 20px;
+    box-shadow: 0 10px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+    color: rgb(255, 255, 255);
+}
+
+.left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    backdrop-filter: blur(50px);
+    -webkit-clip-path: polygon(24% 0, 100% 0, 100% 100%, 0% 100%);
+    clip-path: polygon(24% 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f99f1b;
+    -webkit-clip-path: polygon(0 0, 40% 0, 65% 100%, 0% 100%);
+    clip-path: polygon(0 0, 40% 0, 65% 100%, 0% 100%);
+}
+
+.form-container {
+    position: relative;
+    z-index: 2; /* Set a higher z-index to ensure it's on top of the .left and .right elements */
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.form-group {
+    margin-top: 2%;
+}
+
+label {
+    display: block;
+    margin-bottom: 1px;
+}
+
+#first-name{
+    width: 13%;
+    margin-right: 1.9%;
+}
+
+#last-name{
+    width: 14.9%;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="text"]{
+    width: 30%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #000000;
+    background-color: #ffffff;
+}
+
+.btn-send{
+    border: 1px solid black;
+    padding: 20px;
+    width: 100px;
+    border-radius: 5px;
+    background-color: rgb(0, 0, 0);
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.logo{
+    position: absolute;
+    top: 20%;
+    margin-left: 73%;
+    
+}
+
+.text{
+    position: absolute;
+    top: 70%;
+    margin-left: 66%;
+    font-size: 30px;
+}

@@ -1,0 +1,158 @@
+@import url('https://fonts.cdnfonts.com/css/signika-sc-2');
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family:"Sofia", sans-serif;
+}
+
+.wrapper{
+   background-image: url('nycity.jpg');
+   background-size: cover;
+   height: 100vh; 
+}
+
+.logo{
+    position: absolute;
+    left: 1.5%;
+    top: 2%;
+}
+
+.sign-in-seller{
+    position: absolute;
+    right: 1%;
+    top: 3%;
+    font-size: 20px;
+}
+
+.sign-in-seller a{
+    color: white;
+}
+
+.sign-in-seller a:hover{
+    color: rgb(252, 175, 8);
+}
+
+
+.wrapper h1{
+    position: relative;
+    color: #f99f1b;
+    text-align: center;
+    top: 28%;
+    font-size: 50px;
+    -webkit-text-stroke: black;
+    -webkit-text-stroke-width: 1px;
+
+}
+
+.wrapper h2{
+    position: relative;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    top: 36%;
+    font-size: 30px;
+    -webkit-text-stroke: black;
+    -webkit-text-stroke-width: 1px;
+}
+
+.container {
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    left: 50%;
+    top: 61%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .center {
+    width: 190px;
+    height: 60px;
+    position: absolute;
+  }
+  
+  .btn {
+    width: 180px;
+    height: 60px;
+    cursor: pointer;
+    background-color: transparent;
+    border: 2px solid #f99f1b;
+    outline: none;
+    transition: 1s ease-in-out;
+  }
+
+  .btn a{
+    text-decoration: none;
+  }
+  
+  svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    fill: none;
+    stroke: #fff;
+    stroke-dasharray: 150 480;
+    stroke-dashoffset: 150;
+    transition: 1s ease-in-out;
+  }
+  
+  .btn:hover {
+    transition: 1s ease-in-out;
+    background: #f99f1b;
+  }
+  
+  .btn:hover svg {
+    stroke-dashoffset: -480;
+  }
+  
+  .btn span {
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    font-weight: 100;
+  }
+
+  @media (max-width: 755px){
+        .wrapper h1{
+            font-size: 40px;
+        }
+
+        .wrapper h2{
+            font-size: 20px;
+        }  
+
+        .container{
+            top: 57%;
+        }
+    }
+
+    @media (max-width: 596px){
+        .wrapper h1{
+            font-size: 30px;
+        }
+
+        .wrapper h2{
+            font-size: 15px;
+        }  
+
+        .container{
+            top: 53%;
+        }
+    }
+
+    @media (max-width: 455px){
+        .wrapper h1{
+            font-size: 25px;
+        }
+
+        .wrapper h2{
+            font-size: 15px;
+        }  
+
+        .container{
+            top: 53%;
+        }
+    }
+
+
