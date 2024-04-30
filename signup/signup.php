@@ -1,11 +1,14 @@
 <?php
-$connection = oci_connect("cfx_12", "cfxadmin#22", "//localhost/xe"); // Replace with your actual connection details
 
-if (!$connection) {
-    $error_message = oci_error();
-    echo "Failed to connect to Oracle: " . $error_message['message'];
-    exit();
-}
+session_start();
+include "../connect.php";
+
+/*$user = $_SESSION['user_id'];
+
+    if($user){
+        header('Location: ../component/home.php');    
+        exit();
+    }*/
 
 if(isset($_POST['submit']))
 {
@@ -31,14 +34,13 @@ if(isset($_POST['submit']))
         }
     }
     
-    $sql = "INSERT INTO user_ (user_id, username, email, password_, first_name, last_name, user_role, date_of_birth, gender) VALUES (SEQ_CUSTOMER_ID.NEXTVAL, '$username', '$email', '$password', '$fname', '$lname', '$role', TO_DATE('$dob','YYYY-MM-DD'), '$gender')";
+    $sql = "INSERT INTO User_ (user_id, username, email, password_, first_name, last_name, user_role, date_of_birth, gender) VALUES (SEQ_CUSTOMER_ID.NEXTVAL, '$username', '$email', '$password', '$fname', '$lname', '$role', TO_DATE('$dob','YYYY-MM-DD'), '$gender')";
 
     $sql1 = "INSERT INTO Customer(customer_id, date_joined, verification_code, is_verified) VALUES (SEQ_CUSTOMER_ID.CURRVAL, SYSDATE, '$code', 0)";
 
     if(oci_execute(oci_parse($connection,$sql)) && oci_execute(oci_parse($connection, $sql1))) {
         header("Location: ../login/login.html");
-
-        exit;
+        exit();
     }
     else {
         echo "error!";
