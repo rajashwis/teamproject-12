@@ -1,3 +1,14 @@
+<?php
+
+session_start();
+error_reporting(0);
+
+include "../connect.php";
+
+$user = $_SESSION['user_id']; 
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
