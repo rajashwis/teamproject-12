@@ -1,19 +1,21 @@
 <?php
 
-$connection = oci_connect("cfx_12", "cfxadmin#22", "//localhost/xe"); 
+session_start();
+include "../connect.php";
 
-if (!$connection) {
-    $error_message = oci_error();
-    echo "Failed to connect to Oracle: " . $error_message['message'];
-    exit();
-}
+/*$user = $_SESSION['user_id'];
+
+    if($user){
+        header('Location: ../component/home.php');    
+        exit();
+    }*/
 
 if(isset($_POST['login']))
 {
-    $username = $_POST['username'];
+    $username_or_email = $_POST['username'];
     $password = $_POST['password'];
 
-    $query = "SELECT * FROM User_ WHERE username = '$username'";
+    $query = "SELECT * FROM User_ WHERE username = '$username_or_email' OR email = '$username_or_email'";
     $statement = oci_parse($connection, $query);
     oci_execute($statement);
 
@@ -23,7 +25,8 @@ if(isset($_POST['login']))
         $pass = $user['PASSWORD_'];
 
         if ($password == $pass) {
-            //$_SESSION['username'] = $username;
+            $user_id = $user['USER_ID'];
+            $_SESSION['user_id'] = $user_id;
             header("Location: ../component/home.php");
             exit;
         }
@@ -31,7 +34,7 @@ if(isset($_POST['login']))
             echo("Incorrect password!");
         }
     } else {
-        echo "Username not found!";
+        echo "Invalid Credentials!";
     }
 }
 
