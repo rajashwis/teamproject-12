@@ -1,0 +1,70 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family:"Sofia", sans-serif;
+}
+
+.wrapper {
+    background-image: url('../resources/nycity.jpg');
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.container {
+    height: 600px;
+    width: 1000px;
+    background-color: #00000076;
+    border-radius: 20px;
+    color: white;
+    box-shadow: 0 10px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.07);
+
+}
+
+.container h1{
+    text-align: center;
+}
+
+.form-group{
+    position: relative;
+    margin-top: 5%;
+    margin-left: 32%;
+}
+
+.form-group a{
+    color: #f99f1b;
+}
+
+label{
+    display: block;
+    margin-bottom: 1px;
+}
+
+input[type="email"],
+input[type="password"]{
+    width: 50%;
+    padding: 7px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ffffff;
+    outline: none;
+}
+
+.btn-send{
+    border: none;
+    padding: 15px;
+    width: 100px;
+    border-radius: 5px;
+    background-color: #f99f1b;
+    cursor: pointer;
+    color: #ffffff;
+    left: 50%;
+    opacity: 0.8;
+}
+
+.btn-send:hover{
+    opacity: 1;
+}
