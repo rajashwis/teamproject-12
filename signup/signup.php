@@ -3,12 +3,12 @@
 session_start();
 include "../connect.php";
 
-/*$user = $_SESSION['user_id'];
+$user = $_SESSION['user_id'];
 
     if($user){
         header('Location: ../component/home.php');    
         exit();
-    }*/
+    }
 
 if(isset($_POST['submit']))
 {
