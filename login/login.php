@@ -26,8 +26,10 @@ if(isset($_POST['login']))
 
         if ($password == $pass) {
             $user_id = $user['USER_ID'];
+            $username = $user['USERNAME'];
+            $_SESSION['username'] = $username;
             $_SESSION['user_id'] = $user_id;
-            header("Location: ../component/home.php");
+            header("Location: ../homepage/homepage.php");
             exit;
         }
         else {
