@@ -28,7 +28,7 @@ if(isset($_POST['login']))
             $user_id = $user['USER_ID'];
             $_SESSION['user_id'] = $user_id;
             /*dummy page*/
-            header("Location: ../component/home.php");
+            header("Location: add product.php");
             exit();
         }
         else {
