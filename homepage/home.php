@@ -6,6 +6,7 @@ error_reporting(0);
 include "../connect.php";
 
 $user = $_SESSION['user_id']; 
+$username = $_SESSION['username'];
 
 ?>
 
@@ -37,25 +38,44 @@ $user = $_SESSION['user_id'];
                             </div>
                         </form>
                     </div>
-                        <div class="user-box">
-                            <div class="signin">
-                                <form action="login.html" method="get">
-                                    <button class="btn">
-                                        <u><i class="fa-solid fa-user">
-                                        </i>
-                                            <a href="/teamproject-12/login/login.html"> Sign In</a>
-                                        </u>
-                                    </button>    
-                                </form>
-                            </div>
-                            <div class="signup">
-                                <form action="signup.html" method="get">
-                                    <button class="btn-2">
-                                        <a href="/teamproject-12/signup/signup.html"> Sign Up</a>
-                                    </button>    
-                                </form>
-                            </div>
-                        </div>    
+                    <div class="user-box">
+                    <?php
+                            if(isset($user) && isset($username)) {
+                        echo
+                        
+                    '<div class="profile-dropdown">
+                        <div onclick="toggle()" class="profile-dropdown-btn">
+                        <div class="profile-img">
+                            <i class="fa-solid fa-circle"></i>
+                        </div>
+
+                        <span>
+                        '. $username . ' <i class="fa-solid fa-angle-down"></i>
+                        </span>
+                        </div>
+                    </div>';
+                    } else {
+                        // If user is not logged in, display sign in and sign up buttons
+                        echo '<div class="signin">
+                        <form action="login.html" method="get">
+                            <button class="btn">
+                                <u><i class="fa-solid fa-user"></i>
+                                    <a href="../login/login.html"> Sign In</a>
+                                </u>
+                            </button>    
+                        </form>
+                    </div>
+                    <div class="signup">
+                        <form action="signup.html" method="get">
+                            <button class="btn-2">
+                                <a href="../signup/signup.html"> Sign Up</a>
+                            </button>    
+                        </form>
+                    </div>';
+                    }
+                    ?>
+                    </div>
+
                         <div class="basket">
                             <a href="cart.html"><img src="../resources/trolley.png" height="30px"></a>
                         </div>
@@ -63,6 +83,47 @@ $user = $_SESSION['user_id'];
             </nav> 
             
         </div>
+        <div class="profile-drop">
+            <ul class="profile-dropdown-list">
+            <li class="profile-dropdown-list-item">
+                <a href="#">
+                <i class="fa-regular fa-user"></i>
+                Edit Profile
+                </a>
+            </li>
+
+            <li class="profile-dropdown-list-item">
+                <a href="#">
+                <i class="fa-regular fa-envelope"></i>
+                Inbox
+                </a>
+            </li>
+
+            <li class="profile-dropdown-list-item">
+                <a href="#">
+                <i class="fa-solid fa-sliders"></i>
+                Settings
+                </a>
+            </li>
+
+            <li class="profile-dropdown-list-item">
+                <a href="#">
+                <i class="fa-regular fa-circle-question"></i>
+                Help & Support
+                </a>
+            </li>
+            <hr />
+
+            <li class="profile-dropdown-list-item">
+            <form action="../sign out.php" method="post">
+                <button type="submit">
+                    <i class="fa-solid fa-sign-out-alt"></i> Logout</a>
+                </button>
+            </form>
+            </li>
+            </ul>
+        </div>
+
         <div class="dropdown">
             <ul>
                 <li><a href="teamproject-12/component/home.php">HOME</a></li>
@@ -110,7 +171,7 @@ $user = $_SESSION['user_id'];
             <div class="slides">
               <img src="../resources/slide_img1.jpg" alt="Image 1">
               <img src="../resources/slide_img2.jpg" alt="Image 2">
-              <img src="../resources/slide_img3.jpg" alt="Image 3">
+              <img src="../resources/slide-img3.jpg" alt="Image 3">
             </div>
             <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
             <button class="next" onclick="plusSlides(1)">&#10095;</button>
@@ -238,7 +299,7 @@ $user = $_SESSION['user_id'];
             <div class="location">
                 <p><i class="fa-solid fa-location-dot"></i> Location</p><br>
                 <div class="map">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d441.60166153526745!2d85.31895302088176!3d27.692164950951184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2snp!4v1711632997867!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d44Supportlogou1.60166153526745!2d85.31895302088176!3d27.692164950951184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2snp!4v1711632997867!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
             
@@ -287,6 +348,20 @@ $user = $_SESSION['user_id'];
         ? 'fa-solid fa-xmark'
         : 'fa-solid fa-bars'
     }
+
+    let profileDropdownList = document.querySelector(".profile-dropdown-list");
+let btn = document.querySelector(".profile-dropdown-btn");
+
+let classList = profileDropdownList.classList;
+
+const toggle = () => classList.toggle("active");
+
+window.addEventListener("click", function (e) {
+  if (!btn.contains(e.target)) classList.remove("active");
+});
+
+
+
 </script>
 </body>
 </html>

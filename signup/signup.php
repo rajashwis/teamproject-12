@@ -5,10 +5,10 @@ include "../connect.php";
 
 $user = $_SESSION['user_id'];
 
-    if($user){
-        header('Location: ../component/home.php');    
-        exit();
-    }
+if($user){
+    header('Location: ../homepage/home.php');    
+    exit();
+}
 
 if(isset($_POST['submit']))
 {

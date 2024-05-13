@@ -6,7 +6,7 @@ include "../connect.php";
 $user = $_SESSION['user_id'];
 
     if($user){
-        header('Location: ..homepage/homepage.php');    
+        header('Location: ../homepage/home.php');    
         exit();
     }
 
@@ -29,7 +29,7 @@ if(isset($_POST['login']))
             $username = $user['USERNAME'];
             $_SESSION['username'] = $username;
             $_SESSION['user_id'] = $user_id;
-            header("Location: ../homepage/homepage.php");
+            header("Location: ../homepage/home.php");
             exit;
         }
         else {
