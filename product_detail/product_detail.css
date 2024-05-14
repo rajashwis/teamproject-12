@@ -495,7 +495,6 @@
 }
 
 .container {
-    
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 20px;
@@ -503,13 +502,12 @@
     max-width: 1000px;
     display: flex;
     align-items: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #fff;
 
     position: relative;
     top: 130px;
-    margin-bottom: 140px;
-    
+    margin-bottom: 11%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
 }
 
 .product-details {
@@ -524,37 +522,46 @@
 }
 
 .content h2 {
-    color: #333;
-    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: black;
     margin-bottom: 10px;
 }
 
 .content p {
-    color: #666;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1em;
     margin-bottom: 3%;
 }
 
-
+.quantity-input label {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1em;
+    
+}
 
 .quantity-input {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 13px;
     
 }
 
 .quantity-control {
     display: flex;
     align-items: center;
+    margin-left: 20px;
 }
 
 .quantity-control button {
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    color: #444;
-    font-size: 7px;
+    background-color: white;
+    border: 1px solid gray;
+    color: black;
+    /* font-size: 7px; */
     padding: 8px;
     cursor: pointer;
+    font-size: 14px;
 }
 
 .quantity-control button:hover {
@@ -622,23 +629,27 @@
     height: 30px;
     cursor: pointer;
 }
+
+
 .wishlist-btn:hover{
     background-color: #f53b3b;
 }
 
 
 .image-container {
-    width: 500px; /* Adjust as needed */
-    height: 300px; /* Adjust as needed */
-    flex: 0 0 auto; /* Don't allow the image container to grow */
-    margin-left: 20px; /* Add some space between content and image */
+    width: 500px;
+    height: 300px; 
+    flex: 0 0 auto; 
+    margin-left: 20px; 
 }
+
 .image-container img {
     width: 90%;
     height: 100%;
-    object-fit: cover; /* Ensure the image covers the container */
+    object-fit: cover; 
     border-radius: 10px;
 }
+
 
 
 
@@ -648,106 +659,63 @@
 
 .customer-reviews-container {
     position: relative;
-    border: 1px solid #ccc;
-    border-radius: 10px;
+    border-radius: 13px;
     padding: 20px;
     margin: 20px auto;
     max-width: 1000px;
     display: flex;
-    flex-direction: column; /* Display children elements vertically */
-    align-items: flex-start; /* Align items to the start of the container */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    flex-direction: column; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
    
 }
-.customer-reviews-container .h3{
+.customer-reviews-container h3{
     margin-bottom: 40px;
 }
-
-/* .rating {
-    margin-bottom: 20px; 
-} */
-
-.rating {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end; /* Align items to the end of the container */
-  margin-top: 10px; /* Add space above the rating */
-  
-  top:15px;
-  font-size: 19px;
+.rating{
+    margin-bottom: 9px;
+}
+.rating p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1em;
+    font-weight: 500;
+    margin-bottom: 7px;
 }
 
-.rating p {
-  margin-right: 5px; 
-}  
-
-
-/* .comments  {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    resize: vertical; 
-    margin-bottom: 10px;
-} */
-.ratings {
-    position: absolute;
-    top: 10px; /* Adjust the top position as needed */
-    right: 100px; /* Adjust the right position as needed */
-}
-
-.rating-row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px; /* Add space between each rating row */
-    font-size: 20px; /* Adjust the font size */
-    color: #3f3f3d; /* Set the color to gold */
-}
-
-.rating-row::after {
-    content: '';
-    display: inline-block;
-    width: 10px; /* Adjust the width of the space between star and rating */
-}
-
-.rating-row .star {
-    color: #0e0e0e; /* Set the color to gold */
-}
 
 .comments{
-  position: relative;
-  top: 20px;
-  font-size: 19px;
-
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+}
+.customer-profile{
+    width: 20%;
+    margin-top: 23px;
+    justify-content: space-between;
 }
 
-.comment-line {
-  width: 100%; /* Set the width to span the entire container */
-  border-top: 1px solid #ccc; /* Style the border as needed */
-  margin-top: 100px; /* Add some space above the line */
+.profile-img img{
+    border-radius: 33%;
 }
 
-.customer-rating {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end; /* Align items to the end of the container */
-  margin-top: 10px; /* Add space above the rating */
-  left:870px;
-  bottom:15px;
-  font-size: 19px;
+.customer-profile h5{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1em;
+    font-weight: 500;
 }
 
-.customer-rating p {
-  margin-right: 5px; /* Add some space between the label and the rating */
+.customer-ratings h5{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1em;
+    font-weight: 500;
+
 }
-
-
-
-
-
+.comment-text p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
+    font-weight: 500;
+    width: 60%;
+    text-align:left;
+}
 
 
 

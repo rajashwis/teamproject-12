@@ -227,42 +227,47 @@
                         echo '</div>';
                         echo '<button class="add-to-cart-btn">Add to Cart</button>';
                     ?>
-                    
                 </div>
             </div>
         </div>  
 
 
         <div class="customer-reviews-container">
-            <h3>All Customer Reviews</h3>
-            <div class="ratings">
-                <div class="rating-row">5 <span class="star">&#9733;</span><span class="star">&#9733;</span><span
-                        class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
-                </div>
-                <div class="rating-row">4 <span class="star">&#9733;</span><span class="star">&#9733;</span><span
-                        class="star">&#9733;</span><span class="star">&#9733;</span></div>
-                <div class="rating-row">3 <span class="star">&#9733;</span><span class="star">&#9733;</span><span
-                        class="star">&#9733;</span></div>
-                <div class="rating-row">2 <span class="star">&#9733;</span><span class="star">&#9733;</span></div>
-                <div class="rating-row">1 <span class="star">&#9733;</span></div>
-            </div>
+
+
             <div class="rating">
                 <p>Rating 5.0 </p>
-                <div class="rating-row"><span class="star">&#9733;</span></div>
+                <div class="rating-row">
+                    <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                    <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                    <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                    
+                </div>
             </div>
 
 
             <hr class="comment-line">
-            <div class="comments">
-                <p>Comments:</p>
-               
-            </div>
-            <div class="customer-rating">
-                <p>Rate:</p>
-                <div class="rating-row"><span class="star">&#9733;</span><span class="star">&#9733;</span><span
-                        class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+                <div class="comments">
+                    <div class="customer-profile">
+                        <div class="profile-img">
+                            <img src="../resources/user.jpg" alt="profile-img">
+                        </div>
+                        <h5 class="customer-name">John Doe</h5>
+                    </div>
+                    <div class="customer-ratings">
+                        <h5>Rate:</h5>
+                        <div class="rating-rows">
+                            <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                            <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                            <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                            <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                            <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+                    <div class="comment-text">
+                        <p>This is the user review for the product Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo culpa eligendi quibusdam vel consequuntur, non dicta nulla exercitationem! Laudantium libero quos rem perferendis mollitia beatae sequi laborum consequatur neque sunt recusandae, voluptate blanditiis. Consequuntur, sed? Aperiam  asperiores?</p>
+                    </div>
                 </div>
-            </div>
         </div>
     </main>
 
