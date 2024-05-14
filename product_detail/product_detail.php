@@ -1,11 +1,37 @@
 <?php
 
-session_start();
-error_reporting(0);
+    session_start();
+    error_reporting(0);
 
-include "../connect.php";
+    include "../connect.php";
 
-$user = $_SESSION['user_id'];
+    if (isset($_GET['product_id'])) {
+        $product_id = $_GET['product_id'];
+
+        $query="SELECT * from PRODUCT WHERE product_id = $product_id";
+        $stid=oci_parse($connection, $query);
+        oci_execute($stid);
+        $product = oci_fetch_assoc($stid);
+        $category_id = $product['CATEGORY_ID'];
+        $shop_id = $product['SHOP_ID'];
+
+        $query1 = "SELECT * FROM PRODUCTCATEGORY WHERE category_id = $category_id";
+        $stid1=oci_parse($connection, $query1);
+        oci_execute($stid1);
+        $category = oci_fetch_assoc($stid1);
+
+        $query2 = "SELECT * FROM SHOP WHERE shop_id = $shop_id";
+        $stid2=oci_parse($connection, $query2);
+        oci_execute($stid2);
+        $shop = oci_fetch_assoc($stid2);
+
+    }
+
+    else {
+        header('location: ../homepage/home.php');
+    }
+
+    $user = $_SESSION['user_id'];
 
 ?>
 
@@ -167,26 +193,41 @@ $user = $_SESSION['user_id'];
         <div class="container">
             <div class="product-details">
                 <div class="image-container">
-                    <img src="Image/image1.jpeg" alt="Product Image">
+                    <!---IMAGE--->
+                    <?php
+                        $imageData = $product['PRODUCT_IMAGE']->load();
+                        $encodedImageData = base64_encode($imageData);
+                        // Determine the image type based on the first few bytes of the image data
+                        $header = substr($imageData, 0, 4);
+                        $imageType = 'image/jpeg'; // default to JPEG
+                        if (strpos($header, 'FFD8') === 0) {
+                            $imageType = 'image/jpeg'; // JPEG
+                        } elseif (strpos($header, '89504E47') === 0) {
+                            $imageType = 'image/png'; // PNG
+                        }
+
+                        echo '<img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
+
+                    ?>
                 </div>
                 <button class="wishlist-btn">&#10084;</button>
                 <div class="content">
-                    <h2>Product Name</h2>
-                    <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,
-                        consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor
-                        sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing.</p>
-                    <p>Store: Store Name</p>
-                    <p>Price: $19.99</p>
-                    <div class="quantity-input">
-                        <label for="quantity">Quantity:</label>
-                        <div class="quantity-control">
-                            <button class="minus-btn" id="minusBtn">-</button>
-                            <input type="number" id="quantity" name="quantity" value="1" min="1">
-                            <button class="plus-btn" id="plusBtn">+</button>
-                        </div>
-                    </div>
-                    <button class="buy-btn">Buy Now</button>
-                    <button class="add-to-cart-btn">Add to Cart</button>
+                    <?php
+                        echo '<h2>'.$product['PRODUCT_NAME'].'</h2>';
+                        echo '<p>'.$product['DESCRIPTION_'].'</p>';
+                        echo '<p> Store: '.$shop['SHOP_NAME'].'</p>';
+                        echo '<p>Price: '.$product['PRICE'].'</p>';
+                        echo '<div class="quantity-input">';
+                        echo '<label for="quantity">Quantity:</label>';
+                        echo '<div class="quantity-control">
+                                <button class="minus-btn" id="minusBtn">-</button>
+                                <input type="number" id="quantity" name="quantity" value="1" min="1">
+                                <button class="plus-btn" id="plusBtn">+</button>
+                            </div>';
+                        echo '</div>';
+                        echo '<button class="add-to-cart-btn">Add to Cart</button>';
+                    ?>
+                    
                 </div>
             </div>
         </div>  

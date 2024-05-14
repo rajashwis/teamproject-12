@@ -163,6 +163,13 @@ $username = $_SESSION['username'];
                         $stid=oci_parse($connection, $query);
                         oci_execute($stid);
                         $row = oci_fetch_assoc($stid);
+                        $product_id = $row['PRODUCT_ID'];
+                        
+                        $category_id = $row['CATEGORY_ID'];
+                        $query1 = "SELECT * FROM PRODUCTCATEGORY WHERE category_id = $category_id";
+                        $stid1=oci_parse($connection, $query1);
+                        oci_execute($stid1);
+                        $category = oci_fetch_assoc($stid1);
 
                         $imageData = $row['PRODUCT_IMAGE']->load();
 
@@ -176,10 +183,12 @@ $username = $_SESSION['username'];
                         } elseif (strpos($header, '89504E47') === 0) {
                             $imageType = 'image/png'; // PNG
                         }
+
+                        echo '<a href="../product_detail/product_detail.php?product_id='.$product_id.'">';
                         echo '<td><img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image"></td>';
                         echo '<h1>'.$row['PRODUCT_NAME'].'</h1>';
-                        echo '<p class="price"><s>$64.99</s><br>$49.99 <i class="fa-solid fa-tag"></i></p>';
-                        echo '<p>Mens Shoes</p>';
+                        echo '<p class="price">'.$row['PRICE'].'<i class="fa-solid fa-tag"></i></p>';
+                        echo '<p>'.$category['CATEGORY_NAME'].'</p>';
                     ?>
                 </div>
                 <p><button>Buy</button></p><br>
