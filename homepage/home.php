@@ -158,11 +158,30 @@ $username = $_SESSION['username'];
         <div class="container">
             <div class="card">
                 <div class="image-container">
-                    <img src="../resources/products/jordan.jpg" alt="jordan">
+                    <?php
+                        $query="SELECT * from PRODUCT WHERE product_id = 112";
+                        $stid=oci_parse($connection, $query);
+                        oci_execute($stid);
+                        $row = oci_fetch_assoc($stid);
+
+                        $imageData = $row['PRODUCT_IMAGE']->load();
+
+                        $encodedImageData = base64_encode($imageData);
+            
+                        // Determine the image type based on the first few bytes of the image data
+                        $header = substr($imageData, 0, 4);
+                        $imageType = 'image/jpeg'; // default to JPEG
+                        if (strpos($header, 'FFD8') === 0) {
+                            $imageType = 'image/jpeg'; // JPEG
+                        } elseif (strpos($header, '89504E47') === 0) {
+                            $imageType = 'image/png'; // PNG
+                        }
+                        echo '<td><img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image"></td>';
+                        echo '<h1>'.$row['PRODUCT_NAME'].'</h1>';
+                        echo '<p class="price"><s>$64.99</s><br>$49.99 <i class="fa-solid fa-tag"></i></p>';
+                        echo '<p>Mens Shoes</p>';
+                    ?>
                 </div>
-                <h1>AIR JORDAN 1 <span class="purple-text">Purple</span></h1>
-                <p class="price"><s>$64.99</s><br>$49.99 <i class="fa-solid fa-tag"></i></p>
-                <p>Men's Shoes</p>
                 <p><button>Buy</button></p><br>
             </div>
         </div>

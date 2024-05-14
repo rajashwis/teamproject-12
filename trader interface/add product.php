@@ -54,7 +54,6 @@
 <body>
     <div class="box">
             <!--navbar-->
-        <!--
         <div class="navbar" id="nav">
             <nav>
                 <ul>
@@ -78,9 +77,9 @@
                             </form>
                         </div>
                         <div class="signup">
-                            <form action="signup.html" method="get">
+                            <form action="../sign out.php" method="get">
                                 <button class="btn-2">
-                                    Sign up
+                                    Sign Out
                                 </button>
                             </form>
                         </div>
@@ -88,7 +87,7 @@
                     <li class="basket"><a href="cart.html"><img src="trolley.png" height="30px"></a></li>
                 </ul>
             </nav>
-        </div>-->
+        </div>
         <div class="menu">
             <ul>
                 <li><a href="">Dashboard</a></li>
