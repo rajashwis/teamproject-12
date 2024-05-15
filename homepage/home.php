@@ -159,7 +159,7 @@ $username = $_SESSION['username'];
             <div class="card">
                 <div class="image-container">
                     <?php
-                        $query="SELECT * from PRODUCT WHERE product_id = 15";
+                        $query="SELECT * from PRODUCT WHERE product_id = 112";
                         $stid=oci_parse($connection, $query);
                         oci_execute($stid);
                         $row = oci_fetch_assoc($stid);
@@ -175,17 +175,16 @@ $username = $_SESSION['username'];
 
                         $encodedImageData = base64_encode($imageData);
             
-                        // Determine the image type based on the first few bytes of the image data
                         $header = substr($imageData, 0, 4);
-                        $imageType = 'image/jpeg'; // default to JPEG
+                        $imageType = 'image/jpeg';
                         if (strpos($header, 'FFD8') === 0) {
-                            $imageType = 'image/jpeg'; // JPEG
+                            $imageType = 'image/jpeg'; 
                         } elseif (strpos($header, '89504E47') === 0) {
-                            $imageType = 'image/png'; // PNG
+                            $imageType = 'image/png';
                         }
 
                         echo '<a href="../product_detail/product_detail.php?product_id='.$product_id.'">';
-                        echo '<td><img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image"></td>';
+                        echo '<td><img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image"></td></a>';
                         echo '<h1>'.$row['PRODUCT_NAME'].'</h1>';
                         echo '<p class="price">'.$row['PRICE'].'<i class="fa-solid fa-tag"></i></p>';
                         echo '<p>'.$category['CATEGORY_NAME'].'</p>';

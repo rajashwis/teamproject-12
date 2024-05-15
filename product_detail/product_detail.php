@@ -5,6 +5,18 @@
 
     include "../connect.php";
 
+    $user = $_SESSION['user_id'];
+
+    if (isset($_SESSION['cart_product_added']) && $_SESSION['cart_product_added'] === true) {
+        echo "<script>alert('Product Added to Cart!')</script>";
+        unset($_SESSION['cart_product_added']);
+    }
+
+    if (isset($_SESSION['wishlist_product_added']) && $_SESSION['wishlist_product_added'] === true) {
+        echo "<script>alert('Product Added to Wishlist!')</script>";
+        unset($_SESSION['wishlist_product_added']);
+    }
+
     if (isset($_GET['product_id'])) {
         $product_id = $_GET['product_id'];
 
@@ -31,7 +43,81 @@
         header('location: ../homepage/home.php');
     }
 
-    $user = $_SESSION['user_id'];
+    if (isset($_POST['add_to_cart'])) {
+
+        if(!$user) {
+            header('LOCATION: ../login/login.html');
+        }
+
+        else {
+            $quantity = $_POST['quantity'];
+
+            $query="SELECT * from CUSTOMER WHERE customer_id = $user";
+            $stid=oci_parse($connection, $query);
+            oci_execute($stid);
+            $row = oci_fetch_assoc($stid);
+            $cart_id = $row['CART_ID'];
+
+            $query1 = "SELECT PRODUCT_ID FROM CARTPRODUCT WHERE CART_ID = $cart_id";
+            $stid1=oci_parse($connection, $query1);
+            oci_execute($stid1);
+            $row = oci_fetch_assoc($stid1);
+
+            if($row) {
+                echo "<script>alert('Product already in Cart!')</script>";
+            }
+
+            else {
+                $query1="INSERT INTO CARTPRODUCT VALUES (SEQ_CARTPRODUCT_ID.NEXTVAL, $cart_id, $product_id, $quantity)";
+                $stid1=oci_parse($connection, $query1);
+                
+                if(oci_execute($stid1)) {
+                    $_SESSION['cart_product_added'] = true;
+                    header("LOCATION: ../product_detail/product_detail.php?product_id=$product_id");
+                }
+                
+            }
+            
+        }
+
+    }
+
+    if (isset($_POST['wishlist_button'])) {
+
+        if(!$user) {
+            header('LOCATION: ../login/login.html');
+        }
+
+        else {
+            $query="SELECT * from WISHLIST WHERE customer_id = $user";
+            $stid=oci_parse($connection, $query);
+            oci_execute($stid);
+            $row = oci_fetch_assoc($stid);
+            $wishlist_id = $row['WISHLIST_ID'];
+
+            $query1 = "SELECT PRODUCT_ID FROM WISHLIST WHERE PRODUCT_ID = $product_id";
+            $stid1=oci_parse($connection, $query1);
+            oci_execute($stid1);
+            $row = oci_fetch_assoc($stid1);
+
+            if($row) {
+                echo "<script>alert('Product already in Wishlist!')</script>";
+            }
+
+            else {
+                $query1 = "INSERT INTO WISHLISTPRODUCT VALUES (SEQ_WISHLISTPRODUCT_ID.NEXTVAL, $wishlist_id, $product_id)";
+                $stid1=oci_parse($connection, $query1);
+                
+                if(oci_execute($stid1)) {
+                    $_SESSION['wishlist_product_added'] = true;
+                    header("LOCATION: ../product_detail/product_detail.php?product_id=$product_id");
+                }
+                
+            }
+            
+        }
+
+    }
 
 ?>
 
@@ -210,22 +296,26 @@
 
                     ?>
                 </div>
-                <button class="wishlist-btn">&#10084;</button>
+                <form method="POST">
+                    <button class="wishlist-btn" type="submit" name="wishlist_button">&#10084;</button>
+                </form>
                 <div class="content">
                     <?php
                         echo '<h2>'.$product['PRODUCT_NAME'].'</h2>';
                         echo '<p>'.$product['DESCRIPTION_'].'</p>';
                         echo '<p> Store: '.$shop['SHOP_NAME'].'</p>';
                         echo '<p>Price: '.$product['PRICE'].'</p>';
+                        echo '<form method="POST">';
                         echo '<div class="quantity-input">';
                         echo '<label for="quantity">Quantity:</label>';
-                        echo '<div class="quantity-control">
-                                <button class="minus-btn" id="minusBtn">-</button>
-                                <input type="number" id="quantity" name="quantity" value="1" min="1">
-                                <button class="plus-btn" id="plusBtn">+</button>
-                            </div>';
+                        echo '<div class="quantity-control">';
+                        echo '<button class="minus-btn" id="minusBtn">-</button>';
+                        echo '<input type="number" id="quantity" name="quantity" value="1" min="1">';
+                        echo '<button class="plus-btn" id="plusBtn">+</button>';
                         echo '</div>';
-                        echo '<button class="add-to-cart-btn">Add to Cart</button>';
+                        echo '</div>';
+                        echo '<input type="submit" class = "add-to-cart-btn" value="Add to Cart" name="add_to_cart">';
+                        echo '</form>';
                     ?>
                 </div>
             </div>
