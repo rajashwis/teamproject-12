@@ -159,7 +159,7 @@ $username = $_SESSION['username'];
             <div class="card">
                 <div class="image-container">
                     <?php
-                        $query="SELECT * from PRODUCT WHERE product_id = 112";
+                        $query="SELECT * from PRODUCT WHERE product_id = 15";
                         $stid=oci_parse($connection, $query);
                         oci_execute($stid);
                         $row = oci_fetch_assoc($stid);
