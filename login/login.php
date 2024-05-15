@@ -27,8 +27,16 @@ if(isset($_POST['login']))
         if ($password == $pass) {
             $user_id = $user['USER_ID'];
             $username = $user['USERNAME'];
+
             $_SESSION['username'] = $username;
             $_SESSION['user_id'] = $user_id;
+
+            $query = "SELECT * FROM Customer WHERE customer_id = $user_id";
+            $statement = oci_parse($connection, $query);
+            oci_execute($statement);
+            $customer = oci_fetch_assoc($statement);
+            $cart_id = $customer['CART_ID'];
+            $_SESSION['cart_id'] = $cart_id;
             header("Location: ../homepage/home.php");
             exit;
         }
