@@ -85,6 +85,8 @@
             <?php    }
             ?>
 
+            <a href = "../checkout/check-out.php"><b>CHECKOUT</b></a>
+
 
         </div>
         <script src="cart.js"></script>
