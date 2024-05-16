@@ -1,4 +1,6 @@
+
 <?php
+
 
     session_start();
     error_reporting(0);
@@ -118,8 +120,10 @@
         }
 
     }
+    
+    
+    ?>
 
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -331,7 +335,6 @@
                     <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
                     <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
                     <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
-                    
                 </div>
             </div>
 
@@ -355,16 +358,60 @@
                         </div>
                     </div>
                     <div class="comment-text">
-                        <p>This is the user review for the product Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo culpa eligendi quibusdam vel consequuntur, non dicta nulla exercitationem! Laudantium libero quos rem perferendis mollitia beatae sequi laborum consequatur neque sunt recusandae, voluptate blanditiis. Consequuntur, sed? Aperiam  asperiores?</p>
+                        <p>This is the user review for the elit. Illo culpa eligendi quibusdam vel consequuntur, non dicta nulla exercitationem! Laudantium libero quos rem perferendis mollitia beatae sequi laborum consequatur neque sunt recusandae, voluptate blanditiis. Consequuntur, sed? Aperiam  asperiores?</p>
                     </div>
                 </div>
+
+                <div class="comments">
+                    <div class="customer-profile">
+                        <div class="profile-img">
+                            <img src="../resources/user.jpg" alt="profile-img">
+                        </div>
+                        <h5 class="customer-name">John Doe</h5>
+                    </div>
+                    <div class="customer-ratings">
+                        <h5>Rate:</h5>
+                        <div class="rating-rows">
+                            <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                            <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                            <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                            <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                            <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+                    <div class="comment-text">
+                        <p>This is the user review for the product Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate voluptatem molestiae vel accusantium sequi dolorum dicta officiis, quibusdam aperiam exercitationem.culpa eligendi quibusdam vel consequuntur, non dicta nulla exercitationem! Laudantium libero quos rem perferendis mollitia beatae sequi laborum consequatur neque sunt recusandae, voluptate blanditiis. Consequuntur, sed? Aperiam  asperiores?</p>
+                    </div>
+                </div>
+
+
+
+            <div class="comments">
+                <div class="customer-profile">
+                    <div class="profile-img">
+                        <img src="../resources/user.jpg" alt="profile-img">
+                    </div>
+                    <h5 class="customer-name">John Doe</h5>
+                </div>
+                <div class="customer-ratings">
+                    <h5>Rate:</h5>
+                    <div class="rating-rows">
+                        <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                        <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                        <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                        <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                        <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                    </div>
+                </div>
+                <div class="comment-box">
+                    <textarea placeholder="Add your comment here..."></textarea>
+                    <button class="add-comment-btn">Add Comment</button>
+                </div>
+            </div>
         </div>
     </main>
 
    
-
-
-
 
 
 
