@@ -2,12 +2,20 @@
     margin: 0;
     padding: 0;
     scroll-behavior: smooth;
+
+
+
+
+
 }
 
 .home-page {
     background-size: cover;
     height: 100vh;
     background-color: aliceblue;
+
+
+    
 }
 
 .navbar {
