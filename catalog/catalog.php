@@ -23,6 +23,7 @@ $user = $_SESSION['user_id'];
 <body>
     <div class="home-page">
         <!--navbar-->
+        <!--SIGN IN SIGN UP ETC-->
         <div class="navbar" id="nav">
             <nav>
                     <img class="logo" src="../resources/cfxlocalhubwhitelogo.png">
@@ -83,6 +84,8 @@ $user = $_SESSION['user_id'];
             </nav> 
             
         </div>
+        
+        <!--EDIT PROFILE ETC-->
         <div class="profile-drop">
             <ul class="profile-dropdown-list">
             <li class="profile-dropdown-list-item">
@@ -123,7 +126,8 @@ $user = $_SESSION['user_id'];
             </li>
             </ul>
         </div>
-
+        
+        <!--HOME TRENDING ETC DROPDOWN-->
         <div class="dropdown">
             <ul>
                 <li><a href="teamproject-12/component/home.php">HOME</a></li>
@@ -138,7 +142,8 @@ $user = $_SESSION['user_id'];
                 <li><a href=""><img src="../resources/trolley.png" height="30px"></a></li>
             </ul>
         </div>
-        <!--navbar 2-->
+
+        <!--HOME TRENDING ETC ORIGINAL-->
         <div class="navbar2" id="nav2">
             <nav>
                 <ul>
@@ -154,81 +159,107 @@ $user = $_SESSION['user_id'];
             </nav>
         </div> 
 
-        <!--products-->
-
         
 
     </div>
    
-
-
-    <!--New-->
  
 
 
 
     <!--For you-->
     <div class="for-you">
-            <!--footer-->
-            <div class="footer-background">
+        <!--footer-->
+        <div class="footer-background">
+
             <div class="container-footer w-container">
+
                 <div class="w-row">
-                  <div class="footer-column w-clearfix w-col w-col-4"><img src="../resources/cfxlocalhubwhitelogo.png" alt="" width="40" class="failory-logo-image">
+                    <div class="footer-column w-clearfix w-col w-col-4"><img src="../resources/cfxlocalhubwhitelogo.png" alt="" width="40" class="failory-logo-image">
                     <h3 class="footer-failory-name">CFXLocalHub</h3>
                     <p class="footer-description-failory">Best Shopping Online!<br></p>
-                  </div>
-                  <div class="footer-column w-col w-col-8">
-                    <div class="w-row">
-                      <div class="w-col w-col-8">
-                        <div class="w-row">
-                          <div class="w-col w-col-7 w-col-small-6 w-col-tiny-7">
-                            <h3 class="footer-titles">Get in touch</h3><br>
-                            <p class="footer-links"><a href="" target="_blank"><span class="footer-link"><i class="fa-solid fa-envelope"></i> cfxsupport@gmail.com<br></span></a><a href=""><span class="footer-link"><i class="fa-solid fa-phone"></i> +977 01577257<br></span></a><a href=""><span class="footer-link"><i class="fa-brands fa-facebook"></i> Facebook</span></a><span><br></span><a href=""><span class="footer-link"><i class="fa-brands fa-x-twitter"></i> Twitter<br></span></a><a href=""><span class="footer-link"><i class="fa-brands fa-square-instagram"></i> Instagram<br></span></a><strong><br></strong></p>
-                          </div>
-                          <div class="w-col w-col-5 w-col-small-6 w-col-tiny-5">
-                            <h3 class="footer-titles">Join a Newsletter</h3><br><br>
-                            <p class="newsletter-footer">Your Email</p><br>
-                            <form>
-                                <input id="form-email"  type="email" placeholder="example@gmail.com"><br><br>
-                                <button class="btn-email" type="submit">Subscribe</button>
-                            </form>
-                        </div>
-                        </div>
-                      </div>
                     </div>
-                  </div>
+
+                    <div class="footer-column w-col w-col-8">
+                        <div class="w-row">
+                            <div class="w-col w-col-8">
+                                <div class="w-row">
+                                    <div class="w-col w-col-7 w-col-small-6 w-col-tiny-7">
+
+                                        <h3 class="footer-titles">Get in touch</h3><br>
+                                        <p class="footer-links">
+
+                                            <a href="" target="_blank">
+                                                <span class="footer-link"><i class="fa-solid fa-envelope"></i> cfxsupport@gmail.com<br></span>
+                                            </a>
+                                            
+                                            <a href="">
+                                                <span class="footer-link"><i class="fa-solid fa-phone"></i> +977 01577257<br></span>
+                                            </a>
+
+                                            <a href="">
+                                                <span class="footer-link"><i class="fa-brands fa-facebook"></i> Facebook</span>
+                                            </a>
+                                            
+                                            <span><br></span>
+                                            
+                                            <a href="">
+                                                <span class="footer-link"><i class="fa-brands fa-x-twitter"></i> Twitter<br></span>
+                                            </a>
+                                            
+                                            <a href="">
+                                                <span class="footer-link"><i class="fa-brands fa-square-instagram"></i> Instagram<br></span>
+                                            </a>
+                                            
+                                            <strong><br></strong>
+                                        </p>
+
+                                    </div>
+
+                                    <div class="w-col w-col-5 w-col-small-6 w-col-tiny-5">
+                                        <h3 class="footer-titles">Join a Newsletter</h3><br><br>
+                                        <p class="newsletter-footer">Your Email</p><br>
+                                        <form>
+                                            <input id="form-email"  type="email" placeholder="example@gmail.com"><br><br>
+                                            <button class="btn-email" type="submit">Subscribe</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-            </div>
-<script type="text/javascript" src="catalog.js"></script>
-<script>
-    const toggleBtn = document.querySelector('.toggle')
-    const toggleBtnIcon = document.querySelector('.toggle i')
-    const dropdown = document.querySelector('.dropdown')
 
-    toggleBtn.onclick = function(){
-        dropdown.classList.toggle('open')
+        </div>
+    </div>
 
-        toggleBtnIcon.classList = isOpen
-        ? 'fa-solid fa-xmark'
-        : 'fa-solid fa-bars'
-    }
+    <script type="text/javascript" src="catalog.js"></script>
+        <script>
+            const toggleBtn = document.querySelector('.toggle')
+            const toggleBtnIcon = document.querySelector('.toggle i')
+            const dropdown = document.querySelector('.dropdown')
 
-    let profileDropdownList = document.querySelector(".profile-dropdown-list");
-    let btn = document.querySelector(".profile-dropdown-btn");
+            toggleBtn.onclick = function(){
+                dropdown.classList.toggle('open')
 
-    let classList = profileDropdownList.classList;
+                toggleBtnIcon.classList = isOpen
+                ? 'fa-solid fa-xmark'
+                : 'fa-solid fa-bars'
+            }
 
-    const toggle = () => classList.toggle("active");
+            let profileDropdownList = document.querySelector(".profile-dropdown-list");
+            let btn = document.querySelector(".profile-dropdown-btn");
 
-    window.addEventListener("click", function (e) {
-  if (!btn.contains(e.target)) classList.remove("active");
-});
+            let classList = profileDropdownList.classList;
 
+            const toggle = () => classList.toggle("active");
 
+            window.addEventListener("click", function (e) {
+        if (!btn.contains(e.target)) classList.remove("active");
+        });
 
-</script>
-</body>
+        </script>
+    </body>
 </html>
 
