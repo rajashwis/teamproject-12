@@ -1,3 +1,15 @@
+<?php
+
+session_start();
+error_reporting(0);
+
+include "../connect.php";
+
+$user = $_SESSION['user_id']; 
+$username = $_SESSION['username'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,52 +87,37 @@
         <div class="item"><a href="">Order Number</a></div>
         <div class="item"><a href="">Order Placed</a></div>
         <div class="item"><a href="">Price</a></div>
-        <!-- <div class="item"><a href="">Quantity</a></div> -->
+        <div class="item"><a href="">Collection Slot</a></div>
         <div class="item"><a href="">Status</a></div>
         <div class="item"><a href=""></a></div>
-        <!-- <div class="item"><a href=""></a></div> -->
-
       </div>
       
       
+      <?php
 
-      <div class="Order-item">
-        
-        
-        <div class="OrderNumber">5202</div>
-        <div class="OrderPlaced">5/12/2024</div>
-        <div class="price">Rs 1000</div>
-        
-        
-        <div class="Status">Processing</div>
-        <button class="ViewDetails" ><a href="cart.html">View Details</a></button>
-      </div>
-
-      <div class="Order-item">
-        
-        <div class="OrderNumber1">5202</div>
-        <div class="OrderPlaced1">5/12/2024</div>
-        <div class="price1">Rs 2000</div>
-        
-       
-        <div class="Status1">Processing</div>
-        <button class="ViewDetails"><a href="cart.html">View Details</a></button>
-      </div>
+        $query = "SELECT * FROM ORDERDETAIL WHERE CUSTOMER_ID = $user AND is_paid=0";
+        $stid=oci_parse($connection, $query);
+        oci_execute($stid);
 
 
+        // $order_id = $orderdetail['ORDER_ID'];
+        // $query1 = "SELECT * FROM ORDERPRODUCT WHERE ORDER_ID=$order_id";
+        // $stid1=oci_parse($connection, $query1);
+        // oci_execute($stid1);
 
-
-
-      <div class="Order-item">
-        
-        <div class="OrderNumber2">5202</div>
-        <div class="OrderPlaced2">5/12/2024</div>
-        <div class="price2">Rs 600</div>
-        
-        
-        <div class="Status2">Processing</div>
-        <button class="ViewDetails"><a href="cart.html">View Details</a></button>
-      </div>
+      while($orderdetail = oci_fetch_assoc($stid)) {
+        echo '<div class="Order-item">';
+        echo '<div class="OrderNumber">'.$orderdetail['ORDER_ID'].'</div>';
+        echo '<div class="OrderNumber">'.$orderdetail['ORDER_DATE'].'</div>';
+        echo '<div class="OrderNumber">123</div>';
+        echo '<div class="OrderNumber">Slot1</div>';
+        echo '<div class="OrderNumber">Processing</div>';
+        echo '<button class="ViewDetails" ><a href="cart.html">View Details</a></button>';
+        echo '</div>';
+      }
+      
+      ?>
+    
     </div>
   </div>
   </div>

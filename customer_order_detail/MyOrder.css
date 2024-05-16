@@ -223,9 +223,9 @@
 .item {
     flex: 1;
     text-align: center;
+    font-weight: bold;
     border: 1px solid #ccc;
     padding: 10px;
-    
     border: none;
     border-bottom: 1px solid black;
 }
@@ -261,21 +261,7 @@
 .OrderNumber{
     /* flex-basis: 10%; */
     position: relative;
-    left:70px;
-
-}
-
-.OrderNumber1{
-    /* flex-basis: 10%; */
-    position: relative;
-    left:70px;
-
-}
-
-.OrderNumber2{
-    /* flex-basis: 10%; */
-    position: relative;
-    left:70px;
+    left:5%;
 
 }
 
@@ -285,32 +271,8 @@
     left:90px;
 
 }
-.price1{
-    flex-basis: 10%;
-    position: relative;
-    left:90px;
-
-}
-.price2{
-    flex-basis: 10%;
-    position: relative;
-    left:90px;
-
-}
 
 .OrderPlaced{
-    /* flex-basis: 10%; */
-    position: relative;
-    left:85px;
-
-}
-.OrderPlaced1{
-    /* flex-basis: 10%; */
-    position: relative;
-    left:85px;
-
-}
-.OrderPlaced2{
     /* flex-basis: 10%; */
     position: relative;
     left:85px;
