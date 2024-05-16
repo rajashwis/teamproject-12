@@ -876,9 +876,6 @@
             /* Space between elements */
         }
 
-
-
-
     }
 
 
@@ -892,15 +889,10 @@
             font-family: arial;
             border-radius: 20px;
             overflow: hidden;
-            /* Hide overflowing content */
             height: 500px;
-            /* Increased height */
             display: flex;
-            /* Added flex display */
             flex-direction: column;
-            /* Added column direction */
             justify-content: space-between;
-            /* Space between elements */
         }
 
     }
@@ -915,15 +907,10 @@
             font-family: arial;
             border-radius: 20px;
             overflow: hidden;
-            /* Hide overflowing content */
             height: 500px;
-            /* Increased height */
             display: flex;
-            /* Added flex display */
             flex-direction: column;
-            /* Added column direction */
             justify-content: space-between;
-            /* Space between elements */
         }
     }
 

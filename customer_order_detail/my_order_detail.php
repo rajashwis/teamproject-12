@@ -1,9 +1,7 @@
 <?php
 // Include the footer.php file from the component folder
-include '../component/navbar.php';
+include '../component/header.php';
 ?>
-
-<!-- Your content for myorder.php goes here -->
 
 
 
@@ -18,25 +16,26 @@ include '../component/navbar.php';
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+
 </head>
 <body>
-  <oiv class="container">
+  <div class="container">
     <div class="menu">
-        <ul>
-          <li><a href="#">My Profile</a></li>
-          <li><a class="active" href="#">My Order</a></li>
-          <li><a href="#">My Wishlist</a></li>
-          <li><a href="#">Reviews</a></li>
-        </ul>
+      <ul>
+        <li><a href="#">My Profile</a></li>
+        <li><a class="active" href="#">My Order</a></li>
+        <li><a href="#">My Wishlist</a></li>
+        <li><a href="#">Reviews</a></li>
+      </ul>
     </div>
 
     <div class="right">
       <div class="row">
-        <div class="item"><a href="">Order Number</a></div>
-        <div class="item"><a href="">Order Placed</a></div>
+        <div class="item"><a href="">Order No.</a></div>
+        <div class="item"><a href="">Placed Date</a></div>
         <div class="item"><a href="">Price</a></div>
         <div class="item"><a href="">Status</a></div>
+        <div class="item"><a href="">Show Details</a></div>
       </div>
 
       <div class="order-item">
@@ -73,9 +72,18 @@ include '../component/navbar.php';
         <button class="btn-view-details"><a href="cart.html">View Details</a></button>
       </div>
 
-      
+
     </div>
+
+
   </div>
+
+  <?php
+  // Include the footer.php file from the component folder
+  include '../component/footer.php';
+  ?>
+
+
   <script src="MyOrder.js"></script>
 </body>
 </html>
