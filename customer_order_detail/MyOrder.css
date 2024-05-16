@@ -1,0 +1,429 @@
+/*nav*/
+.navbar {
+    position: fixed;
+    overflow: hidden;
+    height: 70px;
+    width: 100%;
+    top: 0%;
+    /* background-image: url('footer.jpg'); */
+    background-color: #000000;
+    background-size: 29%;
+    display: block;
+    transition: top 0.3s;
+    z-index: 3;
+    left: -1px;
+}
+
+.logo {
+    position: absolute;
+    height: 102px;
+    top: -20%;
+    right: 92%;
+}
+
+.navbar ul {
+    padding: 28px 40px;
+}
+
+.navbar ul li {
+    text-indent: 30px;
+    display: inline-block;
+    color: white;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-size: 13px;
+    font-family: "Sofia", sans-serif;
+}
+
+.navbar ul li a.active,
+.navbar ul li a:hover {
+    color: red;
+}
+
+/*search bar*/
+.search {
+    width: 250%;
+    position: relative;
+    display: flex;
+    left: -49%;
+}
+
+.searchTerm {
+    width: 60%;
+    border: 3px solid rgb(255, 255, 255);
+    border-right: none;
+    padding: 2px;
+    height: 15px;
+    border-radius: 20px 0px 0px 20px;
+    outline: none;
+    color: #9DBFAF;
+    height: 25px;
+}
+
+.searchTerm:focus {
+    color: #000000;
+}
+
+.searchButton {
+    width: 40px;
+    border: 1px solid #f99f1b;
+    background-color: #f99f1b;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 20px 20px 0;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.search-bar {
+    width: 30%;
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+}
+
+.search-btn-e button {
+    background-color: greenyellow;
+}
+
+.signin {
+    position: absolute;
+    top: 27%;
+    right: 11%;
+}
+
+.btn {
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.btn :hover {
+    color: red;
+}
+
+.signup {
+    position: absolute;
+    top: 27%;
+    right: 6%;
+}
+
+.btn-2 {
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    background-color: #f99f1b;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.btn-2 :hover {
+    color: #000000;
+}
+
+.basket {
+    position: absolute;
+    left: 95%;
+    top: 30%;
+    transition: transform .2s;
+}
+
+.basket :hover {
+    transform: scale(1.1);
+}
+
+/* vertical nav */
+.vertical-nav {
+    position: absolute;
+    top: 72px;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+    background-color: #f0f0f0;
+    /* background-color: #1c1b1b; */
+    padding: 0px;
+    /* overflow-y: auto; */
+    /* z-index: 999; */
+}
+
+.vertical-nav ul {
+    position: absolute;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+.vertical-nav ul li {
+    
+    width: 175%; 
+    margin-bottom: 5px;
+   
+}
+
+.vertical-nav ul li a {
+    
+    display: block;
+    padding: 20px 20px;
+    background-color: white;
+    color: #333;
+    text-decoration: none;
+    border-radius: 0px;
+    
+    transition: background-color 0.3s;
+    width: 100%; 
+    height: 100%;
+    text-align: center;
+    line-height: normal;
+}
+
+.vertical-nav ul li a:hover {
+    background-color: #edc84e;
+}
+
+.vertical-nav li a.active {
+    background-color: #edc84e;
+    color: white;
+   
+}
+
+
+
+
+
+
+.container {
+    
+    /* max-width: 980px; */
+    width:900px;
+    height: 550px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    top: 130px;
+    left:400px;
+}
+
+.row {
+    display: flex;
+   
+}
+
+.item {
+    flex: 1;
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+.item a {
+    
+    text-decoration: none;
+    color: #333;
+}
+
+.Order-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+/* .Order {
+    display: flex;
+    align-items: center;
+}
+
+.Order img {
+    width: 100px;
+    margin-right: 20px;
+}
+
+.Order-info {
+    margin-top: 5px;
+} */
+
+.OrderNumber{
+    /* flex-basis: 10%; */
+    position: relative;
+    left:70px;
+
+}
+
+.OrderNumber1{
+    /* flex-basis: 10%; */
+    position: relative;
+    left:70px;
+
+}
+
+.OrderNumber2{
+    /* flex-basis: 10%; */
+    position: relative;
+    left:70px;
+
+}
+
+.price{
+    flex-basis: 10%;
+    position: relative;
+    left:90px;
+
+}
+.price1{
+    flex-basis: 10%;
+    position: relative;
+    left:90px;
+
+}
+.price2{
+    flex-basis: 10%;
+    position: relative;
+    left:90px;
+
+}
+
+.OrderPlaced{
+    /* flex-basis: 10%; */
+    position: relative;
+    left:85px;
+
+}
+.OrderPlaced1{
+    /* flex-basis: 10%; */
+    position: relative;
+    left:85px;
+
+}
+.OrderPlaced2{
+    /* flex-basis: 10%; */
+    position: relative;
+    left:85px;
+
+}
+
+/* .quantity{
+    flex-basis: 10%;
+    position: relative;
+    left:0px;
+
+} */
+.Status{
+    flex-basis: 10%;
+    position: relative;
+    left:40px;
+}
+.Status1{
+    flex-basis: 10%;
+    position: relative;
+    left:40px;
+}
+.Status2{
+    flex-basis: 10%;
+    position: relative;
+    left:40px;
+}
+
+.ViewDetails {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+.ViewDetails a{
+    color: white;
+    text-decoration: none;
+}
+
+
+.ViewDetails:hover {
+    background-color: #d28c2a;
+}
+
+/* .quantity-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-control button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    color: #444;
+    font-size: 14px; 
+    padding: 8px;
+    cursor: pointer;
+}
+
+.quantity-control button:hover {
+    background-color: #e0e0e0;
+}
+
+.quantity-control button:active {
+    transform: translateY(1px);
+}
+
+.quantity {
+    width: 50px;
+    padding: 8px;
+    text-align: center;
+    margin: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+ */
+
+
+
+.box {
+    display: grid;
+    background-size: cover;
+    height: 100vh;
+}
+.box {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    gap: 10px;
+    
+}
+.menu {
+    border-collapse: collapse;
+    width: 80%;
+}
+
+.menu td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+   
+}
+
+.menu a {
+    
+    text-decoration: none;
+    color: black;  
+}
