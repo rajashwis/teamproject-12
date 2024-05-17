@@ -97,7 +97,7 @@
             $row = oci_fetch_assoc($stid);
             $wishlist_id = $row['WISHLIST_ID'];
 
-            $query1 = "SELECT PRODUCT_ID FROM WISHLIST WHERE PRODUCT_ID = $product_id";
+            $query1 = "SELECT PRODUCT_ID FROM WISHLISTPRODUCT WHERE PRODUCT_ID = $product_id";
             $stid1=oci_parse($connection, $query1);
             oci_execute($stid1);
             $row = oci_fetch_assoc($stid1);
