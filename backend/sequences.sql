@@ -1,5 +1,5 @@
 DROP SEQUENCE seq_cart_id;
-DROP SEQUENCE seq_customer_id;
+DROP SEQUENCE seq_user_id;
 DROP SEQUENCE seq_product_id;
 DROP SEQUENCE seq_wishlistproduct_id;
 DROP SEQUENCE seq_cartproduct_id;
@@ -7,6 +7,7 @@ DROP SEQUENCE seq_orderdetail_id;
 DROP SEQUENCE seq_orderproduct_id;
 DROP SEQUENCE seq_shop_id;
 DROP SEQUENCE seq_category_id;
+DROP SEQUENCE seq_wishlist_id;
 
 CREATE SEQUENCE seq_cart_id
     MINVALUE 1
@@ -16,7 +17,7 @@ CREATE SEQUENCE seq_cart_id
     NOCACHE
     NOCYCLE;
     
-CREATE SEQUENCE seq_customer_id
+CREATE SEQUENCE seq_user_id
     MINVALUE 0001
     MAXVALUE 9999
     INCREMENT BY 1
@@ -77,5 +78,13 @@ CREATE SEQUENCE seq_category_id
     MAXVALUE 5555
     INCREMENT BY 1
     START WITH 444
+    NOCACHE
+    NOCYCLE;
+    
+CREATE SEQUENCE seq_wishlist_id
+    MINVALUE 1111
+    MAXVALUE 99999
+    INCREMENT BY 1
+    START WITH 1111
     NOCACHE
     NOCYCLE;
