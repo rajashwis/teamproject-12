@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -414,8 +413,6 @@
 
 
 </style>
-<!DOCTYPE html>
-<html>
     <body>
         <div class="footer-background">
             <div class="container-footer w-container">

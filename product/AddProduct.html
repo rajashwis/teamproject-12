@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Product</title>
+  <link rel="stylesheet" href="AddProduct.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+</head>
+<body>
+    <div>
+        <div class="box">
+            <!--navbar-->
+      <div class="navbar" id="nav">
+        <nav>
+            <ul>
+                <li><img class="logo" src="CFXLocalHub - White_Logo.png"></li>
+                <div class="search-bar">
+                    <form action="search.php" method="GET">
+                        <div class="search">
+                            <input type="text" name="searchTerm" class="searchTerm" placeholder="   NIKE SHOES...">
+                            <button type="submit" class="searchButton">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="user-box">
+                    <div class="signin">
+                        <form action="signin.html" method="get">
+                            <button class="btn">
+                                <u><i class="fa-solid fa-user"></i> Sign in</u>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="signup">
+                        <form action="signup.html" method="get">
+                            <button class="btn-2">
+                                Sign up
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <li class="basket"><a href="cart.html"><img src="trolley.png" height="30px"></a></li>
+            </ul>
+        </nav>
+    </div>
+            <div class="menu">
+                <ul>
+                  <li><a href="">Dashboard</a></li>
+                  <li><a href="">Shop</a></li>
+                  <li><a class="active" href="">Product</a></li>
+                  <li><a href="">Orders</a></li>
+                </ul>
+              </div>
+
+              <div class="container">
+                <h1>Add Products</h1>
+                <hr class="hr-top-left">
+                <div class="product-info">
+                    <img src="Images/image1.jpeg" alt="Product Image">
+                    <div class="details">
+                        <div class="field">
+                            <div class="productName">
+                                <label for="productName">Product Name:</label>
+                                <div class="input-container">
+                                    <input type="text" class="single-line-input" placeholder="Type here...">
+                                  </div>
+                            </div> 
+                        </div>
+
+                        <div class="field">
+                            <div class="Category">
+
+                                <label for="category">Category:</label>
+                                <div class="input-container">
+                                    <input type="text" id="category"class="single-line-input" placeholder="Type here...">
+                                </div>
+                                
+                            </div>   
+                            
+                        </div>
+                        
+                        <div class="field">
+                            <div class="Description">
+                                <label for="description">Description:</label>
+                                <!-- <textarea id="description" rows="4"></textarea> -->
+                                <div class="input-container">
+                                    <input type="text" id="category"class="single-line-input" placeholder="Type here...">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="Allergy">
+                                <label for="allergyInfo">Allergy Information:</label>
+                                <!-- <textarea id="allergyInfo" rows="2"></textarea> -->
+                                <div class="input-container">
+                                    <input type="text" id="category"class="single-line-input" placeholder="Type here...">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="field">
+                            <div class="Price">
+                                <label for="price">Price:</label>
+                                <!-- <input type="text" id="price"> -->
+                                <div class="input-container">
+                                    <input type="text" id="category"class="single-line-input" placeholder="Type here...">
+                                </div>
+                            </div>
+                                
+                             <!-- <input type="text" id="quantity"  name="quantity" value="1" min="1" > -->
+                            
+                                <div class="Quantity">
+                                        <label for="quantity">Quantity:</label>
+                                    <!-- <input type="number" id="quantity" name="quantity" value="1" min="1" max="20"> -->
+                                    <div class="input-container">
+                                        <input type="number" class="single-line-input" placeholder="Type here..." value="1" min="1" max="20">
+                                    </div>    
+                                </div>   
+                        </div>
+
+
+                        <div class="field">
+                            <div class="Date">
+                                <label for="date">Date:</label>
+                                <div class="input-container">
+                                    <input type="date" class="single-line-input" placeholder="Type here...">
+                                </div> 
+                                
+                            </div>
+                            <div class="Discount">
+                                <label for="Discount">Discount:</label>
+                                <!-- <input type="text" id="Discount"> -->
+                                <div class="input-container">
+                                    <input type="text" id="category"class="single-line-input" placeholder="Type here...">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="Stock">
+                                    <label for="stock">Stock Available:</label>
+                                <!-- <input type="number" id="stock" name="stock" value="1" min="1" max="20"> -->
+                                <div class="input-container">
+                                    <input type="number" class="single-line-input" placeholder="Type here..." value="1" min="1" max="20">
+                                </div>
+                            
+                            </div> 
+                        </div> 
+                    </div>
+
+
+
+                <div class="submit-box">
+                    <button type="submit">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+</html>
