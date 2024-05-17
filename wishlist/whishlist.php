@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="../component/header.php">
 </head>
 <body>
 
@@ -38,6 +40,51 @@
       </div>
 
 
+      <div class="wishlist-item">
+        <div class="product">
+          <img src="../resources/products/bakery1.jpg" alt="Product Image">
+          <p>Product Name</p>
+        </div>
+        <div class="price">$2.99</div>
+        <div class="date">2024-5-16</div>
+        <div class="quantity-control">
+          <button class="btn-minus">-</button>
+          <input type="number" class="quantity" name="quantity" value="1" min="1">
+          <button class="btn-plus">+</button>
+        </div>
+        <button class="btn-add-to-cart">Add to Cart</button>
+      </div>
+
+
+      <div class="wishlist-item">
+        <div class="product">
+          <img src="../resources/products/bakery1.jpg" alt="Product Image">
+          <p>Product Name</p>
+        </div>
+        <div class="price">$2.99</div>
+        <div class="date">2024-5-16</div>
+        <div class="quantity-control">
+          <button class="btn-minus">-</button>
+          <input type="number" class="quantity" name="quantity" value="1" min="1">
+          <button class="btn-plus">+</button>
+        </div>
+        <button class="btn-add-to-cart">Add to Cart</button>
+      </div>
+
+      <div class="wishlist-item">
+        <div class="product">
+          <img src="../resources/products/bakery1.jpg" alt="Product Image">
+          <p>Product Name</p>
+        </div>
+        <div class="price">$2.99</div>
+        <div class="date">2024-5-16</div>
+        <div class="quantity-control">
+          <button class="btn-minus">-</button>
+          <input type="number" class="quantity" name="quantity" value="1" min="1">
+          <button class="btn-plus">+</button>
+        </div>
+        <button class="btn-add-to-cart">Add to Cart</button>
+      </div>
       <div class="wishlist-item">
         <div class="product">
           <img src="../resources/products/bakery1.jpg" alt="Product Image">
