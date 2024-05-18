@@ -669,9 +669,6 @@ $user = $_SESSION['user_id'];
 
             </nav>
         </div>
-
-
-
     </div>
 </body>
 </html>
