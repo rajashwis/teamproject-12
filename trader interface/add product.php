@@ -20,6 +20,8 @@
         $discount = $_POST['discount'];
         $stock = $_POST['stock'];
 
+        $discount = !empty($discount) ? $discount : NULL;
+        
         $query="SELECT shop_id, shop_name from SHOP WHERE trader_id = '$trader'";
         $stid=oci_parse($connection, $query);
         oci_execute($stid);
@@ -167,7 +169,7 @@
                                     ?>
                                     <option value = "<?php echo $row['DISCOUNT_ID']?>"><?php echo $row['DISCOUNT_PERCENTAGE']?></option>
                                     <?php } ?>
-                                    <option value=0>None</option>
+                                    <option value="">None</option>
                                 </select>
                             </div>
 
