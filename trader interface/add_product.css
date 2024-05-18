@@ -187,7 +187,7 @@ input:focus {
 }
 
 
-.btn-add-product button {
+.btn-add-product {
     padding: 10px 20px;
     font-size: 16px;
     background-color: #f99f1b;
@@ -196,7 +196,7 @@ input:focus {
     cursor: pointer;
 }
 
-.btn-add-product button:hover {
+.btn-add-product:hover {
     background-color: #0056b3;
 }
 

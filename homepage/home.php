@@ -198,11 +198,11 @@ $user = $_SESSION['user_id'];
                     $category = $category['CATEGORY_NAME'];
 
                     echo '<div class="image-container">';
-                    echo '<a href = "../product_detail/product_detail.php?product_id='.$product_id.'"> <img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image"></a>';
+                    echo '<a href = "../product_detail/product_detail.php?product_id='.$product_id.'"> <img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
                     echo '</div>';
-                    echo '<h1>'.$product['PRODUCT_NAME'].'</h1>';
+                    echo '<h1>'.$product['PRODUCT_NAME'].'</h1></a>';
                     echo '<p class="price"><s>'.$product['PRICE'].'</s><br>'.$product['DISCOUNTED_PRICE'].'<i class="fa-solid fa-tag"></i></p>';
-                    echo '<p>'.$category.'</p>';
+                    echo '<p><a href="">'.$category.'</a></p>';
                     echo '<p><button>Buy</button></p><br>';
                 
                 ?>
@@ -284,11 +284,11 @@ $user = $_SESSION['user_id'];
 
                     echo '<div class="card-4">';
                     echo '<div class="image-container">';
-                    echo '<a href = "../product_detail/product_detail.php?product_id='.$product_id.'"> <img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image"></a>';
+                    echo '<a href = "../product_detail/product_detail.php?product_id='.$product_id.'"> <img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
                     echo '</div>';
-                    echo '<h1>'.$product['PRODUCT_NAME'].'</h1>';
+                    echo '<h1>'.$product['PRODUCT_NAME'].'</h1></a>';
                     echo '<p class="price"><s>'.$product['PRICE'].'</s><br>'.$product['DISCOUNTED_PRICE'].'<i class="fa-solid fa-tag"></i></p>';
-                    echo '<p>'.$category.'</p>';
+                    echo '<p><a href="">'.$category.'</a></p>';
                     echo '<p><button>Buy</button></p><br>';
                     echo '</div>';
 
