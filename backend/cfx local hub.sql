@@ -161,7 +161,7 @@ ADD CONSTRAINT pk_product_category_id PRIMARY KEY(category_id);
 --9. DISCOUNT TABLE
 CREATE TABLE Discount(
     discount_id NUMBER(4), 
-    discount_percentage NUMBER(3,2) NOT NULL, 
+    discount_percentage NUMBER(10,0) NOT NULL, 
     start_date DATE NOT NULL, 
     end_date DATE, 
     description_ VARCHAR2(700), 

@@ -8,6 +8,7 @@ DROP SEQUENCE seq_orderproduct_id;
 DROP SEQUENCE seq_shop_id;
 DROP SEQUENCE seq_category_id;
 DROP SEQUENCE seq_wishlist_id;
+DROP SEQUENCE seq_discount_id;
 
 CREATE SEQUENCE seq_cart_id
     MINVALUE 1
@@ -86,5 +87,13 @@ CREATE SEQUENCE seq_wishlist_id
     MAXVALUE 99999
     INCREMENT BY 1
     START WITH 1111
+    NOCACHE
+    NOCYCLE;
+    
+CREATE SEQUENCE seq_discount_id
+    MINVALUE 1
+    MAXVALUE 999
+    INCREMENT BY 1
+    START WITH 1
     NOCACHE
     NOCYCLE;
