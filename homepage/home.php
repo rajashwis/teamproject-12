@@ -1,11 +1,16 @@
 <?php
 
-session_start();
-error_reporting(0);
+    session_start();
+    error_reporting(0);
 
-include "../connect.php";
+    include "../connect.php";
 
-$user = $_SESSION['user_id']; 
+    $user = $_SESSION['user_id']; 
+
+    if (isset($_GET['searchTerm'])) {
+        $searchTerm = $_GET['searchTerm'];
+        header('Location: ../product/search_sort_product.php?searchTerm='.$searchTerm.'');
+    }
 
 ?>
 
@@ -28,7 +33,7 @@ $user = $_SESSION['user_id'];
                     <img class="logo" src="../resources/cfxlocalhubwhitelogo.png">
             
                     <div class="search-bar">
-                        <form action="search.php" method="GET">
+                        <form method="GET">
                             <div class="search">
                                 <input type="text" name="searchTerm" class="searchTerm" placeholder="   NIKE SHOES...">
                                 <button type="submit" class="searchButton">
