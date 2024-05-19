@@ -136,7 +136,9 @@ body {
 .section-container input[type="text"],
 .section-container input[type="tel"],
 .section-container input[type="email"],
-.section-container input[type="date"] {
+.section-container input[type="date"] 
+.section-container textarea,
+.section-container select {
     width: 100%; 
     padding: 10px; 
     margin-bottom: 15px; 

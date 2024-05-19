@@ -1,3 +1,66 @@
+<?php
+    session_start();
+    error_reporting(0);
+
+    include "../connect.php";
+
+    $user = $_SESSION['user_id']; 
+
+    if(!$user) {
+        header("Location: ../login/login.html");
+        exit();
+    }
+
+    if($_SERVER["REQUEST_METHOD"]=='GET'){
+
+        $query="SELECT * from USER_ WHERE user_id = '$user'";
+        $stid=oci_parse($connection, $query);
+        oci_execute($stid);
+        $row = oci_fetch_assoc($stid);
+
+        if(!$row){
+            echo("Error!");
+            exit();
+        }
+
+        $email = $row['EMAIL'];
+        $password = $row['PASSWORD_'];
+        $username = $row['USERNAME'];
+        $fname = $row['FIRST_NAME'];
+        $lname = $row['LAST_NAME'];
+        $dob = $row['DATE_OF_BIRTH'];
+        $address = $row['ADDRESS_'];
+ 
+    }
+
+    else{
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $username = $_POST['username'];
+        $fname = $_POST['fname'];
+        $lname = $_POST['lname'];
+        $dob = $_POST['dob']; 
+
+        $sql = "UPDATE USER_ SET email='$email', password_='$password', username='$username', first_name='$fname', last_name='$lname', date_of_birth=TO_DATE('$dob','YYYY-MM-DD') WHERE user_id='$user'";
+
+        $stid=oci_parse($connection, $sql);
+        $result=oci_execute($stid);
+
+        if($result) {
+            header("Location: ../component/home.php");
+            exit();
+        }
+
+        else {
+            $error = oci_error($stid);
+            echo "<script>alert('Error updating user data: " . $error['message'] . "')</script>";
+        }
+    }
+
+    oci_close($connection);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -94,48 +157,66 @@
         </div>
 
 
-
+       
         <div class="wrapper-cp">
                 <div class="section-container">
                     <div class="section">
                         <div class="section-content">
-                            <form action="/save-changes" method="post">
+                            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+                                <input type="hidden" name="id" value="<?php echo $id; ?>" class="form-control"> <br>
+
                                 <label for="firstname">First Name:</label><br>
                                 <div class="input-container">
-                                    <input type="text" class="single-line-input" placeholder="Type here...">
-                                  </div>
+                                    <input type="text" name="fname" class="single-line-input" value="<?php echo $fname; ?>">
+                                </div>
                                 <label for="lastname">Last Name:</label><br>
                                 <div class="input-container">
-                                    <input type="text" class="single-line-input" placeholder="Type here...">
+                                    <input type="text" name="lname" class="single-line-input" value="<?php echo $lname; ?>">
                                 </div>
                                 <label for="username">Username:</label><br>
                                 <div class="input-container">
-                                    <input type="text" class="single-line-input" placeholder="Type here...">
+                                    <input type="text" class="single-line-input" value="<?php echo $username; ?>">
                                 </div>
-                                  <label for="address">Address:</label><br>
+                                <label for="address">Address:</label><br>
                                     <div class="input-container">
-                                      <input type="text" class="single-line-input" placeholder="Type here...">
+                                        <textarea name="address" class="single-line-input" value="<?php echo $address; ?>"></textarea>
+                                    <!-- <input type="text" class="single-line-input" value="<?php echo $address; ?>"> -->
                                     </div>
                                 <label for="email">Email:</label><br>
                                 <div class="input-container">
-                                    <input type="text" class="single-line-input" placeholder="Type here...">
-                                  </div>
-                                <label for="phone">Phone Number:</label><br>
-                                <div class="input-container">
-                                    <input type="text" class="single-line-input" placeholder="Type here...">
+                                    <input type="text" class="single-line-input" value="<?php echo $email; ?>">
                                 </div>
+
+                                <?php 
+                                    $query = "SELECT date_of_birth, gender FROM user_ WHERE user_id=$user";
+                                    $stid = oci_parse($connection, $query);
+                                    oci_execute($stid);
+
+                                    $information = oci_fetch_array($stid);
+                                    $dob = $information['DATE_OF_BIRTH'];
+
+                                    $dob_formatted = date('Y-m-d', strtotime($dob));
+                                    $gender = $information['GENDER'];
+                                ?>
                                 <label for="dob">Date of birth:</label><br>
                                 <div class="input-container">
-                                    <input type="date" class="single-line-input" placeholder="Type here...">
+                                    <input type="date" class="single-line-input" value="<?php echo htmlspecialchars($dob_formatted); ?>">
                                 </div>
+
                                 <label for="gender">Gender:</label><br>
                                 <div class="input-container">
-                                    <input type="text" class="single-line-input" placeholder="Type here...">
+
+                                    <select id="gender" name="gender" class="single-line-input">
+                                        <option value="male" <?php if ($gender == 'M') echo 'selected'; ?>>Male</option>
+                                        <option value="female" <?php if ($gender == 'F') echo 'selected'; ?>>Female</option>
+                                        <option value="other" <?php if ($gender == 'O') echo 'selected'; ?>>Other</option>
+                                    </select>
+                                    <!-- <input type="text" class="single-line-input" placeholder="Type here..."> -->
                                 </div>
                                 <!-- <label for="email">Email:</label><br>
                                 <div class="input-container">
                                     <input type="text" class="single-line-input" placeholder="Type here...">
-                                  </div> -->
+                                </div> -->
                             </form>
                             
                         </div>
