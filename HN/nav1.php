@@ -12,18 +12,13 @@
     scroll-behavior: smooth;
 }
 
-.home-page{
-    margin-bottom: 8%;
-}
-
-
-
 .navbar{
     position: fixed;
     overflow: hidden;
     height: 70px;
     width: 100%;
     top: 0%;
+    /* background-image: url('footer.jpg'); */
     background-color: #000000;
     background-size: 29%;
     display: block;
@@ -157,64 +152,7 @@
     transform: scale(1.1);
 }
 
-/*NAV 2*/
-.navbar2 {
-    position: fixed;
-    overflow: hidden;
-    height: 65px;
-    width: 100%;
-    top: 8%;
-    /* background-image: url('footer.jpg'); */
-    background-color: #000000;
-    background-size: 29%;
-    position: fixed;
-    display: block;
-    transition: top 0.3s;
-    z-index: 2;
-}
 
-.navbar2 ul {
-    padding: 23px;
-    text-align: center;
-    position: relative;
-    left: -3px;
-    margin: 0;
-}
-
-.navbar2 ul li {
-    text-indent: 50px;
-    display: inline-block;
-}
-
-.navbar2 ul li a {
-    text-decoration: none;
-    color: rgb(255, 255, 255);
-    font-size: 15px;
-    font-family: "Sofia", sans-serif;
-    padding: 15px;
-    position: relative;
-}
-
-.navbar .toggle{
-    color: rgb(255, 255, 255);
-    position: relative;
-    margin-left: 97%;
-    margin-top: 26px;
-    cursor: pointer;
-    display: none;
-}
-
-/* .navbar2 ul li a img{
-    height: 15px;
-    scale: 1.4;
-    position: relative;
-} */
-
-
-.navbar2 ul li a.active,
-.navbar2 ul li a:hover {
-    color: #f99f1b;
-}
 
 .home-split{
     position: relative;
@@ -371,11 +309,10 @@
 }
 </style>
 <body>
-    <div class="home-page">
         <!--navbar-->
         <div class="navbar" id="nav">
             <nav>
-                    <img class="logo" src="../resources/cfxlocalhubwhitelogo.png">
+                    <img class="logo" src="cfxlocalhubwhitelogo.png">
             
                     <div class="search-bar">
                         <form action="search.php" method="GET">
@@ -404,7 +341,7 @@
                             </div>
                         </div>    
                         <div class="basket">
-                            <a href="cart.html"><img src="../resources/trolley.png" height="30px"></a>
+                            <a href="cart.html"><img src="trolley.png" height="30px"></a>
                         </div>
                 <div class="toggle"><i class="fa-solid fa-bars"></i></div>
             </nav> 
@@ -424,21 +361,7 @@
                 <li><a href=""><img src="trolley.png" height="30px"></a></li>
             </ul>
         </div>
-        <!--navbar 2-->
-        <div class="navbar2" id="nav2">
-            <nav>
-                <ul>
-                    <li class="home-split"><a class="active" href=""> HOME</a></li>
-                    <li><a href="trending.html"> TRENDING</a></li>
-                    <li><a href="decor.html"> HOME & DECOR</a></li>
-                    <li><a href=""> ELECTRONICS</a></li>
-                    <li><a href=""> FASHION</a></li>
-                    <li><a href=""> SALES</a></li>
-                    <li class="bs-split"><a href=""> BECOME A SELLER</a></li>
-                </ul>
-                
-            </nav>
-        </div> 
+
 </div>
 <script href="navbar.js"></script>
 <script>

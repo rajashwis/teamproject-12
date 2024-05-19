@@ -7,9 +7,12 @@
     <link rel="stylesheet" href="search_sort_product.css">
 </head>
 <body>
-    <?php
+<?php
     include '../component/header.php';
-    ?>
+    ?> 
+   <?php
+  //  include '../component/navbar.php';
+    ?> 
 
     <main class="container">
 
@@ -178,7 +181,7 @@
     </main>
 
     <?php
-    include '../component/footer.php';
+    include '../HN/footer.php';
     ?>
 
 </body>
