@@ -30,6 +30,7 @@ $user = $_SESSION['user_id'];
 
         .home-page {
             background-size: cover;
+            height: 2000px;
             background-color: rgb(255, 255, 255);
         }
 
