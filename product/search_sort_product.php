@@ -1,3 +1,20 @@
+<?php
+    session_start();
+    error_reporting(0);
+
+    include "../connect.php";
+
+    $user = $_SESSION['user_id']; 
+
+    if (isset($_GET['searchTerm'])) {
+        $searchTerm = $_GET['searchTerm'];
+        
+        $query = "SELECT * FROM PRODUCT WHERE CONCAT(product_name, description_) LIKE '%$searchTerm%'";
+        $statement = oci_parse($connection, $query);
+        oci_execute($statement);
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,11 +25,9 @@
 </head>
 <body>
 <?php
-    include '../component/header.php';
+    include '../HN/nav1.php';
     ?> 
-   <?php
-  //  include '../component/navbar.php';
-    ?> 
+
 
     <main class="container">
 
@@ -63,107 +78,75 @@
 
                 <!-- box1-->
 
-                <div class="image-container">
-                    <div class="image-box">
-                        <img src="../resources/products/bakery1.jpg" alt="Image 1">
-                    </div>
-                    <div class="description-box">
-                        <h1>BLACK FOREST CAKE </h1>
-                        <p class="price"><s>$64.99</s><br>$49.99 <i class="fa-solid fa-tag"></i></p>
-                        <div class="bakery">
-                            <p>Bakery</p>
-                        </div>
+                <?php
 
-                        <button class="add-to-cart"><a href="cart.html">Add to Cart</a></button>
+                while($product=oci_fetch_assoc($statement)) {
 
-                    </div>
-                </div>
+                    $product_id = $product['PRODUCT_ID'];
+                    
+                    $imageData = $product['PRODUCT_IMAGE']->load();
+                    $encodedImageData = base64_encode($imageData);
+                    // Determine the image type based on the first few bytes of the image data
+                    $header = substr($imageData, 0, 4);
+                    $imageType = 'image/jpeg'; // default to JPEG
+                    if (strpos($header, 'FFD8') === 0) {
+                        $imageType = 'image/jpeg'; // JPEG
+                    } elseif (strpos($header, '89504E47') === 0) {
+                        $imageType = 'image/png'; // PNG
+                    }
 
-                <!-- box2-->
-                <div class="image-container">
-                    <div class="image-box">
-                    <img src="../resources/products/bakery2.jpg" alt="Image 1">
-                    </div>
-                    <div class="description-box">
-                        <h1>BLACK FOREST CAKE </h1>
-                        <p class="price"><s>$64.99</s><br>$49.99 <i class="fa-solid fa-tag"></i></p>
-                        <div class="bakery">
-                            <p>Bakery</p>
-                        </div>
+                    $category_id = $product['CATEGORY_ID'];
+                    $query1 = "SELECT CATEGORY_NAME FROM PRODUCTCATEGORY WHERE CATEGORY_ID = $category_id";
+                    $stid1=oci_parse($connection, $query1);
+                    oci_execute($stid1);
+                    $category = oci_fetch_assoc($stid1);
+                    $category = $category['CATEGORY_NAME'];
 
-                        <button class="add-to-cart"><a href="cart.html">Add to Cart</a></button>
+                    echo '<div class="image-container">';
+                    echo '<div class="image-box">';
+                    echo '<a href = "../product_detail/product_detail.php?product_id='.$product_id.'"> <img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
+                    echo '</div>';
+                    echo '<div class="description-box">';
+                    echo '<h1>'.$product['PRODUCT_NAME'].'</h1></a>';
 
-                    </div>
-                </div>
+                    $query1 = "SELECT 
+                        p.*, 
+                        d.discount_percentage, 
+                        p.price * (1 - d.discount_percentage / 100) AS discounted_price
+                    FROM 
+                        product p
+                    JOIN 
+                        shop s ON p.shop_id = s.shop_id
+                    JOIN 
+                        discount d ON p.discount_id = d.discount_id 
+                                AND s.trader_id = d.trader_id
+                    WHERE
+                        product_id = $product_id";
 
+                    $stid1=oci_parse($connection, $query1);
+                    oci_execute($stid1);
+                    $discount_product = oci_fetch_assoc($stid1);
 
+                    $product_id = $discount_product['PRODUCT_ID'];
+                    $discount_id = $discount_product['DISCOUNT_ID'];
 
-                <!-- box3 -->
-                <div class="image-container">
-                    <div class="image-box">
-                    <img src="../resources/products/bakery2.jpg" alt="Image 1">
-                    </div>
-                    <div class="description-box">
-                        <h1>BLACK FOREST CAKE </h1>
-                        <p class="price"><s>$64.99</s><br>$49.99 <i class="fa-solid fa-tag"></i></p>
-                        <div class="bakery">
-                            <p>Bakery</p>
-                        </div>
-                        <button class="add-to-cart"><a href="cart.html">Add to Cart</a></button>
-                    </div>
-                </div>
+                    if($discount_id) {
+                        echo '<p class="price"><s>'.$product['PRICE'].'</s><br>'.$discount_product['DISCOUNTED_PRICE'].'<i class="fa-solid fa-tag"></i></p>';
+                    }
+                    else {
+                        echo '<p class="price"><br>'.$product['PRICE'].'&nbsp<i class="fa-solid fa-tag"></i></p>';
+                    }
 
+                    // echo '<p class="price"><s>$64.99</s><br>$49.99 <i class="fa-solid fa-tag"></i></p>';
+                    echo '<div class="bakery">';
+                    echo '<p>'.$category.'</p>';
+                    echo '</div>';
+                    echo '<button class="add-to-cart"><a href="cart.html">Add to Cart</a></button>';
+                    echo '</div>';
+                    echo '</div>';
+                }
 
-                <!-- box 4 -->
-                <div class="image-container">
-                    <div class="image-box">
-                        <img src="../resources/products/bakery2.jpg" alt="Image 1">
-                    </div>
-                    <div class="description-box">
-                        <h1>BLACK FOREST CAKE </h1>
-                        <p class="price"><s>$64.99</s><br>$49.99 <i class="fa-solid fa-tag"></i></p>
-                        <div class="bakery">
-                            <p>Bakery</p>
-                        </div>
-
-                        <button class="add-to-cart"><a href="cart.html">Add to Cart</a></button>
-
-                    </div>
-                </div>
-
-                <!-- box5 -->
-                <div class="image-container">
-                    <div class="image-box">
-                        <img src="../resources/products/bakery1.jpg" alt="Image 1">
-                    </div>
-                    <div class="description-box">
-                        <h1>BLACK FOREST CAKE </h1>
-                        <p class="price"><s>$64.99</s><br>$49.99 <i class="fa-solid fa-tag"></i></p>
-                        <div class="bakery">
-                            <p>Bakery</p>
-                        </div>
-
-                        <button class="add-to-cart"><a href="cart.html">Add to Cart</a></button>
-
-                    </div>
-                </div>
-
-
-                <!-- box6 -->
-                <div class="image-container">
-                    <div class="image-box">
-                        <img src="../resources/products/bakery1.jpg" alt="Image 1">
-                    </div>
-                    <div class="description-box">
-                        <h1>BLACK FOREST CAKE </h1>
-                        <p class="price"><s>$64.99</s><br>$49.99 <i class="fa-solid fa-tag"></i></p>
-                        <div class="bakery">
-                            <p>Bakery</p>
-                        </div>
-
-                        <button class="add-to-cart"><a href="cart.html">Add to Cart</a></button>
-                    </div>
-                </div>
+                ?>
             </div>
 
 
