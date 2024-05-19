@@ -1,0 +1,236 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: "Sofia", sans-serif;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 11%;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    height: 300px;
+    border: 1px solid black;
+    margin-top: 5%;
+    border-radius: 10px;
+    background-color: #ebebeb;
+    position: relative; /* Ensure children are positioned relative to this container */
+}
+
+.image {
+    flex: 1;
+}
+
+.image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin-left: 4%;
+    border-radius: 10px;
+}
+
+.container-btn {
+    flex: 1;
+    display: inline-block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 26%;
+    margin-right: 5%;
+}
+
+.container-btn button {
+    margin-inline-start: 100px;
+    padding: 10px;
+    width: 80px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#btn-1 {
+    background-color: rgb(29, 188, 29);
+}
+
+#btn-2 {
+    background-color: rgb(255, 78, 78);
+}
+
+.container-btn button:hover {
+    opacity: 0.9;
+}
+
+.discount-details {
+    position: absolute;
+    left: 63%;
+    font-size: 20px;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+}
+
+.text-1 {
+    text-decoration: underline;
+}
+
+.popup-box {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.upload-upload {
+    margin-top: 10px;
+    margin-left: 11%;
+}
+
+.discount-discount {
+    margin-top: 10px;
+}
+
+.start-date-end-date{
+    margin: 10px;
+}
+
+.close-btn {
+    color: #aaa;
+    margin-left: 96%;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.save-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px; /* Added margin-top for spacing */
+}
+
+.save-btn:hover {
+    background-color: #45a049;
+}
+
+/* Extra Large screens */
+@media (max-width: 1280px) {
+    .container {
+        width: 60%; /* Adjust width if needed */
+    }
+    .discount-details {
+        font-size: 18px;
+        left: 55%;
+    }
+}
+
+/* Large screens */
+@media (max-width: 1024px) {
+    .container {
+        width: 70%; /* Adjust width if needed */
+    }
+    .discount-details {
+        font-size: 18px;
+        left: 50%;
+    }
+}
+
+/* Medium screens */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        width: 90%;
+        height: auto;
+        text-align: center;
+        border: none;
+    }
+
+    .image, .container-btn, .discount-details {
+        width: 80%;
+        margin: 0;
+    }
+
+    .image img {
+        width: 100%;
+        height: auto;
+        margin: 0;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .discount-details {
+        position: static;
+        text-align: center;
+        font-size: 20px;
+        margin-top: 10px;
+        border: 1px solid black; /* Ensure border stays within container */
+    }
+
+    .container-btn {
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .container-btn button {
+        margin: 10px;
+        width: auto;
+        padding: 10px 20px;
+    }
+}
+
+/* Small screens */
+@media (max-width: 640px) {
+    .discount-details {
+        font-size: 18px;
+    }
+
+    .container-btn button {
+        margin: 5px;
+        padding: 8px 16px;
+    }
+}
+
+/* Extra Small screens */
+@media (max-width: 475px) {
+    .discount-details {
+        font-size: 16px;
+    }
+
+    .container-btn button {
+        margin: 5px;
+        padding: 8px 16px;
+    }
+}
