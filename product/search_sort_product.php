@@ -56,7 +56,7 @@
                             <p>Bakery</p>
                         </div>
 
-                        <button class="add-to-cart"><a href="cart.html">Add-to-Cart</a></button>
+                        <button class="add-to-cart"><a href="cart.html">Add to Cart</a></button>
 
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                             <p>Bakery</p>
                         </div>
 
-                        <button class="add-to-cart"><a href="cart.html">Add-to-Cart</a></button>
+                        <button class="add-to-cart"><a href="cart.html">Add to Cart</a></button>
 
                     </div>
                 </div>
@@ -91,7 +91,7 @@
                         <div class="bakery">
                             <p>Bakery</p>
                         </div>
-                        <button class="add-to-cart"><a href="cart.html">Add-to-Cart</a></button>
+                        <button class="add-to-cart"><a href="cart.html">Add to Cart</a></button>
                     </div>
                 </div>
 
@@ -108,7 +108,7 @@
                             <p>Bakery</p>
                         </div>
 
-                        <button class="add-to-cart"><a href="cart.html">Add-to-Cart</a></button>
+                        <button class="add-to-cart"><a href="cart.html">Add to Cart</a></button>
 
                     </div>
                 </div>
@@ -125,7 +125,7 @@
                             <p>Bakery</p>
                         </div>
 
-                        <button class="add-to-cart"><a href="cart.html">Add-to-Cart</a></button>
+                        <button class="add-to-cart"><a href="cart.html">Add to Cart</a></button>
 
                     </div>
                 </div>
