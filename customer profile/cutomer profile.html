@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer profile</title>
+    <link rel="stylesheet" type="text/css" href="customer profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>CFXLocalHub HOME PAGE</title>
+
+
+</head>
+
+<body>
+        <!-- <div class="home-page"> -->
+    <div class="box">
+
+        <!--navbar-->
+        <div class="navbar" id="nav">
+            <nav>
+                <ul>
+                    <li><img class="logo" src="CFXLocalHub - White_Logo.png"></li>
+                    <div class="search-bar">
+                        <form action="search.php" method="GET">
+                            <div class="search">
+                                <input type="text" name="searchTerm" class="searchTerm" placeholder="   NIKE SHOES...">
+                                <button type="submit" class="searchButton">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="user-box">
+                        <div class="signin">
+                            <form action="signin.html" method="get">
+                                <button class="btn">
+                                    <u><i class="fa-solid fa-user"></i> Sign in</u>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="signup">
+                            <form action="signup.html" method="get">
+                                <button class="btn-2">
+                                    Sign up
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <li class="basket"><a href="cart.html"><img src="trolley.png" height="30px"></a></li>
+                </ul>
+            </nav>
+        </div>
+        <!--navbar 2-->
+        <!-- <div class="navbar2" id="nav2">
+            <nav>
+                <ul>
+                    <li class="home-split"><a class="active" href=""> HOME</a></li>
+                    <li><a href="trending.html"> TRENDING</a></li>
+                    <li><a href=""> HOME & DECOR</a></li>
+                    <li><a href=""> ELECTRONICS</a></li>
+                    <li><a href=""> FASHION</a></li>
+                    <li><a href=""> SALES</a></li>
+                    <li class="bs-split"><a href=""> BECOME A SELLER</a></li>
+                </ul>
+            </nav>
+        </div> -->
+
+
+        <!--customer profile-->
+        <!-- <table class="menu">
+            <tr>
+                <td class="menu-item"><a href="my-profile.html">My Profile</a></td>
+            </tr>
+            <tr>
+                <td class="menu-item"><a href="my-order.html">My Order</a></td>
+            </tr>
+            <tr>
+                <td class="menu-item"><a href="view-wishlist.html">View Wishlist</a></td>
+            </tr>
+            <tr>
+                <td class="menu-item"><a href="my-reviews.html">My Reviews</a></td>
+            </tr>
+        </table> -->
+        
+        <div class="menu">
+            <ul>
+                <li><a class="active" href="">My Profile</a></li>
+                <li><a href="">My Order</a></li>
+                <li><a href="">Wishlist</a></li>
+                <li><a href="">Reviews</a></li>
+              </ul>
+        </div>
+
+
+
+        <div class="wrapper-cp">
+                <div class="section-container">
+                    <div class="section">
+                        <div class="section-content">
+                            <form action="/save-changes" method="post">
+                                <label for="firstname">First Name:</label><br>
+                                <div class="input-container">
+                                    <input type="text" class="single-line-input" placeholder="Type here...">
+                                  </div>
+                                <label for="lastname">Last Name:</label><br>
+                                <div class="input-container">
+                                    <input type="text" class="single-line-input" placeholder="Type here...">
+                                </div>
+                                <label for="username">Username:</label><br>
+                                <div class="input-container">
+                                    <input type="text" class="single-line-input" placeholder="Type here...">
+                                </div>
+                                  <label for="address">Address:</label><br>
+                                    <div class="input-container">
+                                      <input type="text" class="single-line-input" placeholder="Type here...">
+                                    </div>
+                                <label for="email">Email:</label><br>
+                                <div class="input-container">
+                                    <input type="text" class="single-line-input" placeholder="Type here...">
+                                  </div>
+                                <label for="phone">Phone Number:</label><br>
+                                <div class="input-container">
+                                    <input type="text" class="single-line-input" placeholder="Type here...">
+                                </div>
+                                <label for="dob">Date of birth:</label><br>
+                                <div class="input-container">
+                                    <input type="date" class="single-line-input" placeholder="Type here...">
+                                </div>
+                                <label for="gender">Gender:</label><br>
+                                <div class="input-container">
+                                    <input type="text" class="single-line-input" placeholder="Type here...">
+                                </div>
+                                <!-- <label for="email">Email:</label><br>
+                                <div class="input-container">
+                                    <input type="text" class="single-line-input" placeholder="Type here...">
+                                  </div> -->
+                            </form>
+                            
+                        </div>
+                        <div>
+                            <div class="profile-icon">
+                                <img src="../resources/cfxfavicon.png">
+                            </div>
+                            <input type="submit" value="Change Password"><br>
+                            <input type="submit1" value="Save Changes">
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <!--footer-->
+ 
+
+    <script type="text/javascript" src="customer.js"></script>
+
+</body>
+
+</html>

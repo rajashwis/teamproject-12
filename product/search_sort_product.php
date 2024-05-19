@@ -22,20 +22,35 @@
 
 
             <section class="shop">
-                <select id="options">
+                <!-- <select id="options">
                     <option value="A">Butcher</option>
                     <option value="B">Greengrocer</option>
                     <option value="C">Fishmonger</option>
                     <option value="D">Bakery</option>
                     <option value="E">Delicatessen</option>
-                </select>
+                </select> -->
 
                 <div class="filters">
+                    Shop:
                     <label><input type="checkbox" id="cat1"> Category 1</label>
                     <label><input type="checkbox" id="cat2"> Category 2</label>
                     <label><input type="checkbox" id="cat3"> Category 3</label>
-
                 </div>
+
+                <div class="filters">
+                    Categories:
+                    <label><input type="checkbox" id="cat1"> Category 1</label>
+                    <label><input type="checkbox" id="cat2"> Category 2</label>
+                    <label><input type="checkbox" id="cat3"> Category 3</label>
+                </div>
+
+                <div class="filters">
+                    Discount:
+                    <label><input type="checkbox" id="cat1"> Category 1</label>
+                    <label><input type="checkbox" id="cat2"> Category 2</label>
+                    <label><input type="checkbox" id="cat3"> Category 3</label>
+                </div>
+
             </section>
 
 
