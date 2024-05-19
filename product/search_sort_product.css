@@ -70,7 +70,7 @@
     border: 2px solid black;
 }
 
-.sort-by {
+/* .sort-by {
     width: 8%;
     box-shadow: 0 0px 4px 0 rgba(0, 0, 0, 1);
     padding: 10px;
@@ -87,7 +87,7 @@
 .sort-by label{
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
-}
+} */
 
 
 .image-container-group {
