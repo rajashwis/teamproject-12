@@ -312,7 +312,7 @@
         <!--navbar-->
         <div class="navbar" id="nav">
             <nav>
-                    <img class="logo" src="cfxlocalhubwhitelogo.png">
+                    <img class="logo" src="../resources/cfxlocalhubwhitelogo.png">
             
                     <div class="search-bar">
                         <form action="search.php" method="GET">
@@ -324,24 +324,47 @@
                             </div>
                         </form>
                     </div>
-                        <div class="user-box">
-                            <div class="signin">
-                                <form action="login.html" method="get">
-                                    <button class="btn">
-                                        <u><i class="fa-solid fa-user"></i> Sign in</u>
-                                    </button>    
-                                </form>
-                            </div>
-                            <div class="signup">
-                                <form action="signup.html" method="get">
-                                    <button class="btn-2">
-                                        Sign up
-                                    </button>    
-                                </form>
-                            </div>
-                        </div>    
+                    <div class="user-box">
+                    <?php
+                            session_start(); // Ensure session is started
+                            if(isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
+                        echo
+                        
+                    '<div class="profile-dropdown">
+                        <div onclick="toggle()" class="profile-dropdown-btn">
+                        <div class="profile-img">
+                            <i class="fa-solid fa-circle"></i>
+                        </div>
+
+                        <span>
+                        '. $_SESSION['username'] . ' <i class="fa-solid fa-caret-down"></i>
+                        </span>
+                        </div>
+                    </div>';
+                    } else {
+                        // If user is not logged in, display sign in and sign up buttons
+                        echo '<div class="signin">
+                        <form action="login.html" method="get">
+                            <button class="btn">
+                                <u><i class="fa-solid fa-user"></i>
+                                    <a href="/teamproject-12-main/login/login.html"> Sign In</a>
+                                </u>
+                            </button>    
+                        </form>
+                    </div>
+                    <div class="signup">
+                        <form action="signup.html" method="get">
+                            <button class="btn-2">
+                                <a href="/teamproject-12-main/signup/signup.html"> Sign Up</a>
+                            </button>    
+                        </form>
+                    </div>';
+                    }
+                    ?>
+                    </div>
+
                         <div class="basket">
-                            <a href="cart.html"><img src="trolley.png" height="30px"></a>
+                            <a href="cart.html"><img src="../resources/trolley.png" height="30px"></a>
                         </div>
                 <div class="toggle"><i class="fa-solid fa-bars"></i></div>
             </nav> 

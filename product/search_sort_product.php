@@ -24,9 +24,10 @@
     <link rel="stylesheet" href="search_sort_product.css">
 </head>
 <body>
-<?php
-    include '../HN/nav1.php';
-    ?> 
+    <?php
+    include '../component/header.php';
+    ?>
+
 
 
     <main class="container">
@@ -95,12 +96,17 @@
                         $imageType = 'image/png'; // PNG
                     }
 
-                    $category_id = $product['CATEGORY_ID'];
-                    $query1 = "SELECT CATEGORY_NAME FROM PRODUCTCATEGORY WHERE CATEGORY_ID = $category_id";
-                    $stid1=oci_parse($connection, $query1);
-                    oci_execute($stid1);
-                    $category = oci_fetch_assoc($stid1);
-                    $category = $category['CATEGORY_NAME'];
+                <!-- box2-->
+                <div class="image-container">
+                    <div class="image-box">
+                        <img src="../resources/products/bakery2.jpg" alt="Image 1">
+                    </div>
+                    <div class="description-box">
+                        <h1>BLACK FOREST CAKE </h1>
+                        <p class="price"><s>$64.99</s><br>$49.99 <i class="fa-solid fa-tag"></i></p>
+                        <div class="bakery">
+                            <p>Bakery</p>
+                        </div>
 
                     echo '<div class="image-container">';
                     echo '<div class="image-box">';
@@ -130,12 +136,20 @@
                     $product_id = $discount_product['PRODUCT_ID'];
                     $discount_id = $discount_product['DISCOUNT_ID'];
 
-                    if($discount_id) {
-                        echo '<p class="price"><s>'.$product['PRICE'].'</s><br>'.$discount_product['DISCOUNTED_PRICE'].'<i class="fa-solid fa-tag"></i></p>';
-                    }
-                    else {
-                        echo '<p class="price"><br>'.$product['PRICE'].'&nbsp<i class="fa-solid fa-tag"></i></p>';
-                    }
+                <!-- box3 -->
+                <div class="image-container">
+                    <div class="image-box">
+                        <img src="../resources/products/bakery2.jpg" alt="Image 1">
+                    </div>
+                    <div class="description-box">
+                        <h1>BLACK FOREST CAKE </h1>
+                        <p class="price"><s>$64.99</s><br>$49.99 <i class="fa-solid fa-tag"></i></p>
+                        <div class="bakery">
+                            <p>Bakery</p>
+                        </div>
+                        <button class="add-to-cart"><a href="cart.html">Add to Cart</a></button>
+                    </div>
+                </div>
 
                     // echo '<p class="price"><s>$64.99</s><br>$49.99 <i class="fa-solid fa-tag"></i></p>';
                     echo '<div class="bakery">';
