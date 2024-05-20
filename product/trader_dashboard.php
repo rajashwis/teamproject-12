@@ -12,12 +12,10 @@
     <main class="container">
 
         <div class="navbar-trader">
-
             <div class="trader-profile">
                 <img src="../resources/user.jpg" alt="trader_profile">
                 <h4>John Cena</h4>
             </div>
-
             <button class="logout">
                 Logout
             </button>
@@ -128,17 +126,7 @@
                         <!-- <button class="add-to-cart"><a href="cart.html">Add to Cart</a></button> -->
                     </div>
                 </div>
-
-
-
-
             </div>
-
-
-
-
-
-
         </div>
     </main>
 
