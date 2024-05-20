@@ -83,21 +83,19 @@
 <body>
 
 
-    <?php
-    include '../HN/navbar.php';
-    ?>
+    <div class="navbar-trader">
+        <div class="trader-profile">
+            <img src="../resources/user.jpg" alt="trader_profile">
+            <h4>John Cena</h4>
+        </div>
+        <button class="logout">
+            Logout
+        </button>
+    </div>
 
-    <h1 class="heading">Add Products</h1>
-    <hr class="hr-top">
 
     <div class="main">
-
     
-
-    <div class="container">
-      
-
-
         <div class="vertical-nav">
             <ul>
                 <li><a class="active" href="#">Dashboard</a></li>
@@ -106,8 +104,13 @@
                 <li><a href="desktop10.html">Discount</a></li>
             </ul>
         </div>
-
+        
+        
         <div class="right">
+            
+            <h1 class="heading">Add Products</h1>
+            <hr class="hr-top">
+
             <form method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <div class="product-name">
@@ -128,7 +131,8 @@
                             ?>
                             <option value = "<?php echo $row['CATEGORY_ID']?>"><?php echo $row['CATEGORY_NAME']?></option>
                             <?php } 
-                            */ ?>
+                            */ 
+                            ?>
                         </select>
                     </div>
                 </div>
@@ -193,11 +197,8 @@
                 </div>
 
                 <input type="submit" name="submit" class="btn-add-product" value="Add Product">
-
             </form>
         </div>
-    </div>
-    
     </div>
 
     <?php
