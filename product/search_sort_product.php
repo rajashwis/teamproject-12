@@ -95,7 +95,7 @@
                     } elseif (strpos($header, '89504E47') === 0) {
                         $imageType = 'image/png'; // PNG
                     }
-
+                
                 <!-- box2-->
                 <div class="image-container">
                     <div class="image-box">
