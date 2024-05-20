@@ -8,6 +8,8 @@
     include "../connect.php";
 
     $user = $_SESSION['user_id'];
+    $cart_id = $_SESSION['cart_id'];
+    $wishlist_id = $_SESSION['wishlist_id'];
 
     if (isset($_SESSION['cart_product_added']) && $_SESSION['cart_product_added'] === true) {
         echo "<script>alert('Product Added to Cart!')</script>";
@@ -39,86 +41,75 @@
         oci_execute($stid2);
         $shop = oci_fetch_assoc($stid2);
 
+        if (isset($_POST['add_to_cart'])) {
+
+            if(!$user) {
+                header('LOCATION: ../login/login.html');
+            }
+    
+            else {
+                $quantity = $_POST['quantity'];
+    
+                $query1 = "SELECT PRODUCT_ID FROM CARTPRODUCT WHERE CART_ID = $cart_id AND PRODUCT_ID = $product_id";
+                $stid1=oci_parse($connection, $query1);
+                oci_execute($stid1);
+                $row = oci_fetch_assoc($stid1);
+    
+                if($row) {
+                    echo "<script>alert('Product already in Cart!')</script>";
+                }
+    
+                else {
+                    $query1="INSERT INTO CARTPRODUCT VALUES (SEQ_CARTPRODUCT_ID.NEXTVAL, $cart_id, $product_id, $quantity)";
+                    $stid1=oci_parse($connection, $query1);
+                    
+                    if(oci_execute($stid1)) {
+                        $_SESSION['cart_product_added'] = true;
+                        header("LOCATION: ../product_detail/product_detail.php?product_id=$product_id");
+                    }
+                    
+                }
+                
+            }
+    
+        }
+    
+        if (isset($_POST['wishlist_button'])) {
+    
+            if(!$user) {
+                header('LOCATION: ../login/login.html');
+            }
+    
+            else {
+    
+                $query1 = "SELECT PRODUCT_ID FROM WISHLISTPRODUCT WHERE PRODUCT_ID = $product_id AND WISHLIST_ID = $wishlist_id";
+                $stid1=oci_parse($connection, $query1);
+                oci_execute($stid1);
+                $row = oci_fetch_assoc($stid1);
+    
+                if($row) {
+                    echo "<script>alert('Product already in Wishlist!')</script>";
+                }
+    
+                else {
+                    $query1 = "INSERT INTO WISHLISTPRODUCT VALUES (SEQ_WISHLISTPRODUCT_ID.NEXTVAL, $wishlist_id, $product_id)";
+                    $stid1=oci_parse($connection, $query1);
+                    
+                    if(oci_execute($stid1)) {
+                        $_SESSION['wishlist_product_added'] = true;
+                        header("LOCATION: ../product_detail/product_detail.php?product_id=$product_id");
+                    }
+                    
+                }
+                
+            }
+    
+        }
+
     }
 
     else {
         header('location: ../homepage/home.php');
-    }
-
-    if (isset($_POST['add_to_cart'])) {
-
-        if(!$user) {
-            header('LOCATION: ../login/login.html');
-        }
-
-        else {
-            $quantity = $_POST['quantity'];
-
-            $query="SELECT * from CUSTOMER WHERE customer_id = $user";
-            $stid=oci_parse($connection, $query);
-            oci_execute($stid);
-            $row = oci_fetch_assoc($stid);
-            $cart_id = $row['CART_ID'];
-
-            $query1 = "SELECT PRODUCT_ID FROM CARTPRODUCT WHERE CART_ID = $cart_id";
-            $stid1=oci_parse($connection, $query1);
-            oci_execute($stid1);
-            $row = oci_fetch_assoc($stid1);
-
-            if($row) {
-                echo "<script>alert('Product already in Cart!')</script>";
-            }
-
-            else {
-                $query1="INSERT INTO CARTPRODUCT VALUES (SEQ_CARTPRODUCT_ID.NEXTVAL, $cart_id, $product_id, $quantity)";
-                $stid1=oci_parse($connection, $query1);
-                
-                if(oci_execute($stid1)) {
-                    $_SESSION['cart_product_added'] = true;
-                    header("LOCATION: ../product_detail/product_detail.php?product_id=$product_id");
-                }
-                
-            }
-            
-        }
-
-    }
-
-    if (isset($_POST['wishlist_button'])) {
-
-        if(!$user) {
-            header('LOCATION: ../login/login.html');
-        }
-
-        else {
-            $query="SELECT * from WISHLIST WHERE customer_id = $user";
-            $stid=oci_parse($connection, $query);
-            oci_execute($stid);
-            $row = oci_fetch_assoc($stid);
-            $wishlist_id = $row['WISHLIST_ID'];
-
-            $query1 = "SELECT PRODUCT_ID FROM WISHLISTPRODUCT WHERE PRODUCT_ID = $product_id";
-            $stid1=oci_parse($connection, $query1);
-            oci_execute($stid1);
-            $row = oci_fetch_assoc($stid1);
-
-            if($row) {
-                echo "<script>alert('Product already in Wishlist!')</script>";
-            }
-
-            else {
-                $query1 = "INSERT INTO WISHLISTPRODUCT VALUES (SEQ_WISHLISTPRODUCT_ID.NEXTVAL, $wishlist_id, $product_id)";
-                $stid1=oci_parse($connection, $query1);
-                
-                if(oci_execute($stid1)) {
-                    $_SESSION['wishlist_product_added'] = true;
-                    header("LOCATION: ../product_detail/product_detail.php?product_id=$product_id");
-                }
-                
-            }
-            
-        }
-
     }
     
     
