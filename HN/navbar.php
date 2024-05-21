@@ -511,7 +511,6 @@
             </nav>
         </div>
     </div>
-    <script href="navbar.js"></script>
     <script>
         //**NAVBAR**//
         var prevScrollpos = window.pageYOffset;
