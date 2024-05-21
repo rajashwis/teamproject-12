@@ -27,7 +27,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search and Sort Product</title>
+    <title>Trader Dashboard</title>
     <link rel="stylesheet" href="trader_dashboard.css">
 </head>
 <body>
@@ -60,13 +60,13 @@
                 </ul>
             </div> -->
             <div class="vertical-nav">
-        <ul>
-            <li><a class="active" href="#">Dashboard</a></li>
-            <li><a href="#">Products</a></li>
-            <li><a href="#">Order</a></li>
-            <li><a  href="desktop10.html">Discount</a></li>
-        </ul>
-    </div>
+                <ul>
+                    <li><a class="active" href="#">Dashboard</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="#">Order</a></li>
+                    <li><a  href="desktop10.html">Discount</a></li>
+                </ul>
+            </div>
 
 
 
@@ -142,16 +142,18 @@
                     }
                 ?>
 
-
-
-
-
             </div>
 
 
-
-
-
+            <div class="category-selection">
+                <select id="category-select" name="category">
+                    <option value="1">Bakery</option>
+                    <option value="2">Dairy</option>
+                    <option value="3">Fruits</option>
+                    <option value="4">Vegetables</option>
+                    <!-- Add more categories as needed -->
+                </select>
+            </div>
 
         </div>
     </main>
