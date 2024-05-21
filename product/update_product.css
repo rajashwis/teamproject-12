@@ -2,9 +2,12 @@
 *{
     margin: 0;padding: 0;
 }
-
-.wrapper{
+body {
+    font-family: Arial, sans-serif;
     background-color: aliceblue;
+    font-size: 0.9em;
+    height: 100vh;
+    width: 100vw;
 }
 
 .navbar-trader{
@@ -82,8 +85,9 @@
 .main{
     display: flex;
     justify-content: center;
-    align-items: center;
+    background-color: aliceblue;
 }
+
 .head h1{
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
@@ -92,42 +96,36 @@
 
 
 .hr-top{
-    border: none; 
-    height: 2px;
-    background-color: black;
     width: 60%;
-    text-align: center;
-    margin: 20px auto;
+    margin-bottom: 44px;
 }
 
 .main{
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
     margin-bottom: 2%;
 }
 
 
 .container {
     display: flex;
-    width: 80%;
+    width: 100%;
     border-radius: 9px;
     justify-content: space-between;
     padding: 10px 15px;
     margin-bottom: 20px;
-   
 }
 
 .vertical-nav{
-    width: 20%;
-    height: 40%;
-    margin-top: 2%;
+    width: 16%;
+    background-color: white;
 }
 
 .vertical-nav ul {
+    height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 8px;  
+    gap: 10px;  
 }
 
 .vertical-nav ul li{
@@ -137,13 +135,15 @@
     text-align: center;
     height: 50px;
     list-style: none;
+    width: 100%;
     background-color: whitesmoke;
 }
 
 
 .vertical-nav ul li a{
-    padding: 20px;
     color: black;
+    padding: 20px;
+    color: #333;
     text-decoration: none;
     border-radius: 0;
     transition: background-color 0.3s, color 0.3s, transform 0.3s;
@@ -168,21 +168,22 @@
 }
 
 .right{
-    width: 70%;
+    width: 80%;
+    height: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    background-color: white;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    padding: 2% 2%;
+    flex-direction: column;
     border-radius: 1%;
 }
 
 
 
-form {
+.right form {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 600px;
+    padding: 4%;
+    border-radius: 8px;
     background-color: white;
 }
 
