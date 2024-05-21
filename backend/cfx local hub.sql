@@ -31,14 +31,14 @@ ADD CONSTRAINT pk_cart_id PRIMARY KEY(cart_id);
 --2. USER TABLE
 CREATE TABLE User_(
     user_id NUMBER(5), 
-    username VARCHAR2(16) NOT NULL, 
-    email VARCHAR2(200) NOT NULL, 
-    password_ VARCHAR2(16) NOT NULL, 
+    username VARCHAR2(16) UNIQUE NOT NULL, 
+    email VARCHAR2(200) UNIQUE NOT NULL, 
+    password_ VARCHAR2(500) NOT NULL, 
     user_role VARCHAR2(8) NOT NULL,
     first_name VARCHAR2(80) NOT NULL, 
     last_name VARCHAR2(200) NOT NULL, 
     gender CHAR, 
-    address VARCHAR2(300), 
+    address_ VARCHAR2(300), 
     date_of_birth DATE NOT NULL, 
     profile_picture BLOB
 );
@@ -147,8 +147,13 @@ ADD CONSTRAINT pk_wishlist_id PRIMARY KEY(wishlist_id);
 --8. PRODUCT CATEGORY TABLE
 CREATE TABLE ProductCategory(
     category_id NUMBER(4), 
-    category_name VARCHAR2(500) NOT NULL
+    category_name VARCHAR2(500) NOT NULL,
+    trader_id NUMBER(5)
 );
+
+ALTER TABLE PRODUCTCATEGORY 
+ADD CONSTRAINT fk_category_trader_id FOREIGN KEY(trader_id)
+REFERENCES Trader(trader_id);
 
 ALTER TABLE ProductCategory
 ADD CONSTRAINT pk_product_category_id PRIMARY KEY(category_id);
@@ -156,7 +161,7 @@ ADD CONSTRAINT pk_product_category_id PRIMARY KEY(category_id);
 --9. DISCOUNT TABLE
 CREATE TABLE Discount(
     discount_id NUMBER(4), 
-    discount_percentage NUMBER(3,2) NOT NULL, 
+    discount_percentage NUMBER(10,0) NOT NULL, 
     start_date DATE NOT NULL, 
     end_date DATE, 
     description_ VARCHAR2(700), 
@@ -231,7 +236,8 @@ ADD CONSTRAINT pk_wishlist_product_id PRIMARY KEY(wishlist_product_id);
 CREATE TABLE CartProduct(
     cart_product_id NUMBER(4),
     cart_id NUMBER(4),
-    product_id NUMBER(5)
+    product_id NUMBER(5),
+    product_quantity NUMBER(4)
 );
 
 ALTER TABLE CartProduct
@@ -289,7 +295,8 @@ ADD CONSTRAINT check_order_payment CHECK(is_paid in (0, 1));
 CREATE TABLE OrderProduct (
     order_product_id NUMBER(5),
     order_id NUMBER(5),
-    product_id NUMBER(5)
+    product_id NUMBER(5),
+    item_quantity NUMBER(5)
 );
 
 ALTER TABLE OrderProduct

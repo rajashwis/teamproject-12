@@ -1,0 +1,325 @@
+
+*{
+    margin: 0;padding: 0;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: aliceblue;
+    font-size: 0.9em;
+    height: 100vh;
+    width: 100vw;
+}
+
+.navbar-trader{
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1% 2%;
+    height: 10vh;
+    margin-bottom: 33px;
+}
+
+.trader-profile{
+    padding: 5px;
+    width: 120px;
+    height: 79px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.trader-profile:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2); 
+}
+
+.trader-profile img{
+    width: 44px;
+    height: 44px;
+    background-color: aliceblue;
+    border-radius: 50%;
+}
+
+
+.navbar-trader h4{
+    margin-top: 3px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1em;
+    color: whitesmoke;
+    font-size: 16px;
+}
+
+.logout {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: #f99f1b;
+    color: white;
+    font-size: 15px;
+    font-weight: bold; 
+    cursor: pointer;
+    height: 40px;
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.logout:hover {
+    background-color: #e68a00; 
+    transform: translateY(-2px); 
+}
+
+.logout:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(249, 159, 27, 0.5);
+}
+
+.logout:active {
+    background-color: #cc7a00; 
+    transform: translateY(1px);
+}
+
+
+.main{
+    display: flex;
+    justify-content: center;
+    background-color: aliceblue;
+}
+
+.head h1{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2em;
+}
+
+
+.hr-top{
+    width: 60%;
+    margin-bottom: 44px;
+}
+
+.main{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2%;
+}
+
+
+.container {
+    display: flex;
+    width: 100%;
+    border-radius: 9px;
+    justify-content: space-between;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+}
+
+.vertical-nav{
+    width: 16%;
+    background-color: white;
+}
+
+.vertical-nav ul {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;  
+}
+
+.vertical-nav ul li{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 50px;
+    list-style: none;
+    width: 100%;
+    background-color: whitesmoke;
+}
+
+
+.vertical-nav ul li a{
+    color: black;
+    padding: 20px;
+    color: #333;
+    text-decoration: none;
+    border-radius: 0;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+    text-align: center;
+    font-family: "Arial", sans-serif;
+    font-size: 16px;
+    width: 100%;
+}
+
+.vertical-nav ul li a:hover{
+    font-weight: bold;
+    background-color: #f99f1b;
+    transform: translateX(10px);
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+
+
+.vertical-nav li a.active {
+    background-color: #f99f1b;
+    color: white;
+}
+
+.right{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 1%;
+}
+
+
+
+.right form {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    padding: 4%;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.form-group {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1%;
+}
+
+
+.form-group div {
+    width: 46%;
+    margin-bottom: 3%;
+}
+
+.product-name label,
+.category label,
+.description label,
+.allergy-information label,
+.stock label,
+.price label,
+.quantity label,
+.discount label,
+.product-image label {
+    font-family: Arial, Helvetica, sans-serif;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+    padding: 3px 4px;
+    font-weight: 500;
+}
+
+
+
+.product-name input,
+.description input,
+.allergy-information input,
+.stock input,
+.picture input,
+.price input,
+.quantity input,
+.product-img input {
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.category select,
+.discount select {
+    width: 80%;
+    padding: 12px;
+    height: 30px;
+}
+
+.submit-box {
+    margin-top: 30px;
+}
+
+
+
+.product-name input,
+.description input,
+.allergy-information input,
+.stock input,
+.picture input,
+.price input,
+.quantity input {
+    border: none;
+    border-bottom: 1px solid black;
+    background: none;
+    padding: 2px 8px;
+    width: 90%;
+}
+
+input:focus {
+    outline: none;
+    border-bottom: 2px solid #0056b3;
+}
+
+
+
+
+
+
+.product-image {
+    border: 2px dashed #444;
+    margin: 10px;
+    float: left;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.btn-ctrl{
+    margin-top: 14px;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-prod {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #f99f1b;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-prod:hover {
+    background-color: #0056b3;
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu,
+    .right {
+        width: 80%;
+    }
+
+    .form-group {
+        flex-direction: column;
+    }
+
+    .form-group div {
+        width: 80%;
+    }
+}
+
+

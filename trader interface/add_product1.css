@@ -1,0 +1,221 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.heading {
+    margin-top: 10%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: whitesmoke;
+    font-size: 0.9em;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.hr-top {
+    width: 80%;
+    margin: 10px auto;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin: 4% 9%;
+    border: 1 px solid red;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 2%;
+    background-color: white;
+    border-radius: 2%;
+}
+
+.menu {
+    width: 15%;
+}
+
+.menu ul {
+    background-image: linear-gradient(
+        111.4deg,
+        rgba(7, 7, 9, 1) 6.5%,
+        rgba(27, 24, 113, 1) 93.2%
+    );
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 40%;
+    border-radius: 3%;
+    text-align: center;
+}
+
+.menu ul li {
+    padding: 5px 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu ul li:hover {
+    background-color: #f99f1b;
+    color: black;
+    transition: 0.3s;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+.menu ul li a.active {
+    font-weight: bold;
+    color: #f99f1b;
+}
+
+.menu ul li a:hover {
+    color: white;
+}
+
+.right {
+    width: 52%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-image img {
+    width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+form {
+    width: 100%;
+    max-width: 600px;
+    background-color: white;
+}
+
+.form-group {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1%;
+}
+
+
+.form-group div {
+    width: 46%;
+    margin-bottom: 3%;
+}
+
+.product-name label,
+.category label,
+.description label,
+.allergy-information label,
+.stock label,
+.price label,
+.quantity label,
+.discount label,
+.product-image label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1em;
+    padding: 3px 4px;
+}
+
+.product-name input,
+.description input,
+.allergy-information input,
+.stock input,
+.picture input,
+.price input,
+.quantity input,
+.product-img input {
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.category select,
+.discount select {
+    width: 80%;
+    padding: 12px;
+}
+
+.submit-box {
+    margin-top: 30px;
+}
+
+
+
+.product-name input,
+.description input,
+.allergy-information input,
+.stock input,
+.picture input,
+.price input,
+.quantity input {
+    border: none;
+    border-bottom: 1px solid black;
+    background: none;
+    padding: 2px 8px;
+    width: 90%;
+}
+
+input:focus {
+    outline: none;
+    border-bottom-color: #0056b3;
+}
+
+.product-image {
+    border: 2px dashed #444;
+    margin: 10px;
+    float: left;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.btn-add-product {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #f99f1b;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-add-product:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu,
+    .right {
+        width: 80%;
+    }
+
+    .form-group {
+        flex-direction: column;
+    }
+
+    .form-group div {
+        width: 80%;
+    }
+}

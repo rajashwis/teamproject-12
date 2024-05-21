@@ -7,7 +7,7 @@
 .home-page{
     background-size: cover;
     height: 100vh;
-    background-color: aliceblue;
+    background-color: rgb(255, 255, 255);
 }
 
 .navbar{
@@ -88,6 +88,7 @@
     font-size: 20px;
 }
 
+
 .search-bar{
     width: 30%;
     position: absolute;
@@ -146,7 +147,7 @@
     right: 0;
     bottom: 0.3rem;
     font-size: 0.5rem;
-    color: var(--green);
+    color: green;
   }
   
   .profile-dropdown-btn span {
@@ -155,7 +156,7 @@
   }
   
   .profile-dropdown-list {
-    position: absolute;
+    position: fixed;
     top: 8%;
     width: 220px;
     right: 7.5%;
@@ -359,12 +360,12 @@
 
 .dropdown{
     display: none;
-    position: absolute;
+    position: fixed;
     right: 1rem;
     top: 80px;
     width: 300px;
     height: 0;
-    background: rgba(0, 0, 0, 0.11);
+    background: rgb(255, 255, 255);
     backdrop-filter: blur(15px);
     border-radius: 10px;
     overflow: hidden;
@@ -663,7 +664,7 @@
 .home-page2{
     background-size: cover;
     height: 90vh;
-    background-color: aliceblue;
+    background-color: rgb(255, 255, 255);
 }
 
 .text-sales{
@@ -772,7 +773,7 @@
 .new-item{
      background-size: cover;
      height: 59vh;
-     background-color: aliceblue;
+     background-color: rgb(255, 255, 255);
 }
 
 .text-new{
@@ -803,13 +804,21 @@
     border-radius: 20px;
     cursor: pointer;
     overflow: hidden;
+    height: 300px;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
   }
 
 .card-5 img{
     border-radius:20px 20px 0px 0px;
     transition: 0.50s;
     position: relative;
-    transform:  scale(1.2);
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the entire container */
+    border-radius: 20px 20px 0 0;
+    transition: 0.5s;
 }
   
 .card-5 img:hover{
@@ -822,7 +831,7 @@
 .for-you{
     background-size: cover;
     height: 160vh;
-    background-color: aliceblue;
+    background-color: rgb(255, 255, 255);
 }
 
 .text-foryou{
@@ -932,7 +941,7 @@
 .location{
     background-size: cover;
     height: 90vh;
-    background-color: aliceblue;
+    background-color: rgb(255, 255, 255);
     
 }
 
@@ -1053,7 +1062,7 @@
 
 
 .footer-background {
-    background-image: url('bluewallpaper.jpg');
+    background-image: url('../resources/bluewallpaper.jpg');
 }
 
   div.container-footer.w-container {

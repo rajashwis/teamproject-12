@@ -1,0 +1,72 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family:"Sofia", sans-serif;
+}
+
+.wrapper {
+    background-image: url('../resources/nycity.jpg');
+    background-size: cover;
+    height: 100vh;
+    position: relative;
+}
+
+.container {
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    width: 80%;
+    height: 500px;
+    /* border: 1px solid #f99f1b; */
+    /* backdrop-filter: blur(50px); */
+    background-color: #f99f1b;
+    /* background-image: url('luke-chesser-tgrBcf7S_dY-unsplash.jpg');
+    background-size: cover; */
+    /* background: linear-gradient(to bottom right, #f99f1b, #ffffff); */
+    border-radius: 20px;
+}
+
+.text{
+    text-align: center;
+    font-size: 40px;
+    color: rgb(0, 0, 0);
+    position: relative;
+    top: 25%;
+}
+
+.verify{
+    position: relative;
+    text-align: center;
+    top: 40%;
+}
+
+.verify-input{
+    width: 30%;
+    height: 30px;
+    margin-right: 1em;
+    display: inline;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.submit-button{
+    background-color: rgb(216, 216, 216);
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.submit-button:hover{
+    background-color: green;
+}
+
+.dialog{
+    text-align: center;
+    font-size: 17px;
+    color: rgb(124, 124, 124);
+    position: relative;
+    top: 55%;
+}
+
