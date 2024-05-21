@@ -64,7 +64,7 @@ oci_close($connection);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer profile</title>
-    <link rel="stylesheet" type="text/css" href="customer profile.css">
+    <!-- <link rel="stylesheet" type="text/css" href="customer profile.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
@@ -75,13 +75,13 @@ oci_close($connection);
         * {
             margin: 0;
             padding: 0;
-            scroll-behavior: smooth;
+            /* scroll-behavior: smooth; */
         }
 
-        .home-page {
-            background-size: cover;
-            height: 100vh;
-            background-color: rgb(255, 255, 255);
+     
+        .box{
+            border: 4px solid green;
+            height: 125px;
         }
 
         .navbar {
@@ -90,12 +90,12 @@ oci_close($connection);
             height: 70px;
             width: 100%;
             top: 0%;
-            /* background-image: url('footer.jpg'); */
             background-color: #000000;
             background-size: 29%;
             display: block;
             transition: top 0.3s;
-            z-index: 3;
+            border: 3px solid red;
+            
         }
 
         .logo {
@@ -182,6 +182,8 @@ oci_close($connection);
             right: 9%;
             color: white;
             font-family: "Sofia", sans-serif;
+
+            border: 3px solid yellow;
         }
 
         .profile-dropdown-btn {
@@ -240,7 +242,7 @@ oci_close($connection);
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: max-height 0.5s;
-            z-index: 3;
+            /* z-index: 3; */
         }
 
         .profile-dropdown-list hr {
@@ -376,7 +378,9 @@ oci_close($connection);
             position: fixed;
             display: block;
             transition: top 0.3s;
-            z-index: 2;
+
+            border: 2px solid blue;
+            /* z-index: 2; */
         }
 
         .navbar2 ul {
@@ -411,10 +415,10 @@ oci_close($connection);
         }
 
         /* .navbar2 ul li a img{
-    height: 15px;
-    scale: 1.4;
-    position: relative;
-} */
+            height: 15px;
+            scale: 1.4;
+            position: relative;
+        } */
 
 
         .navbar2 ul li a.active,
@@ -444,7 +448,7 @@ oci_close($connection);
             border-radius: 10px;
             overflow: hidden;
             transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 1;
+            /* z-index: 1; */
         }
 
         .dropdown.open {
@@ -649,6 +653,8 @@ oci_close($connection);
             </nav>
 
         </div>
+
+
         <div class="profile-drop">
             <ul class="profile-dropdown-list">
                 <li class="profile-dropdown-list-item">
@@ -718,11 +724,13 @@ oci_close($connection);
                 </ul>
             </nav>
         </div>
+
+
     </div>
+
+
     <!--footer-->
 
-
-    <script type="text/javascript" src="customer.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const toggleBtn = document.querySelector('.toggle');
@@ -783,5 +791,4 @@ oci_close($connection);
         });
     </script>
 </body>
-
 </html>
