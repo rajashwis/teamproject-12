@@ -15,8 +15,6 @@
     $count = oci_fetch_assoc($stid2);
     $count = $count['COUNT(*)'];
 
-    echo '<script>alert(' . $count . ')</script>';
-
     $query = "SELECT * FROM CARTPRODUCT WHERE CART_ID = $cart_id";
     $stid=oci_parse($connection, $query);
     oci_execute($stid);
@@ -39,7 +37,6 @@
 
     if(isset($_POST['closeBtn'])) {
         $collection_slot = $_POST['pickup-time'];
-        echo '<script>alert(' . $collection_slot . ')</script>';
     }
 
     include "../HN/nav1.php";
@@ -193,8 +190,19 @@
         </div>
 
         <form method="POST">
-            <button type="submit" name="okBtn" id="okBtn">Close</button>
+            <button type="submit" name="okBtn" id="okBtn">OK</button>
         </form>
+        
+        <?php 
+            if(isset($_POST['okBtn'])) {
+                echo '<script>alert(' . $totalPrice . ')</script>';
+
+                
+                $delete_query = "DELETE FROM CARTPRODUCT WHERE ";
+            }
+        ?>
+
+
         
         <section class="payment-method">
             <h2>Payment Method</h2><br/>

@@ -52,10 +52,10 @@
                 <form method="GET" action="">
                     <select name="sort-products" id="options">
                         <option value="">--Sort By--</option>
-                        <option value="popularity" <?php if(isset($_GET['sort-products']) && (isset($_GET['sort-products']) == 'popularity')) { echo "selected"; } ?>>Popularity</option>
-                        <option value="product_name" <?php if(isset($_GET['sort-products']) && (isset($_GET['sort-products'])  == 'product_name')) { echo "selected"; } ?>>Product Name</option>
-                        <option value="price" <?php if(isset($_GET['sort-products']) && (isset($_GET['sort-products'])  == 'price')) { echo "selected"; } ?>>Price</option>
-                        <option value="rating" <?php if(isset($_GET['sort-products']) && (isset($_GET['sort-products'])  == 'rating')) { echo "selected"; } ?>>Rating</option>
+                        <option value="product_name" <?php if(isset($_GET['sort-products']) && ($_GET['sort-products']) == 'product_name') { echo "selected"; } ?>>Product Name</option>
+                        <option value="price" <?php if(isset($_GET['sort-products']) && ($_GET['sort-products'])  == 'price') { echo "selected"; } ?>>Price</option>
+                        <option value="date_added_desc" <?php if(isset($_GET['sort-products']) && ($_GET['sort-products'])  == 'date_added_desc') { echo "selected"; } ?>>Date Added (Newest First)</option>
+                        <option value="date_added_asc" <?php if(isset($_GET['sort-products']) && ($_GET['sort-products'])  == 'date_added_asc') { echo "selected"; } ?>>Date Added (Oldest First)</option>
                     </select>
             
                 <div class="filters">
@@ -97,16 +97,38 @@
 
             <div class="image-container-group">
                 <?php
+
+                $sort_product = "";
                 
+                if(isset($_GET['sort-products'])) {
+
+                    if ($_GET['sort-products'] == "product_name") {
+                        $sort_products = "PRODUCT_NAME";
+                    }
+
+                    else if ($_GET['sort-products'] == "price") {
+                        $sort_product = "PRICE";
+                    }
+
+                    else if ($_GET['sort-products'] == "date_added_desc") {
+                        $sort_product = "DATE_ADDED DESC";
+                    }
+
+                    else if ($_GET['sort-products'] == "date_added_asc") {
+                        $sort_product = "DATE_ADDED ASC";
+                    }
+
+                }
+
                 if($categorychecked) {
                     foreach ($categorychecked as $rowcategory) {
                         $rowcategory = intval($rowcategory);
                         
-                        $query = "SELECT * FROM PRODUCT WHERE CATEGORY_ID = $rowcategory";
-                        $statement = oci_parse($connection, $query);
-                        oci_execute($statement);
+                        $query1 = "SELECT * FROM PRODUCT WHERE CATEGORY_ID = $rowcategory ORDER BY $sort_product";
+                        $statement1 = oci_parse($connection, $query1);
+                        oci_execute($statement1);
                        
-                        while($product=oci_fetch_assoc($statement)) {
+                        while($product=oci_fetch_assoc($statement1)) {
 
                             $product_id = $product['PRODUCT_ID'];
                             
@@ -162,7 +184,13 @@
                 }
 
                 else {
+
+                    $query = "SELECT * FROM PRODUCT ORDER BY $sort_product";
+                    $statement = oci_parse($connection, $query);
+                    oci_execute($statement);
+
                     while($product=oci_fetch_assoc($statement)) {
+                        
 
                         $product_id = $product['PRODUCT_ID'];
                         

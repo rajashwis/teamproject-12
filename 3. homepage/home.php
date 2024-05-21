@@ -206,9 +206,9 @@
                     echo '<div class="image-container">';
                     echo '<a href = "../product_detail/product_detail.php?product_id='.$product_id.'"> <img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
                     echo '</div>';
-                    echo '<h1>'.$product['PRODUCT_NAME'].'</h1></a>';
+                    echo '<h1><font color="black">'.$product['PRODUCT_NAME'].'</font></h1></a>';
                     echo '<p class="price"><s>'.$product['PRICE'].'</s><br>'.$product['DISCOUNTED_PRICE'].'<i class="fa-solid fa-tag"></i></p>';
-                    echo '<p><a href="">'.$category.'</a></p>';
+                    echo '<p><a href="#"><font color="black">'.$category.'</font></a></p>';
                     echo '<p><button>Buy</button></p><br>';
                 
                 ?>
@@ -292,9 +292,9 @@
                     echo '<div class="image-container">';
                     echo '<a href = "../product_detail/product_detail.php?product_id='.$product_id.'"> <img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
                     echo '</div>';
-                    echo '<h1>'.$product['PRODUCT_NAME'].'</h1></a>';
+                    echo '<h1><font color="black">'.$product['PRODUCT_NAME'].'</font></h1></a>';
                     echo '<p class="price"><s>'.$product['PRICE'].'</s><br>'.$product['DISCOUNTED_PRICE'].'<i class="fa-solid fa-tag"></i></p>';
-                    echo '<p><a href="">'.$category.'</a></p>';
+                    echo '<p><a href="#"><font color="black">'.$category.'</font></a></p>';
                     echo '<p><button>Buy</button></p><br>';
                     echo '</div>';
 
@@ -332,8 +332,9 @@
                     }
 
                     echo '<div class="card-5">';
+                    echo '<div class="image-container">';
                     echo '<a href = "../product_detail/product_detail.php?product_id='.$product_id.'"> <img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image"  style="width:100%"></a><br><br>';
-                    echo '</div>';
+                    echo '</div></div>';
 
                 }
             ?>
@@ -381,7 +382,7 @@
                     echo '<a href = "../product_detail/product_detail.php?product_id='.$product_id.'">';
                     echo '<img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
                     echo '</div>';
-                    echo '<h1>'.$product['PRODUCT_NAME'].'</h1>';
+                    echo '<h1><font color="black">'.$product['PRODUCT_NAME'].'</font></h1>';
                     echo '</a>';
 
                     $query1 = "SELECT 
@@ -413,7 +414,7 @@
                     }
 
                     echo '<a href = "../category/categories.php?category='.$category.'">';
-                    echo '<p>'.$category.'</p>';
+                    echo '<p><font color="black">'.$category.'</font></p>';
                     echo '</a>';
                     echo '<p><button>Buy</button></p><br>';
                     echo '</div>';
