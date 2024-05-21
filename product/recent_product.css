@@ -1,0 +1,238 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    /* background-color: aliceblue; */
+}
+
+.containter{
+    height: 100%;
+}
+.navbar-admin{
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0% 2%;
+}
+
+.admin-profile{
+    padding: 5px;
+    width: 120px;
+    height: 79px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.admin-profile:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2); 
+}
+
+.admin-profile img{
+    width: 44px;
+    height: 44px;
+    background-color: aliceblue;
+    border-radius: 50%;
+}
+
+
+.navbar-admin h4{
+    margin-top: 3px;
+   font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1em;
+    color: whitesmoke;
+    font-size: 16px;
+}
+
+.logout {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: #f99f1b;
+    color: white;
+    font-size: 15px;
+    font-weight: bold; 
+    cursor: pointer;
+    height: 40px;
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.logout:hover {
+    background-color: #e68a00; 
+    transform: translateY(-2px); 
+}
+
+.logout:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(249, 159, 27, 0.5);
+}
+
+.logout:active {
+    background-color: #cc7a00; 
+    transform: translateY(1px);
+}
+
+
+
+
+.vertical-nav{
+    width: 17%;
+    margin-top: 10px;
+}
+
+.vertical-nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: white;
+    height: 100%;
+   
+}
+
+
+.vertical-nav ul li {
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    text-align: center;
+    height: 50px;
+    list-style: none;
+    background-color: whitesmoke;
+}
+
+.vertical-nav ul li a{
+    color: black;
+    padding: 20px;
+    color: #333;
+    text-decoration: none;
+    border-radius: 0;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+    text-align: center;
+    font-family: "Arial", sans-serif;
+    font-size: 16px;
+    width: 100%;
+}
+
+
+.vertical-nav ul li a:hover {
+    color: #000;
+    transform: translateX(10px);
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    background-color: #f99f1b;
+}
+.vertical-nav li a.active {
+    background-color: #f99f1b;
+    color: white;
+}
+
+
+.main{
+    display: flex;
+    justify-content: space-between;
+    width: 98%;
+    height: 100%;
+}
+
+
+.table-data {
+	display: flex;
+	flex-wrap: wrap;
+	grid-gap: 24px;
+	margin-top: 24px;
+	width: 66%;
+	/* border: 1px solid blue; */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    border-radius: 9px;
+   
+}
+
+.table-data > div {
+	border-radius: 20px;
+	padding: 20px;
+	overflow-x: auto;
+    width: 100%;
+    background-color: #f9f9f9;
+}
+
+table{
+    width: 90%;
+}
+
+
+table th {
+    text-align: left; 
+    padding: 10px;
+}
+
+
+table td {
+    text-align: left; 
+    padding: 10px;
+}
+
+
+
+.table-data .head h3 {
+    margin-bottom: 24px;
+	margin-right: auto;
+	font-size: 24px;
+	font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.table-data .product table th {
+    font-family: Arial, Helvetica, sans-serif;
+	padding-bottom: 12px;
+	font-size: 19px;
+	border-bottom: 1px solid black;
+}
+
+.table-data .product table td {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 13px 9px;
+}
+
+.table-data .product table tr td:first-child {
+	display: flex;
+	align-items: center;
+	grid-gap: 12px;
+	padding-left: 6px;
+}
+
+.table-data .product table td img {
+	width: 55px;
+	/* height: 44px; */
+	border-radius: 3px;
+	object-fit: cover;
+}
+
+
+
+
+.table-data .product table tbody tr:hover {
+	background: #eee;
+}
+
+main .table-data .product table tr td .status {
+	font-size: 13px;
+	padding: 6px 16px;
+	color: #F9F9F9;
+	border-radius: 20px;
+	font-weight: 700;
+    
+}
+
+main .table-data .product table tr td .status.completed {
+    background: #3C91E6;
+}
+
+
+main .table-data .product table tr td .status.pending {
+    background: #FD7238;
+} 
