@@ -13,8 +13,7 @@
 </head>
 <body>
 
- 
-
+    <div class="wrapper">
         <div class="navbar-trader">
             <div class="trader-profile">
                 <img src="../resources/user.jpg" alt="trader_profile">
@@ -25,10 +24,13 @@
             </button>
         </div>
 
-       
+        <div class="head">
+            <h1 class="heading">Update Product</h1>
+            <hr class="hr-top">
+        </div>
 
         <div class="main">
-      
+            <div class="container">
                 <div class="vertical-nav">
                     <ul>
                         <li><a class="active" href="#">Dashboard</a></li>
@@ -39,11 +41,6 @@
                 </div>
 
                 <div class="right">
-                   
-                        <h1 class="heading">Update Product</h1>
-                        <hr class="hr-top">
-                
-                    
                     <form method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <div class="product-name">
@@ -113,7 +110,10 @@
                         </div>
                     </form>
                 </div>
+            </div>
         </div>
+
+    </div>
     
     <?php
     include '../HN/footer.php';

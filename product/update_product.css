@@ -2,12 +2,9 @@
 *{
     margin: 0;padding: 0;
 }
-body {
-    font-family: Arial, sans-serif;
+
+.wrapper{
     background-color: aliceblue;
-    font-size: 0.9em;
-    height: 100vh;
-    width: 100vw;
 }
 
 .navbar-trader{
@@ -85,9 +82,8 @@ body {
 .main{
     display: flex;
     justify-content: center;
-    background-color: aliceblue;
+    align-items: center;
 }
-
 .head h1{
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
@@ -96,36 +92,42 @@ body {
 
 
 .hr-top{
+    border: none; 
+    height: 2px;
+    background-color: black;
     width: 60%;
-    margin-bottom: 44px;
+    text-align: center;
+    margin: 20px auto;
 }
 
 .main{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 2%;
 }
 
 
 .container {
     display: flex;
-    width: 100%;
+    width: 80%;
     border-radius: 9px;
     justify-content: space-between;
     padding: 10px 15px;
     margin-bottom: 20px;
+   
 }
 
 .vertical-nav{
-    width: 16%;
-    background-color: white;
+    width: 20%;
+    height: 40%;
+    margin-top: 2%;
 }
 
 .vertical-nav ul {
-    height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 10px;  
+    gap: 8px;  
 }
 
 .vertical-nav ul li{
@@ -135,15 +137,13 @@ body {
     text-align: center;
     height: 50px;
     list-style: none;
-    width: 100%;
     background-color: whitesmoke;
 }
 
 
 .vertical-nav ul li a{
-    color: black;
     padding: 20px;
-    color: #333;
+    color: black;
     text-decoration: none;
     border-radius: 0;
     transition: background-color 0.3s, color 0.3s, transform 0.3s;
@@ -168,22 +168,21 @@ body {
 }
 
 .right{
-    width: 80%;
-    height: 100%;
+    width: 70%;
     display: flex;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
+    background-color: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 2% 2%;
     border-radius: 1%;
 }
 
 
 
-.right form {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+form {
     width: 100%;
     max-width: 600px;
-    padding: 4%;
-    border-radius: 8px;
     background-color: white;
 }
 

@@ -1,9 +1,24 @@
+<?php
+
+session_start();
+error_reporting(0);
+
+include "../connect.php";
+
+$user = $_SESSION['user_id']; 
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="header.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="favicon" rel="icon" type="image/x-icon" href="cfxfavicon.png">
+    <link rel="stylesheet" type="text/css" href="home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>CFXLocalHub HOME PAGE</title>
 </head>
 <style>
     *{
@@ -102,6 +117,145 @@
       background-color: greenyellow;
 }
 
+.profile-dropdown {
+    position: absolute;
+    width: fit-content;
+    top: 15%;
+    right: 9%;
+    color: white;
+    font-family:"Sofia", sans-serif;
+  }
+  
+  .profile-dropdown-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    width: 150px;
+    border-radius: 50px;
+    color: black;
+    background-color: white;
+    box-shadow: var(--shadow);
+  
+    cursor: pointer;
+    border: 1px solid var(--secondary);
+    transition: box-shadow 0.2s ease-in, background-color 0.2s ease-in,
+      border 0.3s;
+  }
+  
+  .profile-dropdown-btn:hover {
+    background-color: #f99f1b;
+  }
+  
+  .profile-img {
+    position: relative;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: url('default-profile.jpg');
+    background-size: cover;
+  }
+  
+  .profile-img i {
+    position: absolute;
+    right: 0;
+    bottom: 0.3rem;
+    font-size: 0.5rem;
+    color: green;
+  }
+  
+  .profile-dropdown-btn span {
+    margin: 0 0.5rem;
+    margin-right: 0;
+  }
+  
+  .profile-dropdown-list {
+    position: fixed;
+    top: 8%;
+    width: 220px;
+    right: 7.5%;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid black;
+    max-height: 0;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: max-height 0.5s;
+    z-index: 3;
+  }
+  
+  .profile-dropdown-list hr {
+    border: 0.5px solid black;
+  }
+  
+  .profile-dropdown-list.active {
+    max-height: 500px;
+  }
+  
+  .profile-dropdown-list-item {
+    padding: 0.5rem 0rem 0.5rem 1rem;
+    transition: background-color 0.2s ease-in, padding-left 0.2s;
+  }
+  
+  .profile-dropdown-list-item a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--black);
+  }
+  
+  .profile-dropdown-list-item a i {
+    margin-right: 0.8rem;
+    font-size: 1.1rem;
+    width: 2.3rem;
+    height: 2.3rem;
+    background-color: var(--secondary);
+    color: var(--white);
+    line-height: 2.3rem;
+    text-align: center;
+    margin-right: 1rem;
+    border-radius: 50%;
+  }
+
+
+  .profile-dropdown-list-item button{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  .profile-dropdown-list-item button i{
+    margin-right: 0.8rem;
+    font-size: 1.1rem;
+    width: 2.3rem;
+    height: 2.3rem;
+    background-color: var(--secondary);
+    color: var(--white);
+    line-height: 2.3rem;
+    text-align: center;
+    margin-right: 1rem;
+    border-radius: 50%;
+  }
+  
+  .profile-dropdown-list-item:hover {
+    background-color: #f99f1b;
+  }
+
+
+.logout{
+    position: absolute;
+    top: 40%;
+    right: 13%;
+    color: white;
+    font-family:"Sofia", sans-serif;
+}
+
+
+
 .signin{
     position: absolute;
     top: 27%;
@@ -143,7 +297,7 @@
 
 .basket{
     position: absolute;
-    left: 95%;
+    left: 97%;
     top: 30%;
     transition: transform .2s; 
 }
@@ -153,51 +307,6 @@
 }
 
 
-
-.home-split{
-    position: relative;
-    right: 5%;
-}
-
-.bs-split{
-    position: relative;
-    left: 5%;
-}
-
-.dropdown{
-    display: none;
-    position: absolute;
-    right: 1rem;
-    top: 80px;
-    width: 300px;
-    height: 0;
-    background: rgba(0, 0, 0, 0.11);
-    backdrop-filter: blur(15px);
-    border-radius: 10px;
-    overflow: hidden;
-    transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.dropdown.open{
-    height: 410px;
-}
-
-.dropdown ul li a{
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-    font-size: 15px;
-    font-family: "Sofia", sans-serif;
-    padding: 15px;
-    display: flex;
-    padding: 0.7rem;
-    align-items: center;
-    justify-content: center;
-}
-
-.dropdown ul li a:hover{
-    background-color: #f99f1b;
-    border-radius: 10px;
-}
 
 /*responsive*/
 
@@ -307,7 +416,13 @@
     }
 
 }
+
+
+
+
+
 </style>
+
 <body>
         <!--navbar-->
         <div class="navbar" id="nav">
@@ -347,7 +462,7 @@
                         <form action="login.html" method="get">
                             <button class="btn">
                                 <u><i class="fa-solid fa-user"></i>
-                                    <a href="/teamproject-12-main/login/login.html"> Sign In</a>
+                                    <a href="/teamproject-12old/login/login.html"> Sign In</a>
                                 </u>
                             </button>    
                         </form>
@@ -355,7 +470,7 @@
                     <div class="signup">
                         <form action="signup.html" method="get">
                             <button class="btn-2">
-                                <a href="/teamproject-12-main/signup/signup.html"> Sign Up</a>
+                                <a href="/teamproject-12old/signup/signup.html"> Sign Up</a>
                             </button>    
                         </form>
                     </div>';
@@ -370,78 +485,51 @@
             </nav> 
             
         </div>
-        <div class="dropdown">
-            <ul>
-                <li><a href="">HOME</a></li>
-                <li><a href="trending.html"> TRENDING</a></li>
-                <li><a href="decor.html"> HOME & DECOR</a></li>
-                <li><a href=""> ELECTRONICS</a></li>
-                <li><a href=""> FASHION</a></li>
-                <li><a href=""> SALES</a></li>
-                <li><a href=""> BECOME A SELLER</a></li>
-                <li><a href="">Sign In</a></li>
-                <li><a href="">Sign Up</a></li>
-                <li><a href=""><img src="trolley.png" height="30px"></a></li>
+        <div class="profile-drop">
+            <ul class="profile-dropdown-list">
+            <li class="profile-dropdown-list-item">
+                <a href="#">
+                <i class="fa-regular fa-user"></i>
+                Edit Profile
+                </a>
+            </li>
+
+            <li class="profile-dropdown-list-item">
+                <a href="#">
+                <i class="fa-regular fa-envelope"></i>
+                Inbox
+                </a>
+            </li>
+
+            <li class="profile-dropdown-list-item">
+                <a href="#">
+                <i class="fa-regular fa-bookmark"></i>
+                Wishlist
+                </a>
+            </li>
+
+            <li class="profile-dropdown-list-item">
+                <a href="#">
+                <i class="fa-regular fa-circle-question"></i>
+                Help & Support
+                </a>
+            </li>
+            <hr />
+
+            <li class="profile-dropdown-list-item">
+            <form action="logout.php" method="post">
+                <button type="submit">
+                    <i class="fa-solid fa-sign-out-alt"></i> Logout</a>
+                </button>
+            </form>
+            </li>
             </ul>
         </div>
-
-</div>
-<script href="navbar.js"></script>
+       
+                  
+<script type="text/javascript" src="home.js"></script>
 <script>
-    //**NAVBAR**//
-var prevScrollpos = window.pageYOffset;
-window.onscroll = function() {
-var currentScrollPos = window.pageYOffset;
-/*FOR NAVBAR 1*/
-// if (prevScrollpos > currentScrollPos) {
-// document.getElementById("nav").style.top = "0";
-// } else {
-// document.getElementById("nav").style.top = "-190px";
-// }
-/*FOR NAVBAR 2*/
-if (prevScrollpos > currentScrollPos) {
-document.getElementById("nav2").style.top = "8%";
-} else {
-document.getElementById("nav2").style.top = "-10px";
-}
-prevScrollpos = currentScrollPos;
-}
-
-
-//slide
-let slideIndex = 0;
-const slides = document.querySelector('.slides');
-const slideWidth = document.querySelector('.slides img').clientWidth;
-
-function showSlides() {
-  slides.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
-}
-
-showSlides();
-
-function nextSlide() {
-  slideIndex++;
-  if (slideIndex >= slides.children.length) {
-    slideIndex = 0;
-  }
-  showSlides();
-}
-
-setInterval(nextSlide, 4000);
-
-function plusSlides(n) {
-  slideIndex += n;
-  if (slideIndex < 0) {
-    slideIndex = slides.children.length - 1;
-  } else if (slideIndex >= slides.children.length) {
-    slideIndex = 0;
-  }
-  showSlides();
-}
-
-//profile drop down
-
-const toggleBtn = document.querySelector('.toggle')
+    const toggleBtn = document.querySelector('.toggle')
     const toggleBtnIcon = document.querySelector('.toggle i')
     const dropdown = document.querySelector('.dropdown')
 
@@ -453,19 +541,20 @@ const toggleBtn = document.querySelector('.toggle')
         : 'fa-solid fa-bars'
     }
 
-            let profileDropdownList = document.querySelector(".profile-dropdown-list");
-        let btn = document.querySelector(".profile-dropdown-btn");
+    let profileDropdownList = document.querySelector(".profile-dropdown-list");
+let btn = document.querySelector(".profile-dropdown-btn");
 
-        let classList = profileDropdownList.classList;
+let classList = profileDropdownList.classList;
 
-        const toggle = () => classList.toggle("active");
+const toggle = () => classList.toggle("active");
 
-        window.addEventListener("click", function (e) {
-        if (!btn.contains(e.target)) classList.remove("active");
-        });
+window.addEventListener("click", function (e) {
+  if (!btn.contains(e.target)) classList.remove("active");
+});
+
+
 
 </script>
-
-
 </body>
 </html>
+

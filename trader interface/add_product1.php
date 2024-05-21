@@ -1,6 +1,5 @@
 <?php
 
-/*
     session_start();
     include "../connect.php";
 
@@ -66,8 +65,8 @@
         }
     
     }
-    */
-?>
+    ?>
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,30 +83,25 @@
 
 
     <?php
-    include '../HN/navbar.php';
+    include '../component/header.php';
     ?>
 
     <h1 class="heading">Add Products</h1>
     <hr class="hr-top">
 
-    <div class="main">
-
-    
-
     <div class="container">
-      
-
-
-        <div class="vertical-nav">
+        <div class="menu">
             <ul>
-                <li><a class="active" href="#">Dashboard</a></li>
-                <li><a href="#">Products</a></li>
-                <li><a href="#">Order</a></li>
-                <li><a href="desktop10.html">Discount</a></li>
+                <li><a href="">Dashboard</a></li>
+                <li><a href="">Shop</a></li>
+                <li><a class="active" href="">Product</a></li>
+                <li><a href="">Orders</a></li>
             </ul>
         </div>
 
         <div class="right">
+
+
             <form method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <div class="product-name">
@@ -119,7 +113,6 @@
                         <label for="category">Category:</label>
                         <select name="category" required>
                             <?php
-                            /*
                                 $query = "SELECT * FROM PRODUCTCATEGORY WHERE TRADER_ID=$trader";
                                 $statement = oci_parse($connection, $query);
                                 oci_execute($statement);
@@ -127,8 +120,7 @@
                                 while($row=oci_fetch_assoc($statement)) {
                             ?>
                             <option value = "<?php echo $row['CATEGORY_ID']?>"><?php echo $row['CATEGORY_NAME']?></option>
-                            <?php } 
-                            */ ?>
+                            <?php } ?>
                         </select>
                     </div>
                 </div>
@@ -172,7 +164,6 @@
                         <select name="discount">
                             <option value="">None</option>
                             <?php
-                            /*
                                 $query = "SELECT * FROM DISCOUNT WHERE TRADER_ID = $trader";
                                 $statement = oci_parse($connection, $query);
                                 oci_execute($statement);
@@ -180,8 +171,7 @@
                                 while($row=oci_fetch_assoc($statement)) {
                             ?>
                             <option value = "<?php echo $row['DISCOUNT_ID']?>"><?php echo $row['DISCOUNT_PERCENTAGE']?></option>
-                            <?php } 
-                            */ ?>
+                            <?php } ?>
                         </select>
                     </div>
 
@@ -197,11 +187,9 @@
             </form>
         </div>
     </div>
-    
-    </div>
 
     <?php
-    include '../HN/footer.php';
+    include '../component/footer.php';
     ?>
 </body>
 </html>

@@ -95,18 +95,6 @@
                     } elseif (strpos($header, '89504E47') === 0) {
                         $imageType = 'image/png'; // PNG
                     }
-                
-                <!-- box2-->
-                <div class="image-container">
-                    <div class="image-box">
-                        <img src="../resources/products/bakery2.jpg" alt="Image 1">
-                    </div>
-                    <div class="description-box">
-                        <h1>BLACK FOREST CAKE </h1>
-                        <p class="price"><s>$64.99</s><br>$49.99 <i class="fa-solid fa-tag"></i></p>
-                        <div class="bakery">
-                            <p>Bakery</p>
-                        </div>
 
                     echo '<div class="image-container">';
                     echo '<div class="image-box">';
@@ -135,22 +123,7 @@
 
                     $product_id = $discount_product['PRODUCT_ID'];
                     $discount_id = $discount_product['DISCOUNT_ID'];
-
-                <!-- box3 -->
-                <div class="image-container">
-                    <div class="image-box">
-                        <img src="../resources/products/bakery2.jpg" alt="Image 1">
-                    </div>
-                    <div class="description-box">
-                        <h1>BLACK FOREST CAKE </h1>
-                        <p class="price"><s>$64.99</s><br>$49.99 <i class="fa-solid fa-tag"></i></p>
-                        <div class="bakery">
-                            <p>Bakery</p>
-                        </div>
-                        <button class="add-to-cart"><a href="cart.html">Add to Cart</a></button>
-                    </div>
-                </div>
-
+                    
                     // echo '<p class="price"><s>$64.99</s><br>$49.99 <i class="fa-solid fa-tag"></i></p>';
                     echo '<div class="bakery">';
                     echo '<p>'.$category.'</p>';

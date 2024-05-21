@@ -149,10 +149,11 @@
                 <ul>
                     <li class="home-split"><a class="active" href=""> HOME</a></li>
                     <li><a href="trending.html"> TRENDING</a></li>
-                    <li><a href="decor.html"> BAKERY</a></li>
-                    <li><a href=""> ELECTRONICS</a></li>
-                    <li><a href=""> FASHION</a></li>
-                    <li><a href=""> SALES</a></li>
+                    <li><a href="trending.html"> SHOPS</a></li>
+                    <li><a href="decor.html"> CATEGORIES</a></li>
+                    <li><a href=""> DISCOUNTS</a></li>
+                    <!-- <li><a href=""> </a></li> -->
+                    <li><a href=""> ABOUT</a></li>
                     <li class="bs-split"><a href="seller.html"> BECOME A SELLER</a></li>
                 </ul>
                 
