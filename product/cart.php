@@ -27,7 +27,7 @@
 </head>
 <body>
     <?php
-        include '../HN/navbar.php';
+        include '../product/header.php';
 
         while($cart = oci_fetch_assoc($stid)) { 
             $product_id = $cart['PRODUCT_ID'];
@@ -115,7 +115,7 @@
         </form>
     </div>
     <?php
-        include '../HN/footer.php';
+        // include '../HN/footer.php';
     ?> 
 
     <script src="cart.js"></script>
