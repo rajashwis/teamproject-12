@@ -37,6 +37,11 @@
         }
     }
 
+    if(isset($_POST['closeBtn'])) {
+        $collection_slot = $_POST['pickup-time'];
+        echo '<script>alert(' . $collection_slot . ')</script>';
+    }
+
     include "../HN/nav1.php";
     include "../HN/nav2.php";
 
@@ -62,33 +67,91 @@
 
                 <?php
 
+                    $totalPrice = 0;
+
                     while($cartproduct = oci_fetch_assoc($stid)) {
 
-                    $product_id = $cartproduct['PRODUCT_ID'];
-                    $quantity = $cartproduct['PRODUCT_QUANTITY'];
+                        $product_id = $cartproduct['PRODUCT_ID'];
+                        $quantity = $cartproduct['PRODUCT_QUANTITY'];
 
-                    $query3 = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = $product_id";
-                    $statement3 = oci_parse($connection, $query3);
-                    oci_execute($statement3);
-                    $product = oci_fetch_assoc($statement3);
+                        $query3 = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = $product_id";
+                        $statement3 = oci_parse($connection, $query3);
+                        oci_execute($statement3);
+                        $product = oci_fetch_assoc($statement3);
 
-                    addToCart($product_id, $item_quantity);
+                        addToCart($product_id, $item_quantity);
 
-                    echo '<div class="card">';
-                    echo '<div class="card-image"><img src="../resources/products/jordan.jpg" alt=""></div>';
-                    echo '<div class="card-details">';
-                    echo '<div class="card-name">';
-                    echo $product['PRODUCT_NAME'].',';
-                    echo '<a href="#"> <i class="fa-solid fa-store"></i> Shopname</a>';
-                    echo '</div>';
-                    echo '<div class="card-price">RS.21000 <span>$27000</span></div>';
-                    echo '<div class="card-wheel">';
-                    echo '<button onclick="decrement()">-</button>';
-                    echo '<span id="quantity">1</span>';
-                    echo '<button onclick="increment()">+</button>';
-                    echo '</div>';
-                    echo '</div>';
-                    echo '</div>';
+                        $shop_id = $product['SHOP_ID'];
+                        $query5 = "SELECT * FROM SHOP WHERE SHOP_ID = $shop_id";
+                        $stid5=oci_parse($connection, $query5);
+                        oci_execute($stid5);
+                        $shop = oci_fetch_assoc($stid5);
+
+                        echo '<div class="card">';
+
+                        $imageData = $product['PRODUCT_IMAGE']->load();
+                        $encodedImageData = base64_encode($imageData);
+                        // Determine the image type based on the first few bytes of the image data
+                        $header = substr($imageData, 0, 4);
+                        $imageType = 'image/jpeg'; // default to JPEG
+                        if (strpos($header, 'FFD8') === 0) {
+                            $imageType = 'image/jpeg'; // JPEG
+                        } elseif (strpos($header, '89504E47') === 0) {
+                            $imageType = 'image/png'; // PNG
+                        }
+
+                        echo '';
+                        echo '<div class="card-image"><img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image"></div>';
+                        echo '<div class="card-details">';
+                        echo '<div class="card-name">';
+                        echo $product['PRODUCT_NAME'].',';
+                        echo '<a href="#"> <i class="fa-solid fa-store"></i>'.$shop['SHOP_NAME'].'</a>';
+                        echo '</div>';
+
+                        $query4 = "SELECT 
+                                p.*, 
+                                d.discount_percentage, 
+                                p.price * (1 - d.discount_percentage / 100) AS discounted_price
+                            FROM 
+                                product p
+                            JOIN 
+                                shop s ON p.shop_id = s.shop_id
+                            JOIN 
+                                discount d ON p.discount_id = d.discount_id 
+                                        AND s.trader_id = d.trader_id
+                            WHERE
+                                product_id = $product_id";
+
+                        $stid4=oci_parse($connection, $query4);
+                        oci_execute($stid4);
+                        $discount_product = oci_fetch_assoc($stid4);
+
+                        $product_id = $discount_product['PRODUCT_ID'];
+                        $discount_id = $discount_product['DISCOUNT_ID'];
+
+                        
+
+                        if($discount_id) {
+                            echo '<div class="card-price">'.$discount_product['DISCOUNTED_PRICE']. '<span>'.$product['PRICE'].'</span></div>';
+                            $price = $discount_product['DISCOUNTED_PRICE'];
+                            $totalPrice += ($quantity * $price);
+                        }
+                        else {
+                            echo '<div class="card-price">'.$discount_product['DISCOUNTED_PRICE'].'</div>';
+                            $price = $product['PRICE'];
+                            $totalPrice += ($quantity * $price);
+                        }
+
+                        echo '<div class="card-price">';
+                        echo 'Quantity: '.$quantity.'';
+                        // echo '<button onclick="decrement()">-</button>';
+                        // echo '<span id="quantity">1</span>';
+                        // echo '<button onclick="increment()">+</button>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</div>';
+
+                        
 
                     } 
 
@@ -98,7 +161,7 @@
         
                 <div class="checkout-total">
                     <h6>Total</h6>
-                    <p>Rs.21570</p>
+                    <p><?php echo $totalPrice ?></p>
                 </div>
             </div>
         </section>
@@ -109,23 +172,29 @@
     
         <div id="overlay" class="overlay"></div>
         <div id="popup" class="popup">
+            <form method="POST">
             <h2>Delivery Hours</h2><br/>
-            <label for="pickup-time">Collection Slot:<br/></label>
-            <select id="pickup-time" name="pickup-time">
-                <option value="1">Wednesday (10:00 - 13:00)</option>
-                <option value="2">Wednesday (13:00 - 16:00)</option>
-                <option value="3">Wednesday (16:00 - 19:00)</option>
-                <option value="4">Thursday (10:00 - 13:00)</option>
-                <option value="5">Thursday (13:00 - 16:00)</option>
-                <option value="6">Thursday(16:00 - 19:00)</option>
-                <option value="7">Friday (10:00 - 13:00)</option>
-                <option value="8">Friday (13:00 - 16:00)</option>
-                <option value="9">Friday (16:00 - 19:00)</option>
-            </select>
-            
-            <br><br>
-            <button id="closeBtn">Close</button>
+                <label for="pickup-time">Collection Slot:<br/></label>
+                <select id="pickup-time" name="pickup-time">
+                    <option value=1 <?php if($collection_slot==1) {echo "selected";} ?>>Wednesday (10:00 - 13:00)</option>
+                    <option value=2 <?php if($collection_slot==2) {echo "selected";} ?>>Wednesday (13:00 - 16:00)</option>
+                    <option value=3 <?php if($collection_slot==3) {echo "selected";} ?>>Wednesday (16:00 - 19:00)</option>
+                    <option value=4 <?php if($collection_slot==4) {echo "selected";} ?>>Thursday (10:00 - 13:00)</option>
+                    <option value=5 <?php if($collection_slot==5) {echo "selected";} ?>>Thursday (13:00 - 16:00)</option>
+                    <option value=6 <?php if($collection_slot==6) {echo "selected";} ?>>Thursday(16:00 - 19:00)</option>
+                    <option value=7 <?php if($collection_slot==7) {echo "selected";} ?>>Friday (10:00 - 13:00)</option>
+                    <option value=8 <?php if($collection_slot==8) {echo "selected";} ?>>Friday (13:00 - 16:00)</option>
+                    <option value=9 <?php if($collection_slot==9) {echo "selected";} ?>>Friday (16:00 - 19:00)</option>
+                </select>
+                
+                <br><br>
+                <button type="submit" name="closeBtn" id="closeBtn">Close</button>
+            </form>
         </div>
+
+        <form method="POST">
+            <button type="submit" name="okBtn" id="okBtn">Close</button>
+        </form>
         
         <section class="payment-method">
             <h2>Payment Method</h2><br/>
@@ -167,7 +236,7 @@
         </section>
     </main>
 
-    <?php    include "../HN/footer.php"; ?>s
+    <?php    include "../HN/footer.php"; ?>
 
 
 <script>
