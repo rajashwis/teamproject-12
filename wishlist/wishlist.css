@@ -3,25 +3,51 @@
     padding: 0;
 }
 
-.container{
+/* .container{
     display: flex;
-    width: 100%;
+    width: 65%;
+    height: auto;
     justify-content:space-around;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    /* min-height: 100%; */
+    padding: 20px;
+    min-height: 100%;
     margin-bottom: 5%;
     margin-top: 9%;
+} */
+.container {
+    
+    /* max-width: 980px; */
+    width:70%;
+    height: auto;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    bottom: 100px;
+    left:160px;
+    
 }
 
+
+
+
 .menu {
+    position: relative;
     padding: 10px;
     border-radius: 5%;
     width: 16%;
     height: 100%;
+    top:100px;
 }
 
+
+
+
 .right{
-    width: 60%;
+    width: 65%;
+    /* margin-top: -0.5rem; */
 }
 
 .menu ul {
@@ -59,13 +85,14 @@
 }
 
 .row {
-    height: 10%;
-    padding: 3px 5px;
+    height: 17%;
+    padding: 6px 5px;
     background-image: linear-gradient(111.4deg, rgba(7, 7, 9, 1) 6.5%, rgba(27, 24, 113, 1) 93.2%);
     display: flex;
     align-items: center;
-    width: 100%;
-    gap: 13%; 
+    width: 1000px;
+
+    gap: 15%; 
     justify-content: space-between;
 }
 
@@ -78,26 +105,42 @@
     padding: 3px 5px;
 } */
 
+.item-product{
+    position: absolute;
+    left: 33%;
+}
+
+.item-price{
+    position: absolute;
+    left: 61%;
+}
+
 .row> *{
     width: 25%;
 }
   
 .wishlist-item {
     margin-top: 4px;
+    margin-bottom: 4px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0.7rem;
+
+    
 }
 
 .wishlist-item> *{
     font-family: Arial, Helvetica, sans-serif;
     width: 20%;
+   
 }
 
 .product{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    
 }
 
 .product p{
@@ -106,7 +149,8 @@
 
 
 .product img{
-    width: 60%;
+    width: 90%;
+    border-radius: 5%;
 }
 
 .quantity-control{
@@ -144,4 +188,21 @@
     cursor: pointer;
     color: #fff;
     border-radius: 9%;
+    position: relative;
+    top: 20px;
+    left: 250px;
+}
+.btn-remove{
+    width: 100px;
+    height: 40px;
+    padding: 5px 7px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+    border-radius: 9%;
+    position: relative;
+    bottom: 20px;
+    left: 380px;
 }

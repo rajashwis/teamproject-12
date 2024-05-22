@@ -122,19 +122,10 @@
     }
 
     //REVIEW STARSSSS
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ajaxRequest'])) {
-        if (isset($_POST['chosenStars']) && isset($_POST['comment'])) {
-            $chosenStars = intval($_POST['chosenStars']);
-            $comment = trim($_POST['comment']);
-    
-            // Here you can handle the $chosenStars and $comment variables, e.g., save them to a database
-            echo '<script>alert("' . $chosenStars . '")</script>';
-            echo '<script>alert("' . htmlspecialchars($comment, ENT_QUOTES, 'UTF-8').'")</script>';
-        } else {
-            echo 'Invalid data received.';
-        }
-    } else {
-        echo 'No data received.';
+    if(isset($_POST['post-review'])) {
+
+        echo "<script>alert('yasss')</script>";
+        
     }
     
     
@@ -384,21 +375,24 @@
                 <section class="add-review">
                     <button onclick="showReviewPopup()">Add Review</button>
                 </section>
-
-                <div id="review-popup" class="review-popup">
-                    <span class="close-btn" onclick="closeReviewPopup()">&times;</span>
-                    <h2>Add Review</h2>
-                    <div class="rating-rows">
-                        <span class="star" onclick="rate(1)"><i class="fa fa-star-o" aria-hidden="true"></i></span>
-                        <span class="star" onclick="rate(2)"><i class="fa fa-star-o" aria-hidden="true"></i></span>
-                        <span class="star" onclick="rate(3)"><i class="fa fa-star-o" aria-hidden="true"></i></span>
-                        <span class="star" onclick="rate(4)"><i class="fa fa-star-o" aria-hidden="true"></i></span>
-                        <span class="star" onclick="rate(5)"><i class="fa fa-star-o" aria-hidden="true"></i></span>
-                    </div><br/>
-                    <input type="hidden" id="chosenStars" value="0">
-                    <textarea id="comment" placeholder="Write your review here"></textarea>
-                    <button onclick="postReview()">Post Review</button>
-                </div>
+                
+                <form method="POST">
+                    <div id="review-popup" class="review-popup">
+                        <span class="close-btn" onclick="closeReviewPopup()">&times;</span>
+                        <h2>Add Review</h2>
+                        <div class="rating-rows">
+                            <span class="star" onclick="rate(1)"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                            <span class="star" onclick="rate(2)"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                            <span class="star" onclick="rate(3)"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                            <span class="star" onclick="rate(4)"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                            <span class="star" onclick="rate(5)"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                        </div><br/>
+                        <input type="hidden" id="chosenStars" value="0">
+                        <textarea id="comment" placeholder="Write your review here"></textarea>
+                        <button type = "submit" name="post-review">Post Review</button>
+                        <!-- <button onclick="postReview()">Post Review</button> -->
+                    </div>
+                </form>
 
 
 
@@ -575,18 +569,6 @@ function postReview() {
 
     let rating = document.getElementById('chosenStars').value;
     let comment = document.getElementById('comment').value;
-
-    // Send the review data to the server using AJAX
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onload = function() {
-        if (this.status === 200) {
-            console.log('Server response:', this.responseText);
-            // Handle the server response here if needed
-        }
-    };
-    xhr.send('chosenStars=' + rating + '&comment=' + encodeURIComponent(comment));
 
 
     // Close the popup after posting review

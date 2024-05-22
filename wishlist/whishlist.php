@@ -38,9 +38,7 @@ $wishlist_id = $_SESSION['wishlist_id'];
 
   include '../component/header.php';
   ?>
-
-<div class="container">
-  <div class="menu">
+<div class="menu">
     <ul>
       <li><a href="">My Profile</a></li>
       <li><a href="">My Order</a></li>
@@ -48,6 +46,11 @@ $wishlist_id = $_SESSION['wishlist_id'];
       <li><a href="">Reviews</a></li>
     </ul>
   </div>
+
+
+<div class="container">
+
+  
 
   <div class="right">
 
@@ -90,13 +93,15 @@ $wishlist_id = $_SESSION['wishlist_id'];
 
         </div>
 
-        <div class="item product">
+        <div class="item-product">
           <p><?php echo $product['PRODUCT_NAME'];?></p>
         </div>
-        <div class="item price"><?php echo $product['PRICE'];?></div>
+        <section class="item-price"><?php echo $product['PRICE'];?></section>
         <div>
         <button class="btn-add-to-cart">Add to Cart</button>
+        <button class="btn-remove">Remove</button>
         </div>
+      
       </div>
     <?php    }
     ?>
