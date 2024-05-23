@@ -1,21 +1,23 @@
 <?php
 
-session_start();
+// session_start();
 include "../connect.php";
 
-$user = $_SESSION['user_id'];
-$username = $_SESSION['username'];
-$cart_id = $_SESSION['cart_id'];
-$wishlist_id = $_SESSION['wishlist_id'];
+// $user = $_SESSION['user_id'];
+// $username = $_SESSION['username'];
+// $cart_id = $_SESSION['cart_id'];
+// $wishlist_id = $_SESSION['wishlist_id'];
 
-/**if(!$user){
-    header('Location: ../login/login.php');    
-    exit();
-}**/
+// if(!$user){
+//     header('Location: ../login/login.php');    
+//     exit();
+// }
 
-$query = "SELECT * FROM WISHLISTPRODUCT WHERE WISHLIST_ID = $wishlist_id";
-$stid = oci_parse($connection, $query);
-oci_execute($stid);
+// $query = "SELECT * FROM WISHLISTPRODUCT WHERE WISHLIST_ID = $wishlist_id";
+// $stid = oci_parse($connection, $query);
+// oci_execute($stid);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -37,18 +39,20 @@ oci_execute($stid);
 <body>
 
 <?php include "../component/header.php"; ?>
+<div class ="container">
+
 
   <div class="menu">
-                <ul>
-                    <li><a  href="">My Profile</a></li>
-                    <li><a href="">My Order</a></li>
-                    <li><a class="active" a href="">My Wishlist</a></li>
-                    <li><a href="">Review</a></li>
-                </ul>
-            </div>
+        <ul>
+            <li><a  href="">My Profile</a></li>
+            <li><a href="">My Order</a></li>
+            <li><a class="active" a href="">My Wishlist</a></li>
+            <li><a href="">Review</a></li>
+        </ul>
+  </div>
 
+ 
 
-    <div class ="container">
     <div class="right">
 
       <div class="row">
@@ -60,13 +64,13 @@ oci_execute($stid);
 
 
     <?php
-    while ($wishlist = oci_fetch_assoc($stid)) {
-      $product_id = $wishlist['PRODUCT_ID'];
+    // while ($wishlist = oci_fetch_assoc($stid)) {
+    //   $product_id = $wishlist['PRODUCT_ID'];
 
-      $query1 = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = $product_id";
-      $stid1 = oci_parse($connection, $query1);
-      oci_execute($stid1);
-      $product = oci_fetch_assoc($stid1);
+    //   $query1 = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = $product_id";
+    //   $stid1 = oci_parse($connection, $query1);
+    //   oci_execute($stid1);
+    //   $product = oci_fetch_assoc($stid1);
       ?>
 
     <div class="wishlist-item">
@@ -74,37 +78,167 @@ oci_execute($stid);
       <div class="item product">
 
         <?php
-        $imageData = $product['PRODUCT_IMAGE']->load();
-        $encodedImageData = base64_encode($imageData);
-        // Determine the image type based on the first few bytes of the image data
-        $header = substr($imageData, 0, 4);
-        $imageType = 'image/jpeg'; // default to JPEG
-        if (strpos($header, 'FFD8') === 0) {
-          $imageType = 'image/jpeg'; // JPEG
-        } elseif (strpos($header, '89504E47') === 0) {
-          $imageType = 'image/png'; // PNG
-        }
 
-        echo '<img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
 
+        // $imageData = $product['PRODUCT_IMAGE']->load();
+        // $encodedImageData = base64_encode($imageData);
+        // // Determine the image type based on the first few bytes of the image data
+        // $header = substr($imageData, 0, 4);
+        // $imageType = 'image/jpeg'; // default to JPEG
+        // if (strpos($header, 'FFD8') === 0) {
+        //   $imageType = 'image/jpeg'; // JPEG
+        // } elseif (strpos($header, '89504E47') === 0) {
+        //   $imageType = 'image/png'; // PNG
+        // }
+
+        // echo '<img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
         ?>
-
+        <img src ="../resources/products/bakery1.jpg">
       </div>
 
       <div class="item product">
         <p>
-          <?php echo $product['PRODUCT_NAME']; ?>
+          CAKE
+          <?php //echo $product['PRODUCT_NAME']; ?>
         </p>
       </div>
       <div class="item price">
-        <?php echo $product['PRICE']; ?>
+        40
+        <?php //echo $product['PRICE']; ?>
       </div>
-      <div>
+      <div class="func-btn">
         <button class="btn-add-to-cart">Add to Cart</button>
         <button class="btn-order-now">Order Now</button>
       </div>
     </div>
-    <?php }
+
+
+    <div class="wishlist-item">
+
+      <div class="item product">
+
+        <?php
+
+
+        // $imageData = $product['PRODUCT_IMAGE']->load();
+        // $encodedImageData = base64_encode($imageData);
+        // // Determine the image type based on the first few bytes of the image data
+        // $header = substr($imageData, 0, 4);
+        // $imageType = 'image/jpeg'; // default to JPEG
+        // if (strpos($header, 'FFD8') === 0) {
+        //   $imageType = 'image/jpeg'; // JPEG
+        // } elseif (strpos($header, '89504E47') === 0) {
+        //   $imageType = 'image/png'; // PNG
+        // }
+
+        // echo '<img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
+        ?>
+        <img src ="../resources/products/bakery1.jpg">
+      </div>
+
+      <div class="item product">
+        <p>
+          CAKE
+          <?php //echo $product['PRODUCT_NAME']; ?>
+        </p>
+      </div>
+      <div class="item price">
+        40
+        <?php //echo $product['PRICE']; ?>
+      </div>
+      <div class="func-btn">
+        <button class="btn-add-to-cart">Add to Cart</button>
+        <button class="btn-order-now">Order Now</button>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="wishlist-item">
+
+      <div class="item product">
+
+        <?php
+
+
+        // $imageData = $product['PRODUCT_IMAGE']->load();
+        // $encodedImageData = base64_encode($imageData);
+        // // Determine the image type based on the first few bytes of the image data
+        // $header = substr($imageData, 0, 4);
+        // $imageType = 'image/jpeg'; // default to JPEG
+        // if (strpos($header, 'FFD8') === 0) {
+        //   $imageType = 'image/jpeg'; // JPEG
+        // } elseif (strpos($header, '89504E47') === 0) {
+        //   $imageType = 'image/png'; // PNG
+        // }
+
+        // echo '<img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
+        ?>
+        <img src ="../resources/products/bakery1.jpg">
+      </div>
+
+      <div class="item product">
+        <p>
+          CAKE
+          <?php //echo $product['PRODUCT_NAME']; ?>
+        </p>
+      </div>
+      <div class="item price">
+        40
+        <?php //echo $product['PRICE']; ?>
+      </div>
+      <div class="func-btn">
+        <button class="btn-add-to-cart">Add to Cart</button>
+        <button class="btn-order-now">Order Now</button>
+      </div>
+    </div>
+
+
+
+
+    <div class="wishlist-item">
+
+      <div class="item product">
+
+        <?php
+
+
+        // $imageData = $product['PRODUCT_IMAGE']->load();
+        // $encodedImageData = base64_encode($imageData);
+        // // Determine the image type based on the first few bytes of the image data
+        // $header = substr($imageData, 0, 4);
+        // $imageType = 'image/jpeg'; // default to JPEG
+        // if (strpos($header, 'FFD8') === 0) {
+        //   $imageType = 'image/jpeg'; // JPEG
+        // } elseif (strpos($header, '89504E47') === 0) {
+        //   $imageType = 'image/png'; // PNG
+        // }
+
+        // echo '<img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
+        ?>
+        <img src ="../resources/products/bakery1.jpg">
+      </div>
+
+      <div class="item product">
+        <p>
+          CAKE
+          <?php //echo $product['PRODUCT_NAME']; ?>
+        </p>
+      </div>
+      <div class="item price">
+        40
+        <?php //echo $product['PRICE']; ?>
+      </div>
+      <div class="func-btn">
+        <button class="btn-add-to-cart">Add to Cart</button>
+        <button class="btn-order-now">Order Now</button>
+      </div>
+    </div>
+    
+
+    <?php //}
     ?>
 
   </div>
