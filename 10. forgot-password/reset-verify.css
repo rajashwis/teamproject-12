@@ -1,0 +1,65 @@
+body{
+    padding: 0;
+    margin: 0;
+    font-family:"Sofia", sans-serif;
+}
+
+.wrapper{
+    display: flex;
+    justify-content: center; /* Horizontally center the items */
+    align-items: center; /* Vertically center the items */
+    background-color: rgb(0, 0, 0);
+    background-image: url('../resources/church.jpg');
+    background-size: cover;
+    height: 100vh;
+}
+
+.container{
+    /* border: 1px solid black; */
+    border-radius: 10px;
+    height: 500px;
+    width: 40%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Add box shadow */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.68);
+}
+
+.container h1{
+    text-align: center;
+}
+
+.container p{
+    text-align: center;
+    margin-top: 1%;
+}
+
+.container form{
+    text-align: center;
+    margin-top: 10%;
+}
+
+input {
+    width: 400px; 
+    height: 20px;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid black;
+    background-color: transparent;
+}
+
+.container button{
+    margin-top: 10%;
+    border: none;
+    background-color: #f99f1b;
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.container button:hover{
+    opacity: 0.9;
+}

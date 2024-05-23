@@ -91,16 +91,15 @@
             $discount_id = $row['DISCOUNT_ID'];
             $category_id = $row['CATEGORY_ID'];
 
-            $query1 = "SELECT * FROM DISCOUNT WHERE DISCOUNT_ID = '$discount_id'";
+            $query1 = "SELECT * FROM DISCOUNT WHERE DISCOUNT_ID = $discount_id";
             $stid1=oci_parse($connection, $query1);
             oci_execute($stid1);
             $edit_discount = oci_fetch_assoc($stid1);
 
-            $query2 = "SELECT * FROM PRODUCTCATEGORY WHERE CATEGORY_ID = '$category_id'";
+            $query2 = "SELECT * FROM PRODUCTCATEGORY WHERE CATEGORY_ID = $category_id";
             $stid2=oci_parse($connection, $query2);
             oci_execute($stid2);
             $edit_category = oci_fetch_assoc($stid2);
-            $category_id = $edit_category['CATEGORY_ID'];
         }
 
        
@@ -171,7 +170,7 @@
 
                                         while($row1=oci_fetch_assoc($statement)) {
                                     ?>
-                                    <option value = "<?php echo $row1['CATEGORY_ID']?>"><?php echo $row1['CATEGORY_NAME']?></option>
+                                    <option value = "<?php echo $row1['CATEGORY_ID']?>" <?php if($row1['CATEGORY_ID'] == $edit_category['CATEGORY_ID']){echo "selected";} ?>><?php echo $row1['CATEGORY_NAME']?></option>
                                     <?php } 
                                     
                                     ?>

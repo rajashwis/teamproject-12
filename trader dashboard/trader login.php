@@ -3,12 +3,12 @@
 session_start();
 include "../connect.php";
 
-/*$user = $_SESSION['user_id'];
+$trader = $_SESSION['trader_id'];
 
-    if($user){
+    if($trader){
         header('Location: ../component/home.php');    
         exit();
-    }*/
+    }
 
 if(isset($_POST['login']))
 {
@@ -26,7 +26,7 @@ if(isset($_POST['login']))
 
         if ($password == $pass) {
             $user_id = $user['USER_ID'];
-            $_SESSION['user_id'] = $user_id;
+            $_SESSION['trader_id'] = $user_id;
             /*dummy page*/
             header("Location: add product.php");
             exit();
