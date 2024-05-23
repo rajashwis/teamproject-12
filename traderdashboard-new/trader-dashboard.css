@@ -1,0 +1,231 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #333;
+    color: white;
+    height: 100vh;
+    position: fixed;
+    top: 60px; /* Adjust the top position to accommodate the fixed navbar */
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: flex-start; /* Align items to the top */
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    width: 100%;
+    text-align: left; /* Align text to the left */
+}
+
+.sidebar ul li a.active,
+.sidebar ul li a:hover {
+    background-color: #444;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 15px 51px; /* Adjust padding to include both left and right */
+    width: 100%;
+    box-sizing: border-box; /* Ensures padding is included in element's total width */
+}
+
+.main-content {
+    margin-left: 200px;
+    padding: 70px 20px 20px; /* Add top padding to create space for the fixed navbar */
+    width: 100%;
+}
+
+
+.content {
+    display: none;
+}
+
+.content:target {
+    display: block;
+}
+
+.content.active {
+    display: block;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.graph {
+    margin-bottom: 20px;
+}
+
+.top-items ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.item {
+    width: 150px;
+    height: 200px; /* Adjust height to accommodate image and total sold text */
+    text-align: center;
+    margin-right: 10px; /* Adjust spacing between items */
+}
+
+.item img {
+    width: 100%;
+    height: 150px; /* Adjust image height */
+    object-fit: cover; /* Ensure the image covers the entire space */
+    border-radius: 20px;
+    border: 1px solid black;
+}
+
+.item span {
+    display: block;
+    color: #555;
+    font-size: 14px;
+    margin-top: 5px; /* Adjust spacing between image and text */
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    z-index: 999; /* Ensure the navbar is above other elements */
+    border-bottom: 1px solid white;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden; 
+}
+
+.profile-img img {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover; 
+}
+
+
+.profile span {
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.sign-out-btn {
+    background-color: #f99f1b;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 28px; 
+}
+
+
+
+
+
+/* Media Queries for Responsive Design */
+
+@media (max-width: 1200px) {
+    .top-items ul {
+        flex-wrap: wrap;
+    }
+
+    .item {
+        margin-right: 5px;
+        width: 120px;
+        height: 160px;
+    }
+
+    .item img {
+        height: 120px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: 0;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 20px;
+    }
+
+    .stats {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .top-items ul {
+        flex-direction: column;
+    }
+
+    .item {
+        margin-bottom: 10px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        flex-direction: column;
+    }
+
+    .profile span {
+        font-size: 14px;
+    }
+
+    .sign-out-btn {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .stats div {
+        width: 100%;
+        text-align: center;
+    }
+
+    .item {
+        margin: 5px 0;
+    }
+}

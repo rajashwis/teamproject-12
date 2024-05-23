@@ -24,6 +24,7 @@
         exit();
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -141,6 +142,52 @@
     padding: 5px;
 }
 
+.order-table button:hover{
+    background-color: #bebebe;
+}
+
+/* category */
+
+.category-table-container {
+    overflow-x: auto;
+}
+
+.category-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.category-table th,
+.category-table td {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.category-table th {
+    background-color: #b0b0b0;
+}
+
+.category-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.category-table tbody tr:hover {
+    background-color: #ddd;
+}
+
+.category-table button{
+    border: 1px solid black;
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.category-table button:hover{
+    background-color: #bebebe;
+}
+
 
 /*shop*/
 .shop-container {
@@ -217,6 +264,19 @@
     max-width: 400px;
 }
 
+.popup-content input{
+    display: block;
+    margin: 10px;
+}
+
+.popup-content button{
+    border: none;
+    background-color: #f99f1b;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
 .close {
     color: #aaa;
     float: right;
@@ -231,6 +291,80 @@
     cursor: pointer;
 }
 
+
+.category-popup-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.category-popup-content button{
+    cursor: pointer;
+}
+
+
+/*discount*/
+
+.discount-table-container {
+    position: relative;
+    right: 20%;
+    top: 15%;
+    border: 1px solid black;
+}
+
+.discount-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.discount-table th,
+.discount-table td {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    width: 700px;
+}
+
+.discount-table th {
+    background-color: #b0b0b0;
+}
+
+.discount-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.discount-table tbody tr:hover {
+    background-color: #ddd;
+}
+
+.discount-table button{
+    border: 1px solid black;
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.discount-table a{
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+.discount-table button:hover{
+    background-color: #bebebe;
+}
+
+
+.text{
+    position: relative;
+    top: 15%;
+    right: 20%;
+}
 
 </style>
 
@@ -249,7 +383,7 @@
     <div class="container">
         <div class="sidebar">
             <ul>
-                <li><a class="active" href="#dashboard" onclick="showContent('dashboard')"><i class="fa-solid fa-chart-simple"></i> Dashboard</a></li>
+                <li><a href="#dashboard" onclick="showContent('dashboard')"><i class="fa-solid fa-chart-simple"></i> Dashboard</a></li>
                 <li><a href="#products" onclick="showContent('products')"><i class="fa-solid fa-box-open"></i> Products</a></li>
                 <li><a href="#orders" onclick="showContent('orders')"><i class="fa-solid fa-truck-fast"></i> Orders</a></li>
                 <li><a href="#shop" onclick="showContent('shop')"><i class="fa-solid fa-shop"></i> Shop</a></li>
@@ -275,45 +409,65 @@
                 <div class="top-items">
                     <h2>Top Selling Items</h2>
                     <ul>
-                        <li class="item">
-                            <img src="../resources/products/bakery1.jpg" alt="Item 1">
-                            <span>Product Name</span>
-                            <span>Total Sold: 50</span>
-                        </li>
-                        <li class="item">
-                            <img src="../resources/products/jordan.jpg" alt="Item 2">
-                            <span>Product Name</span>
-                            <span>Total Sold: 30</span>
-                        </li>
-                        <li class="item">
-                            <img src="../resources/products/watch.jpg" alt="Item 3">
-                            <span>Product Name</span>
-                            <span>Total Sold: 20</span>
-                        </li>
-                        <li class="item">
-                            <img src="../resources/products/watch.jpg" alt="Item 3">
-                            <span>Product Name</span>
-                            <span>Total Sold: 20</span>
-                        </li>
-                        <li class="item">
-                            <img src="../resources/products/watch.jpg" alt="Item 3">
-                            <span>Product Name</span>
-                            <span>Total Sold: 20</span>
-                        </li>
+
+                        <?php 
+                            $query6 = "SELECT * FROM (
+                                SELECT P.PRODUCT_ID, P.PRODUCT_NAME, COUNT(OP.PRODUCT_ID) AS ORDER_PRODUCT_COUNT
+                                FROM ORDERPRODUCT OP
+                                JOIN PRODUCT P ON P.PRODUCT_ID = OP.PRODUCT_ID
+                                GROUP BY P.PRODUCT_ID, P.PRODUCT_NAME
+                                ORDER BY ORDER_PRODUCT_COUNT DESC
+                            )
+                            WHERE ROWNUM <= 5";
+                            
+                            $statement6 = oci_parse($connection, $query6);
+                            oci_execute($statement6);
+
+                            while($order_product = oci_fetch_assoc($statement6)) {
+                                $order_product_id = $order_product['PRODUCT_ID'];
+
+                                $image_query = "SELECT PRODUCT_IMAGE FROM PRODUCT WHERE PRODUCT_ID = $order_product_id";
+                                $image_statement = oci_parse($connection, $image_query);
+                                oci_execute($image_statement);
+
+                                $order_product_image = oci_fetch_assoc($image_statement);
+
+                                echo '<li class="item">';
+
+                                $imageData = $order_product_image['PRODUCT_IMAGE']->load();
+                                $encodedImageData = base64_encode($imageData);
+                                // Determine the image type based on the first few bytes of the image data
+                                $header = substr($imageData, 0, 4);
+                                $imageType = 'image/jpeg'; // default to JPEG
+                                if (strpos($header, 'FFD8') === 0) {
+                                    $imageType = 'image/jpeg'; // JPEG
+                                } elseif (strpos($header, '89504E47') === 0) {
+                                    $imageType = 'image/png'; // PNG
+                                }
+                                echo '<img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
+
+                                // echo '<img src="../resources/products/bakery1.jpg" alt="Item 1">';
+                                echo '<span>'.$order_product['PRODUCT_NAME'].'</span>';
+                                echo '<span>Total Sold: '.$order_product['ORDER_PRODUCT_COUNT'].'</span>';
+                                echo '</li>';
+                            }
+                            
+                        ?>
+
                     </ul>
                 </div>
                 
                 
             </div>
-
             <div id="products" class="content">
                 <h1>Products</h1>
                 <button class="add-product-btn"><a href="add-products.php"><i class="fa-solid fa-plus"></i> Add Product</a></button>
 
-                <!--FIX THISSSS-->
                 <form method="GET">
                     <select class="category-option" name="category">
-                        <!-- <option value="" >Select Category</option> -->
+
+                        <option value="" >Select Category</option>
+
                         <?php
                         $query3 = "SELECT * FROM PRODUCTCATEGORY WHERE TRADER_ID = $trader_id";
                         $statement3 = oci_parse($connection, $query3);
@@ -322,9 +476,6 @@
                         while ($category_list = oci_fetch_assoc($statement3)) {
                             $category_id_ = $category_list['CATEGORY_ID'];
                             $category_name = $category_list['CATEGORY_NAME'];
-
-                            error_log("Category ID from DB: " . $category_id_);
-                            error_log("Category ID from GET: " . $_GET['category']);
 
                             $selected = (isset($_GET['category']) && $_GET['category'] == $category_id_) ? ' selected' : '';
                             echo "<option value='" . htmlspecialchars($category_id_) . "' " . $selected . ">" . htmlspecialchars($category_name) . "</option>";
@@ -338,10 +489,10 @@
 
                     <?php 
 
-                        if(isset($_GET['category'])) {
+                        if (isset($_GET['category']) && $_GET['category'] != "") {
                             $category_id_filter = $_GET['category'];
 
-                            $query1 = "SELECT * FROM PRODUCT WHERE SHOP_ID = $shop_id";
+                            $query1 = "SELECT * FROM PRODUCT WHERE SHOP_ID = $shop_id AND CATEGORY_ID = $category_id_filter";
                             $statement1 = oci_parse($connection, $query1);
                             oci_execute($statement1);
 
@@ -355,8 +506,6 @@
 
                         }
 
-
-                        
                         while($product = oci_fetch_array($statement1)) {
                             
                             $product_id = $product['PRODUCT_ID'];
@@ -379,7 +528,7 @@
                             } elseif (strpos($header, '89504E47') === 0) {
                                 $imageType = 'image/png'; // PNG
                             }
-                            echo '<a href = "#"> <img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image"></a>';
+                            echo '<a href = "edit-product.php?product_id='.$product_id.'"> <img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image"></a>';
 
 
                             //echo '<img src="../resources/products/jordan.jpg" alt="Product 1">';
@@ -392,7 +541,7 @@
 
                         }
                     ?>
-                    
+
                 </div>
                 
             </div>
@@ -454,23 +603,21 @@
             <div id="shop" class="content">
                 <h1>Shop</h1>
                 <div class="shop-container">
-                    <form id="shopForm">
-                        <div class="shop-info">
-                            <div class="shop-image">
-                                <img id="shopImage" src="../resources/dummy images/dummy_product.png" alt="Shop Image">
-                            </div>
-                            <div class="shop-details">
-                                <h2 id="shopName">Shop Name</h2>
-                                <p id="shopAddress">Shop Address</p>
-                            </div>
-                            <button type="button" id="editShopBtn" onclick="openEditPopup()">Edit</button>
+                    <div class="shop-info">
+                        <div class="shop-image">
+                            <img id="shopImage" src="../resources/dummy images/dummy_product.png" alt="Shop Image">
                         </div>
-                    </form>
+                        <div class="shop-details">
+                            <h2 id="shopName">Shop Name</h2>
+                            <p id="shopAddress">Shop Address</p>
+                        </div>
+                        <button type="button" id="editShopBtn" onclick="openEditPopup()">Edit</button>
+                    </div>
                 </div>
 
                 <h1>Category</h1>
-                <div class="order-table-container">
-                    <table class="order-table">
+                <div class="category-table-container">
+                    <table class="category-table">
                         <thead>
                             <tr>
                                 <th>Category ID</th>
@@ -480,35 +627,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Cake</td>
-                                <td>5</td>
-                                <td>
-                                    <button>Edit</button>
-                                    <button>Delete</button>
-                                </td>
-                            </tr>
+                            <?php 
+                                $query4 = "SELECT * FROM PRODUCTCATEGORY WHERE TRADER_ID = $trader_id";
+                                $statement4 = oci_parse($connection, $query4);
+                                oci_execute($statement4);
 
-                            <tr>
-                                <td>1</td>
-                                <td>Cake</td>
-                                <td>5</td>
-                                <td>
-                                    <button>Edit</button>
-                                    <button>Delete</button>
-                                </td>
-                            </tr>
+                                while ($category = oci_fetch_assoc($statement4)) {
 
-                            <tr>
-                                <td>1</td>
-                                <td>Cake</td>
-                                <td>5</td>
-                                <td>
-                                    <button>Edit</button>
-                                    <button>Delete</button>
-                                </td>
-                            </tr>
+                                    echo '<tr>';
+                                    echo '<td>'.$category['CATEGORY_ID'].'</td>';
+                                    echo '<td>'.$category['CATEGORY_NAME'].'</td>';
+                                    echo '<td>5</td>';
+                                    echo '<td>';
+                                    echo '<button onclick="openEditCategoryPopup(this)">Edit</button>';
+                                    echo '<button onclick="deleteRow(this)">Delete</button>';
+                                    echo '</td>';
+                                    echo '</tr>';
+
+                                }
+                            ?>
+
                         </tbody>
                     </table>
                 </div>
@@ -524,30 +662,92 @@
                         <input type="file" id="editImage" name="editImage">
             
                         <label for="editName">Edit Shop Name:</label>
-                        <input type="text" id="editName" name="editName">
+                        <input type="text" required id="editName" name="editName">
             
                         <label for="editAddress">Edit Shop Address:</label>
-                        <input type="text" id="editAddress" name="editAddress">
+                        <input type="text" required id="editAddress" name="editAddress">
             
                         <button type="button" onclick="saveChanges()">Save</button>
                     </form>
                 </div>
             </div>
             
-
+            <!-- Edit Category Popup Box -->
+                <div id="editCategoryPopup" class="popup">
+                    <div class="popup-content category-popup-content">
+                        <span class="close" onclick="closeEditCategoryPopup()">&times;</span>
+                        <form id="editCategoryForm">
+                            <label for="editCategoryName">Category Name:</label>
+                            <input type="text" id="editCategoryName" name="editCategoryName">
+                            <button type="button" onclick="saveCategoryChanges()">Save</button>
+                        </form>
+                    </div>
+                </div>
                 <!--DO NOT EDIT ABOVE-->
 
                 
             
            
             <div id="discount" class="content">
-                <h1>Discount</h1>
-                <!-- Shop content goes here -->
+                <h1 class="text">Discount</h1>
+                <div class="discount-table-container">
+                    <table class="discount-table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Discount Percentage</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <?php 
+                                
+                                $query5 = "SELECT * FROM DISCOUNT WHERE TRADER_ID = $trader_id";
+                                $statement5 = oci_parse($connection, $query5);
+                                oci_execute($statement5);
+
+                                while($discount = oci_fetch_assoc($statement5)) {
+                                    echo '<tr>';
+
+                                    $imageData = $discount['DISCOUNT_IMAGE']->load();
+                                    $encodedImageData = base64_encode($imageData);
+                                    // Determine the image type based on the first few bytes of the image data
+                                    $header = substr($imageData, 0, 4);
+                                    $imageType = 'image/jpeg'; // default to JPEG
+                                    if (strpos($header, 'FFD8') === 0) {
+                                        $imageType = 'image/jpeg'; // JPEG
+                                    } elseif (strpos($header, '89504E47') === 0) {
+                                        $imageType = 'image/png'; // PNG
+                                    }
+
+                                    echo '<td><img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image" width="200px"></td>';
+                                    echo '<td>'.$discount['DISCOUNT_PERCENTAGE'].'</td>';
+                                    echo '<td>'.$discount['START_DATE'].'</td>';
+                                    echo '<td>'.$discount['END_DATE'].'</td>';
+                                    echo '<td><button><a href="discount-edit.html">Edit</a></button></td>';
+                                    echo '<td><button><a href="discount-edit.html">Delete</button></a></td>';
+                                    echo '</tr>';
+                                }
+                                
+                            ?>
+
+                    
+                            
+                       
+                        </tbody>
+                    </table>
+                </div>
             </div>
+
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="edit.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
     // Initialize the chart
@@ -582,13 +782,19 @@
             content.classList.remove('active');
         });
         document.getElementById(id).classList.add('active');
+        localStorage.setItem('activeTab', id); // Save the active tab's ID
     };
 
-    // Initially display the dashboard
-    showContent('dashboard');
+    // Retrieve the saved active tab's ID from localStorage
+    var activeTab = localStorage.getItem('activeTab');
+    if (activeTab) {
+        showContent(activeTab);
+    } else {
+        showContent('dashboard'); // Default to dashboard if no tab is saved
+    }
+});
 
-
-    function openEditPopup() {
+function openEditPopup() {
     document.getElementById("editPopup").style.display = "block";
 }
 
@@ -599,20 +805,110 @@ function closeEditPopup() {
 function saveChanges() {
     var newName = document.getElementById("editName").value;
     var newAddress = document.getElementById("editAddress").value;
-    // Code to update image, name, and address
-    document.getElementById("shopName").textContent = newName;
-    document.getElementById("shopAddress").textContent = newAddress;
+    var newImage = document.getElementById("editImage").files[0]; // Get the uploaded image file
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+        document.getElementById("shopImage").src = e.target.result; // Update the shop image source
+    };
+
+    if (newImage) {
+        reader.readAsDataURL(newImage); // Read the image file as a data URL
+    }
+
+    document.getElementById("shopName").innerText = newName;
+    document.getElementById("shopAddress").innerText = newAddress;
     closeEditPopup();
 }
 
+// Load the data when the page loads
+window.onload = function() {
+    loadShopData();
+};
 
-});
+function loadShopData() {
+    // Retrieve the data from localStorage
+    var shopName = localStorage.getItem("shopName");
+    var shopAddress = localStorage.getItem("shopAddress");
+    var shopImage = localStorage.getItem("shopImage");
+
+    // Update the UI with the retrieved data
+    document.getElementById("shopName").innerText = shopName;
+    document.getElementById("shopAddress").innerText = shopAddress;
+    document.getElementById("shopImage").src = shopImage;
+}
+
+function saveChanges() {
+    var newName = document.getElementById("editName").value;
+    var newAddress = document.getElementById("editAddress").value;
+    var newImage = document.getElementById("editImage").files[0];
+
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+        // Update the shop image source
+        document.getElementById("shopImage").src = e.target.result;
+
+        // Save the updated data to localStorage
+        localStorage.setItem("shopName", newName);
+        localStorage.setItem("shopAddress", newAddress);
+        localStorage.setItem("shopImage", e.target.result);
+    };
+
+    if (newImage) {
+        reader.readAsDataURL(newImage);
+    }
+
+    document.getElementById("shopName").innerText = newName;
+    document.getElementById("shopAddress").innerText = newAddress;
+    closeEditPopup();
+}
+
+// Edit category functions
+let currentCategoryRow = null;
+
+function openEditCategoryPopup(button) {
+    // Get the row being edited and store it in the variable
+    currentCategoryRow = button.parentNode.parentNode;
+    // Get the category name from the row
+    var categoryName = currentCategoryRow.cells[1].textContent;
+    // Set the category name in the popup's input field
+    document.getElementById("editCategoryName").value = categoryName;
+    // Display the popup
+    document.getElementById("editCategoryPopup").style.display = "block";
+}
+
+function closeEditCategoryPopup() {
+    // Hide the popup
+    document.getElementById("editCategoryPopup").style.display = "none";
+}
+
+function saveCategoryChanges() {
+    // Get the edited category name from the input field
+    var editedCategory = document.getElementById("editCategoryName").value;
+    // Update the category name in the current row
+    if (currentCategoryRow) {
+        currentCategoryRow.cells[1].textContent = editedCategory;
+    }
+    // Hide the popup
+    closeEditCategoryPopup();
+}
+
+function deleteRow(button) {
+    // Get the row to be deleted
+    var row = button.parentNode.parentNode;
+    // Remove the row from the table
+    row.parentNode.removeChild(row);
+}
+
+//discount
 
 
 
 
 
-    </script>
+
+</script>
 
 </body>
 </html>
