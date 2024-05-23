@@ -12,6 +12,8 @@
 
     <main class="container">
 
+
+
         <div class="navbar-trader">
             <div class="trader-profile">
                 <img src="../resources/user.jpg" alt="trader_profile">
@@ -22,8 +24,20 @@
             </button>
         </div>
 
+        <div class="category-selection">
+            <select id="category-select" name="category">
+                <option value="1">Bakery</option>
+                <option value="2">Dairy</option>
+                <option value="3">Fruits</option>
+                <option value="4">Vegetables</option>
+            </select>
+
+            <button>Sort</button>
+        </div>
+
 
         <div class="main">
+            
             <div class="menu">
                 <ul>
                     <li><a class="active" href="">Dashboard</a></li>
