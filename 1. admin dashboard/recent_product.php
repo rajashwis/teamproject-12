@@ -1,3 +1,15 @@
+<?php
+
+    session_start();
+    error_reporting(0);
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
+    include "../connect.php";
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,23 +58,39 @@
 								<th>Product</th>
 								<th>Shop</th>
                                 <th>Category</th>
-                                <th>1</th>
+                                <th>Price</th>
 								<th>Date Added</th>
 								<th>Is Approved</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>
-									<img src="../resources/products/bakery1.jpg">
-									<p>Cake</p>
-								</td>
-								<td>Shop Name</td>
-                                <td>Category</td>
-                                <td>2</td>
-								<td>01-10-2021</td>
-								<td><span class="status completed">Completed</span></td>
-							</tr>
+							<?php 
+
+								$query = "SELECT 
+										P.*, 
+										S.SHOP_NAME 
+									FROM PRODUCT P
+									JOIN SHOP S ON P.SHOP_ID = S.SHOP_ID";
+								$statement = oci_parse($connection, $query);
+								oci_execute($statement);
+
+								while($product = oci_fetch_assoc($statement)) {
+
+									echo '<tr>';
+									echo '<td>';
+									echo '<img src="../resources/products/bakery1.jpg">';
+									echo '<p>Cake</p>';
+									echo '</td>';
+									echo '<td>Shop Name</td>';
+									echo '<td>Category</td>';
+									echo '<td>2</td>';
+									echo '<td>01-10-2021</td>';
+									echo '<td><span class="status completed">Completed</span></td>';
+									echo '</tr>';
+
+								}
+							?>
+							
 							<tr>
 								<td>
                                     <img src="../resources/products/bakery2.jpg">

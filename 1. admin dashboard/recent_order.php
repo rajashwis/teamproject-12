@@ -1,3 +1,14 @@
+<?php
+
+    session_start();
+    error_reporting(0);
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
+    include "../connect.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,59 +53,45 @@
 					</div>
 					<table>
 						<thead>
+
 							<tr>
-								<th>User</th>
-								<th>Product</th>
-								<th>Date Order</th>
-								<th>Status</th>
-							</tr>
+									<th>Order Number</th>
+									<th>User</th>
+									<th>Order Date</th>
+									<th>Status</th>
+								</tr>
 						</thead>
+							
 						<tbody>
-							<tr>
-								<td>
-									<img src="../resources/johncena.jpg">
-									<p>John Doe</p>
-								</td>
-								<td>Product Name</td>
-								<td>01-10-2021</td>
-								<td><span class="status completed">Completed</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="../resources/johndoe.jpg">
-									<p>John Doe</p>
-								</td>
-								<td>Product Name</td>
-								<td>01-10-2021</td>
-								<td><span class="status pending">Pending</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="../resources/johndoe.jpg">
-									<p>John Doe</p>
-								</td>
-								<td>Product Name</td>
-								<td>01-10-2021</td>
-								<td><span class="status pending">Pending</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="../resources/johncena.jpg">
-									<p>John Doe</p>
-								</td>
-								<td>Product Name</td>
-								<td>01-10-2021</td>
-								<td><span class="status pending">Pending</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="../resources/johncena.jpg">
-									<p>John Doe</p>
-								</td>
-								<td>Product Name</td>
-								<td>01-10-2021</td>
-								<td><span class="status completed">Completed</span></td>
-							</tr>
+							<?php 
+								$query = "SELECT *
+										FROM (
+											SELECT 
+												OD.*, 
+												U.first_name || ' ' || U.last_name AS customer
+											FROM ORDERDETAIL OD
+											JOIN USER_ U ON OD.customer_id = U.user_id
+											ORDER BY OD.ORDER_DATE DESC
+										)
+										WHERE ROWNUM <= 5";
+								$statement = oci_parse($connection, $query);
+								oci_execute($statement);
+
+								while($order = oci_fetch_assoc($statement)) {
+
+									echo '<tr>';
+									echo '<td>'.$order['ORDER_ID'].'</td>';
+									echo '<td>';
+									echo '<img src="../resources/johncena.jpg"> <p>'.$order['CUSTOMER'].'</p>';
+									echo '</td>';
+									echo '<td>'.$order['ORDER_DATE'].'</td>';
+									echo '<td><span class="status completed">'.$order['STATUS'].'</span></td>';
+									echo '</tr>';
+
+								}
+							?>
+						
+							
 						</tbody>
 					</table>
 				</div>
