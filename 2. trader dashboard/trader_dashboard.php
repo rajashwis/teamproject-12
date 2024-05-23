@@ -47,18 +47,20 @@
             </button>
         </div>
 
+        <div class="category-selection">
+            <select id="category-select" name="category">
+                <option value="1">Bakery</option>
+                <option value="2">Dairy</option>
+                <option value="3">Fruits</option>
+                <option value="4">Vegetables</option>
+            </select>
+            <button>Sort</button>
+        </div>
+
         
 
 
         <div class="main">
-            <!-- <div class="menu">
-                <ul>
-                    <li><a class="active" href="">Dashboard</a></li>
-                    <li><a href="">Shop</a></li>
-                    <li><a href="">Product</a></li>
-                    <li><a href="">Orders</a></li>
-                </ul>
-            </div> -->
             <div class="vertical-nav">
                 <ul>
                     <li><a class="active" href="#">Dashboard</a></li>
@@ -142,17 +144,6 @@
                     }
                 ?>
 
-            </div>
-
-
-            <div class="category-selection">
-                <select id="category-select" name="category">
-                    <option value="1">Bakery</option>
-                    <option value="2">Dairy</option>
-                    <option value="3">Fruits</option>
-                    <option value="4">Vegetables</option>
-                    <!-- Add more categories as needed -->
-                </select>
             </div>
 
         </div>
