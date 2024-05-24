@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="favicon" rel="icon" type="image/x-icon" href="../resources/cfxfavicon.png">
+    <link rel="stylesheet" type="text/css" href="signin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>Sign In</title>
+</head>
+<body>
+    <div class="wrapper" style="background-image: url('../resources/bg1_login.jpg');">
+        <div class="inner">
+            <div class="img-holder">
+                <img src="../resources/bg1_login.jpg">
+            </div>
+            <form method="post" action="signin.php">
+                <h3>Welcome!</h3>
+                <div class="form-gap">  
+                    <div class="form-wraper">
+                        <input type="text" name="username" placeholder="Username or Email" class="form-control">
+                        <input type="password" name="password" placeholder="Password" class="form-control"><br/>
+                        <input type="checkbox"> Stay logged in
+                    </div>
+                    <br>
+                    <br>
+                    <button class="btn-register" name="login">
+                        Log in
+                    </button>
+                    <br><br><br>
+                    <div class="if-forget-or-have-acc">
+                        <p>Forgot Username or Password? <a href="../reset_password/reset_password.html"> Reset</a></p>
+                    </div>
+                    <br>
+                    <div class="if-forget-or-have-acc">
+                        <p>Don't have an account? <a href="../signup/signup.html"> Sign up</a></p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -8,8 +8,6 @@
     include "../connect.php";
 
     $user = $_SESSION['user_id'];
-    $cart_id = $_SESSION['cart_id'];
-    $wishlist_id = $_SESSION['wishlist_id'];
 
     if (isset($_SESSION['cart_product_added']) && $_SESSION['cart_product_added'] === true) {
         echo "<script>alert('Product Added to Cart!')</script>";
@@ -41,24 +39,63 @@
         oci_execute($stid2);
         $shop = oci_fetch_assoc($stid2);
 
-        if (isset($_POST['add_to_cart'])) {
+        if(isset($_POST['post-review'])) {
 
-            if(!$user) {
-                header('LOCATION: ../login/login.html');
+            $rating = $_POST['rating'];
+            $review = $_POST['review'];
+
+            echo "<script>alert('".$user.", ".$product_id."')</script>";
+    
+            $query3 = "INSERT INTO REVIEW VALUES (SEQ_REVIEW_ID.NEXTVAL, $rating, '$review', SYSDATE, $user, $product_id)";
+            $statement3 = oci_parse($connection, $query3);
+            oci_execute($statement3);
+            
+        }
+
+    }
+
+    else {
+        header('location: ../homepage/home.php');
+    }
+
+    if (isset($_POST['add_to_cart'])) {
+
+        if(!$user) {
+            header('LOCATION: ../signin/signin.html');
+        }
+
+        else {
+            $quantity = $_POST['quantity'];
+
+            $product_query = "SELECT STOCK_AVAILABLE FROM PRODUCT WHERE PRODUCT_ID = $product_id";
+            $product_stid=oci_parse($connection, $product_query);
+            oci_execute($product_stid);
+            $product_stock = oci_fetch_assoc($product_stid);
+            $stock = $product_stock['STOCK_AVAILABLE'];
+
+            $stock_ = $stock - 2;
+
+            if($quantity > $stock_) {
+                echo "<script>alert('Not enough stock available!')</script>";
             }
-    
+
             else {
-                $quantity = $_POST['quantity'];
-    
-                $query1 = "SELECT PRODUCT_ID FROM CARTPRODUCT WHERE CART_ID = $cart_id AND PRODUCT_ID = $product_id";
+
+                $query="SELECT * from CUSTOMER WHERE customer_id = $user";
+                $stid=oci_parse($connection, $query);
+                oci_execute($stid);
+                $row = oci_fetch_assoc($stid);
+                $cart_id = $row['CART_ID'];
+
+                $query1 = "SELECT PRODUCT_ID FROM CARTPRODUCT WHERE CART_ID = $cart_id";
                 $stid1=oci_parse($connection, $query1);
                 oci_execute($stid1);
                 $row = oci_fetch_assoc($stid1);
-    
+
                 if($row) {
                     echo "<script>alert('Product already in Cart!')</script>";
                 }
-    
+
                 else {
                     $query1="INSERT INTO CARTPRODUCT VALUES (SEQ_CARTPRODUCT_ID.NEXTVAL, $cart_id, $product_id, $quantity)";
                     $stid1=oci_parse($connection, $query1);
@@ -69,47 +106,48 @@
                     }
                     
                 }
-                
+
             }
-    
-        }
-    
-        if (isset($_POST['wishlist_button'])) {
-    
-            if(!$user) {
-                header('LOCATION: ../login/login.html');
-            }
-    
-            else {
-    
-                $query1 = "SELECT PRODUCT_ID FROM WISHLISTPRODUCT WHERE PRODUCT_ID = $product_id AND WISHLIST_ID = $wishlist_id";
-                $stid1=oci_parse($connection, $query1);
-                oci_execute($stid1);
-                $row = oci_fetch_assoc($stid1);
-    
-                if($row) {
-                    echo "<script>alert('Product already in Wishlist!')</script>";
-                }
-    
-                else {
-                    $query1 = "INSERT INTO WISHLISTPRODUCT VALUES (SEQ_WISHLISTPRODUCT_ID.NEXTVAL, $wishlist_id, $product_id)";
-                    $stid1=oci_parse($connection, $query1);
-                    
-                    if(oci_execute($stid1)) {
-                        $_SESSION['wishlist_product_added'] = true;
-                        header("LOCATION: ../product_detail/product_detail.php?product_id=$product_id");
-                    }
-                    
-                }
-                
-            }
-    
+            
         }
 
     }
 
-    else {
-        header('location: ../homepage/home.php');
+    if (isset($_POST['wishlist_button'])) {
+
+        if(!$user) {
+            header('LOCATION: ../signin/signin.html');
+        }
+
+        else {
+            $query="SELECT * from WISHLIST WHERE customer_id = $user";
+            $stid=oci_parse($connection, $query);
+            oci_execute($stid);
+            $row = oci_fetch_assoc($stid);
+            $wishlist_id = $row['WISHLIST_ID'];
+
+            $query1 = "SELECT PRODUCT_ID FROM WISHLISTPRODUCT WHERE PRODUCT_ID = $product_id";
+            $stid1=oci_parse($connection, $query1);
+            oci_execute($stid1);
+            $row = oci_fetch_assoc($stid1);
+
+            if($row) {
+                echo "<script>alert('Product already in Wishlist!')</script>";
+            }
+
+            else {
+                $query1 = "INSERT INTO WISHLISTPRODUCT VALUES (SEQ_WISHLISTPRODUCT_ID.NEXTVAL, $wishlist_id, $product_id)";
+                $stid1=oci_parse($connection, $query1);
+                
+                if(oci_execute($stid1)) {
+                    $_SESSION['wishlist_product_added'] = true;
+                    header("LOCATION: ../product_detail/product_detail.php?product_id=$product_id");
+                }
+                
+            }
+            
+        }
+
     }
     
     
@@ -131,144 +169,9 @@
 </head>
 <body>
     
-    <div class="home-page">
-        <!--navbar-->
-        <div class="navbar" id="nav">
-            <nav>
-                <img class="logo" src="../resources/cfxlocalhubwhitelogo.png">
-
-                <div class="search-bar">
-                    <form action="search.php" method="GET">
-                        <div class="search">
-                            <input type="text" name="searchTerm" class="searchTerm" placeholder="   NIKE SHOES...">
-                            <button type="submit" class="searchButton">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-                <div class="user-box">
-                    <?php
-                    session_start(); // Ensure session is started
-                    if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
-                        echo
-
-                            '<div class="profile-dropdown">
-                        <div onclick="toggle()" class="profile-dropdown-btn">
-                        <div class="profile-img">
-                            <i class="fa-solid fa-circle"></i>
-                        </div>
-
-                        <span>
-                        ' . $_SESSION['username'] . ' <i class="fa-solid fa-angle-down"></i>
-                        </span>
-                        </div>
-                    </div>';
-                    } else {
-
-                        // If user is not logged in, display sign in and sign up buttons
-                        echo '<div class="signin">
-                        <form action="login.html" method="get">
-                            <button class="btn">
-                                <u><i class="fa-solid fa-user"></i>
-                                    <a href="../login/login.html"> Sign In</a>
-                                </u>
-                            </button>    
-                        </form>
-                    </div>
-                    <div class="signup">
-                        <form action="signup.html" method="get">
-                            <button class="btn-2">
-                                <a href="../signup/signup.html"> Sign Up</a>
-                            </button>    
-                        </form>
-                    </div>';
-                    }
-                    ?>
-                </div>
-
-                <div class="basket">
-                    <a href="cart.html"><img src="../resources/trolley.png" height="30px"></a>
-                </div>
-                <div class="toggle"><i class="fa-solid fa-bars"></i></div>
-            </nav>
-
-        </div>
-        <div class="profile-drop">
-            <ul class="profile-dropdown-list">
-                <li class="profile-dropdown-list-item">
-                    <a href="#">
-                        <i class="fa-regular fa-user"></i>
-                        Edit Profile
-                    </a>
-                </li>
-
-                <li class="profile-dropdown-list-item">
-                    <a href="#">
-                        <i class="fa-regular fa-envelope"></i>
-                        Inbox
-                    </a>
-                </li>
-
-                <li class="profile-dropdown-list-item">
-                    <a href="#">
-                        <i class="fa-solid fa-sliders"></i>
-                        Settings
-                    </a>
-                </li>
-
-                <li class="profile-dropdown-list-item">
-                    <a href="#">
-                        <i class="fa-regular fa-circle-question"></i>
-                        Help & Support
-                    </a>
-                </li>
-                <hr />
-
-                <li class="profile-dropdown-list-item">
-                    <form action="../sign out.php" method="post">
-                        <button type="submit">
-                            <i class="fa-solid fa-sign-out-alt"></i> Logout</a>
-                        </button>
-                    </form>
-                </li>
-            </ul>
-        </div>
-
-        <div class="dropdown">
-            <ul>
-                <li><a href="teamproject-12/component/home.php">HOME</a></li>
-                <li><a href="trending.html"> TRENDING</a></li>
-                <li><a href="decor.html"> HOME & DECOR</a></li>
-                <li><a href=""> ELECTRONICS</a></li>
-                <li><a href=""> FASHION</a></li>
-                <li><a href=""> SALES</a></li>
-                <li><a href="seller.html"> BECOME A SELLER</a></li>
-                <li><a href="">Sign In</a></li>
-                <li><a href="">Sign Up</a></li>
-                <li><a href=""><img src="../resources/trolley.png" height="30px"></a></li>
-            </ul>
-        </div>
-        <!--navbar 2-->
-        <div class="navbar2" id="nav2">
-            <nav>
-                <ul>
-                    <li class="home-split"><a class="active" href=""> HOME</a></li>
-                    <li><a href="trending.html"> TRENDING</a></li>
-                    <li><a href="decor.html"> HOME & DECOR</a></li>
-                    <li><a href=""> ELECTRONICS</a></li>
-                    <li><a href=""> FASHION</a></li>
-                    <li><a href=""> SALES</a></li>
-                    <li class="bs-split"><a href="seller.html"> BECOME A SELLER</a></li>
-                </ul>
-
-            </nav>
-        </div>
-    </div>
+    <?php include "../components/header.php"?>
 
    
-
-
     <main class="main">
          <!-- DEEPA Front end -->
         <div class="container">
@@ -299,13 +202,41 @@
                         echo '<h2>'.$product['PRODUCT_NAME'].'</h2>';
                         echo '<p>'.$product['DESCRIPTION_'].'</p>';
                         echo '<p> Store: '.$shop['SHOP_NAME'].'</p>';
-                        echo '<p>Price: '.$product['PRICE'].'</p>';
+
+                        $query1 = "SELECT 
+                            p.*, 
+                            d.discount_percentage, 
+                            p.price * (1 - d.discount_percentage / 100) AS discounted_price
+                        FROM 
+                            product p
+                        JOIN 
+                            shop s ON p.shop_id = s.shop_id
+                        JOIN 
+                            discount d ON p.discount_id = d.discount_id 
+                                    AND s.trader_id = d.trader_id
+                        WHERE
+                            product_id = $product_id";
+
+                        $stid1=oci_parse($connection, $query1);
+                        oci_execute($stid1);
+                        $discount_product = oci_fetch_assoc($stid1);
+
+                        $product_id = $discount_product['PRODUCT_ID'];
+                        $discount_id = $discount_product['DISCOUNT_ID'];
+
+                        if($discount_id) {
+                            echo '<p>Price: <strike>'.$product['PRICE'].'</strike>&nbsp'.$discount_product['DISCOUNTED_PRICE'].'</p>';
+                        }
+                        else {
+                            echo '<p>Price: '.$product['PRICE'].'</p>';
+                        }
+
                         echo '<form method="POST">';
                         echo '<div class="quantity-input">';
                         echo '<label for="quantity">Quantity:</label>';
                         echo '<div class="quantity-control">';
                         echo '<button class="minus-btn" id="minusBtn">-</button>';
-                        echo '<input type="number" id="quantity" name="quantity" value="1" min="1">';
+                        echo '<input type="number" id="quantity" name="quantity" value="1" min="'.$product['MIN_ORDER'].'" max="'.$product['MAX_ORDER'].'">';
                         echo '<button class="plus-btn" id="plusBtn">+</button>';
                         echo '</div>';
                         echo '</div>';
@@ -327,7 +258,31 @@
                     <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
                     <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
                 </div>
-            </div>
+                <!--add review-->
+                <section class="add-review">
+                    <button onclick="showReviewPopup()">Add Review</button>
+                </section>
+                
+                <form method="POST">
+                    <div id="review-popup" class="review-popup">
+                        <span class="close-btn" onclick="closeReviewPopup()">&times;</span>
+                        <h2>Add Review</h2>
+                        <div class="rating-rows">
+                            <select name="rating" id="options">
+                                <option value="default">--Choose a Rating--</option>
+                                <option value=1>1</option>
+                                <option value=2>2</option>
+                                <option value=3>3</option>
+                                <option value=4>4</option>
+                                <option value=5>5</option>
+                            </select>
+                        </div><br/>
+                        <textarea id="comment" name="review" placeholder="Write your review here"></textarea>
+                        <button type = "submit" name="post-review">Post Review</button>
+                        <!-- <button onclick="postReview()">Post Review</button> -->
+                    </div>
+                </form>
+
 
 
             <hr class="comment-line">
@@ -351,7 +306,9 @@
                     <div class="comment-text">
                         <p>This is the user review for the elit. Illo culpa eligendi quibusdam vel consequuntur, non dicta nulla exercitationem! Laudantium libero quos rem perferendis mollitia beatae sequi laborum consequatur neque sunt recusandae, voluptate blanditiis. Consequuntur, sed? Aperiam  asperiores?</p>
                     </div>
+                    <hr>
                 </div>
+                
 
                 <div class="comments">
                     <div class="customer-profile">
@@ -377,7 +334,7 @@
 
 
 
-            <div class="comments">
+            <!-- <div class="comments">
                 <div class="customer-profile">
                     <div class="profile-img">
                         <img src="../resources/user.jpg" alt="profile-img">
@@ -398,61 +355,11 @@
                     <textarea placeholder="Add your comment here..."></textarea>
                     <button class="add-comment-btn">Add Comment</button>
                 </div>
-            </div>
+            </div> -->
         </div>
     </main>
 
-   
-
-
-
-
-    <!--For you-->
-    <div class="for-you">
-        <!--footer-->
-        <div class="footer-background">
-            <div class="container-footer w-container">
-                <div class="w-row">
-                    <div class="footer-column w-clearfix w-col w-col-4"><img src="../resources/cfxlocalhubwhitelogo.png"
-                            alt="" width="40" class="failory-logo-image">
-                        <h3 class="footer-failory-name">CFXLocalHub</h3>
-                        <p class="footer-description-failory">Best Shopping Online!<br></p>
-                    </div>
-                    <div class="footer-column w-col w-col-8">
-                        <div class="w-row">
-                            <div class="w-col w-col-8">
-                                <div class="w-row">
-                                    <div class="w-col w-col-7 w-col-small-6 w-col-tiny-7">
-                                        <h3 class="footer-titles">Get in touch</h3><br>
-                                        <p class="footer-links"><a href="" target="_blank"><span class="footer-link"><i
-                                                        class="fa-solid fa-envelope"></i>
-                                                    cfxsupport@gmail.com<br></span></a><a href=""><span
-                                                    class="footer-link"><i class="fa-solid fa-phone"></i> +977
-                                                    01577257<br></span></a><a href=""><span class="footer-link"><i
-                                                        class="fa-brands fa-facebook"></i>
-                                                    Facebook</span></a><span><br></span><a href=""><span
-                                                    class="footer-link"><i class="fa-brands fa-x-twitter"></i>
-                                                    Twitter<br></span></a><a href=""><span class="footer-link"><i
-                                                        class="fa-brands fa-square-instagram"></i>
-                                                    Instagram<br></span></a><strong><br></strong></p>
-                                    </div>
-                                    <div class="w-col w-col-5 w-col-small-6 w-col-tiny-5">
-                                        <h3 class="footer-titles">Join a Newsletter</h3><br><br>
-                                        <p class="newsletter-footer">Your Email</p><br>
-                                        <form>
-                                            <input id="form-email" type="email" placeholder="example@gmail.com"><br><br>
-                                            <button class="btn-email" type="submit">Subscribe</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <?php include "../components/footer.php"?>
 
     <script type="text/javascript" src="product_details.js"></script>
     <script>
@@ -479,8 +386,55 @@
             if (!btn.contains(e.target)) classList.remove("active");
         });
 
+        //review
+
+        function showReviewPopup() {
+    document.getElementById('review-popup').style.display = 'block';
+}
+
+function closeReviewPopup() {
+    document.getElementById('review-popup').style.display = 'none';
+}
+
+function postReview() {
+    // You can add code here to handle posting the review
+    // For example, you can collect rating and comment values and send them to the server
+    // let rating = document.querySelector('input[name="rating"]:checked').value;
+    // let comment = document.getElementById('comment').value;
+
+    // Here you can send the review data to the server using AJAX or any other method
+    // console.log("Rating: " + rating);
+    // console.log("Comment: " + comment);
+
+    let rating = document.getElementById('chosenStars').value;
+    let comment = document.getElementById('comment').value;
 
 
+    // Close the popup after posting review
+    closeReviewPopup();
+}
+
+
+//star
+
+
+    function rate(stars) {
+
+        document.getElementById('chosenStars').value = stars;
+        
+        const starIcons = document.querySelectorAll('.rating-rows .star i');
+        starIcons.forEach((star, index) => {
+            if (index < stars) {
+                star.classList.remove('fa-star-o');
+                star.classList.add('fa-star');
+                star.style.color = 'orange';
+            } else {
+                star.classList.remove('fa-star');
+                star.classList.add('fa-star-o');
+                star.style.color = '';
+            }
+        });
+    }
     </script>
 </body>
 </html>
