@@ -153,11 +153,12 @@ $user = $_SESSION['user_id'];
                 
             </nav>
         </div> 
-
+        
+    </div>
        
 
         <!--MY REVIEW DEEPA FRONTEND-->
-        <h2>My REVIEWS</h2>
+        <h2 class="heading">MY REVIEWS</h2>
         <div class="container">
             <div class="menu">
                 <ul>
@@ -238,7 +239,6 @@ $user = $_SESSION['user_id'];
 
             </div>
         </div>
-    </div>
 
     
 

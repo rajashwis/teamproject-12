@@ -1,4 +1,4 @@
-<?php
+<span?php
 
 // session_start();
 include "../connect.php";
@@ -39,9 +39,9 @@ include "../connect.php";
 <body>
 
 <?php include "../component/header.php"; ?>
+<h2 class="heading"2>MY WISHLIST</h2>
+
 <div class ="container">
-
-
   <div class="menu">
         <ul>
             <li><a  href="">My Profile</a></li>
@@ -56,10 +56,10 @@ include "../connect.php";
     <div class="right">
 
       <div class="row">
-        <div class="item"><a href="">Product</a></div>
-        <div class="item"><a href="">Name</a></div>
-        <div class="item"><a href="">Price</a></div>
-        <div class="item"><a href=""></a></div>
+        <div class="item"><span>Product</span></div>
+        <div class="item"><span>Name</span></div>
+        <div class="item"><span>Price</apan></div>
+        <div class="item"><span> </span></div>
       </div>
 
 
@@ -198,44 +198,14 @@ include "../connect.php";
 
 
 
-    <div class="wishlist-item">
-
-      <div class="item product">
-
-        <?php
+    
 
 
-        // $imageData = $product['PRODUCT_IMAGE']->load();
-        // $encodedImageData = base64_encode($imageData);
-        // // Determine the image type based on the first few bytes of the image data
-        // $header = substr($imageData, 0, 4);
-        // $imageType = 'image/jpeg'; // default to JPEG
-        // if (strpos($header, 'FFD8') === 0) {
-        //   $imageType = 'image/jpeg'; // JPEG
-        // } elseif (strpos($header, '89504E47') === 0) {
-        //   $imageType = 'image/png'; // PNG
-        // }
+ 
 
-        // echo '<img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
-        ?>
-        <img src ="../resources/products/bakery1.jpg">
-      </div>
 
-      <div class="item product">
-        <p>
-          CAKE
-          <?php //echo $product['PRODUCT_NAME']; ?>
-        </p>
-      </div>
-      <div class="item price">
-        40
-        <?php //echo $product['PRICE']; ?>
-      </div>
-      <div class="func-btn">
-        <button class="btn-add-to-cart">Add to Cart</button>
-        <button class="btn-order-now">Order Now</button>
-      </div>
-    </div>
+
+
     
 
     <?php //}
