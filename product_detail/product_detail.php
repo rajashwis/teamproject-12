@@ -81,18 +81,18 @@
 
             else {
 
-                $query="SELECT * from CUSTOMER WHERE customer_id = $user";
+                $query="SELECT CART_ID from CUSTOMER WHERE customer_id = $user";
                 $stid=oci_parse($connection, $query);
                 oci_execute($stid);
                 $row = oci_fetch_assoc($stid);
                 $cart_id = $row['CART_ID'];
 
-                $query1 = "SELECT PRODUCT_ID FROM CARTPRODUCT WHERE CART_ID = $cart_id";
-                $stid1=oci_parse($connection, $query1);
+                $query1 = "SELECT PRODUCT_ID FROM CARTPRODUCT WHERE CART_ID = $cart_id AND PRODUCT_ID = $product_id";
+                $stid1 = oci_parse($connection, $query1);
                 oci_execute($stid1);
-                $row = oci_fetch_assoc($stid1);
+                $row1 = oci_fetch_assoc($stid1);
 
-                if($row) {
+                if($row1) {
                     echo "<script>alert('Product already in Cart!')</script>";
                 }
 
