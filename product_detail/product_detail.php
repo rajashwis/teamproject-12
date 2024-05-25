@@ -46,7 +46,7 @@
 
             echo "<script>alert('".$user.", ".$product_id."')</script>";
     
-            $query3 = "INSERT INTO REVIEW VALUES (SEQ_REVIEW_ID.NEXTVAL, $rating, '$review', SYSDATE, $user, $product_id)";
+            $query3 = "INSERT INTO REVIEW VALUES (SEQ_REVIEW_ID.NEXTVAL, $rating, $review, SYSDATE, $user, $product_id)";
             $statement3 = oci_parse($connection, $query3);
             oci_execute($statement3);
             

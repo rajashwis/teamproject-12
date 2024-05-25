@@ -1,235 +1,151 @@
 body {
     padding: 0;
     margin: 0;
-    font-family: "Sofia", sans-serif;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('box.jpg');
+    background-size: cover;
 }
 
-.wrapper {
+
+.discount {
     display: flex;
-    flex-direction: column;
     align-items: center;
 }
 
-.container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 50%;
-    height: 300px;
-    border: 1px solid black;
-    margin-top: 5%;
-    border-radius: 10px;
-    background-color: #ebebeb;
-    position: relative; /* Ensure children are positioned relative to this container */
+.discount-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 5%;
+    overflow: hidden;
+    transition: 2s;
 }
 
-.image {
-    flex: 1;
-}
-
-.image img {
+.discount-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    margin-left: 4%;
-    border-radius: 10px;
 }
 
-.container-btn {
-    flex: 1;
-    display: inline-block;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 26%;
-    margin-right: 5%;
+.discount span {
+    font-size: 16px;
+    margin-left: 10px;
 }
 
-.container-btn button {
-    margin-inline-start: 100px;
-    padding: 10px;
-    width: 80px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-}
 
-#btn-1 {
-    background-color: rgb(29, 188, 29);
-}
 
-#btn-2 {
-    background-color: rgb(255, 78, 78);
-}
-
-.container-btn button:hover {
-    opacity: 0.9;
-}
-
-.discount-details {
-    position: absolute;
-    left: 63%;
-    font-size: 20px;
-    padding: 10px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
-}
-
-.text-1 {
-    text-decoration: underline;
-}
-
-.popup-box {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.popup-content {
-    background-color: white;
-    margin: 15% auto;
+.discount-form {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    border: 1px solid #888;
-    width: 40%;
-    border-radius: 10px;
-    text-align: center;
+    width: 700px;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
-.upload-upload {
-    margin-top: 10px;
-    margin-left: 11%;
+.discount-form h2 {
+    margin-bottom: 20px;
+    color: #333;
 }
 
-.discount-discount {
-    margin-top: 10px;
+.discount-form .form-group {
+    width: 100%;
+    margin-bottom: 15px;
 }
 
-.start-date-end-date{
-    margin: 10px;
+.discount-form .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
 }
 
-.close-btn {
-    color: #aaa;
-    margin-left: 96%;
-    font-size: 28px;
-    font-weight: bold;
+.discount-form .form-group input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-.close-btn:hover,
-.close-btn:focus {
-    color: black;
-    text-decoration: none;
+.discount-form .form-group input[type="file"] {
+    display: none;
+}
+
+#imgUpload{
+    display: none;
+}
+
+.discount-form .discount-image {
+    margin-bottom: 15px;
+    position: relative;
+    width: 600px;
+    height: 300px;
+    overflow: hidden;
+    border: 2px solid #000000;
     cursor: pointer;
 }
 
-.save-btn {
-    background-color: #4CAF50;
-    color: white;
+.discount-form .discount-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.discount-form .discount-image label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.discount-form .discount-image:hover label {
+    opacity: 1;
+}
+
+.discount-form button {
     padding: 10px 20px;
+    background-color: #f99f1b;
+    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 20px; /* Added margin-top for spacing */
 }
 
-.save-btn:hover {
-    background-color: #45a049;
+.discount-form a{
+    text-decoration: none;
+    color: white;
 }
 
-/* Extra Large screens */
-@media (max-width: 1280px) {
-    .container {
-        width: 60%; /* Adjust width if needed */
-    }
-    .discount-details {
-        font-size: 18px;
-        left: 55%;
-    }
+.discount-form button:hover {
+    background-color: #d78b19;
 }
 
-/* Large screens */
-@media (max-width: 1024px) {
-    .container {
-        width: 70%; /* Adjust width if needed */
-    }
-    .discount-details {
-        font-size: 18px;
-        left: 50%;
-    }
-}
-
-/* Medium screens */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-        width: 90%;
-        height: auto;
-        text-align: center;
-        border: none;
+@media only screen and (max-width: 600px) {
+    .discount-form {
+        width: 90%; /* Adjust width for smaller screens */
     }
 
-    .image, .container-btn, .discount-details {
-        width: 80%;
-        margin: 0;
+    .discount-form .discount-image {
+        width: 100%; /* Make the image container full width */
+        height: auto; /* Allow height to adjust according to the image */
     }
 
-    .image img {
-        width: 100%;
-        height: auto;
-        margin: 0;
-        border-radius: 10px 10px 0 0;
-    }
-
-    .discount-details {
-        position: static;
-        text-align: center;
-        font-size: 20px;
-        margin-top: 10px;
-        border: 1px solid black; /* Ensure border stays within container */
-    }
-
-    .container-btn {
-        flex-direction: row;
-        justify-content: center;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-
-    .container-btn button {
-        margin: 10px;
-        width: auto;
-        padding: 10px 20px;
-    }
-}
-
-/* Small screens */
-@media (max-width: 640px) {
-    .discount-details {
-        font-size: 18px;
-    }
-
-    .container-btn button {
-        margin: 5px;
-        padding: 8px 16px;
-    }
-}
-
-/* Extra Small screens */
-@media (max-width: 475px) {
-    .discount-details {
-        font-size: 16px;
-    }
-
-    .container-btn button {
-        margin: 5px;
-        padding: 8px 16px;
+    .discount-form .form-group input[type="file"] {
+        display: inline-block; /* Display the file input inline */
+        width: auto; /* Allow width to adjust according to content */
     }
 }

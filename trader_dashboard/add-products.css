@@ -51,53 +51,6 @@ body {
 
   }
 
-  .profile-form .form-group input[type="file"] {
-    display: none;
-  }
-
-  #imgUpload{
-      display: none;
-  }
-
-  .profile-form .profile-image {
-    margin-bottom: 15px;
-    position: relative;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 2px solid #000000;
-    cursor: pointer;
-    text-align: center;
-  }
-
-  .profile-form .profile-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-  }
-
-  .profile-form .profile-image label {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      color: #fff;
-      text-align: center;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s;
-  }
-
-  .profile-form .profile-image:hover label {
-      opacity: 1;
-  }
-
   /* Media query for smaller screens */
 @media screen and (max-width: 600px) {
     .container {

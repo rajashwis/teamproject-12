@@ -17,12 +17,98 @@
 
         $shop = oci_fetch_assoc($statement);
         $shop_id = $shop['SHOP_ID'];
+        $shop_name = $shop['SHOP_NAME'];
+        $shop_address = $shop['ADDRESS'];
+
+
+        if($shop['SHOP_IMAGE']) {
+            $imageData = $shop['SHOP_IMAGE']->load();
+        }
+
+        else {
+            $dummyFilePath = '../resources/dummy images/dummy_product.png'; // Path to your dummy image file
+            $imageData = file_get_contents($dummyFilePath);
+        }
+
+        // Encode the BLOB data as base64
+        $encodedImageData = base64_encode($imageData);
+
+        // Determine the image type based on the first few bytes of the image data
+        $header = substr($imageData, 0, 4);
+        $imageType = 'image/jpeg'; // default to JPEG
+        if (strpos($header, 'FFD8') === 0) {
+            $imageType = 'image/jpeg'; // JPEG
+        } elseif (strpos($header, '89504E47') === 0) {
+            $imageType = 'image/png'; // PNG
+        }
+       
     }
 
     else {
         header('Location: ../component/home.php');    
         exit();
     }
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit_category'])) {
+        $edit_category_id = $_POST['editCategoryId'];
+        $edit_category_name = $_POST['editCategoryName'];
+    
+    
+        $query = "UPDATE PRODUCTCATEGORY SET CATEGORY_NAME = '$edit_category_name' WHERE CATEGORY_ID = $edit_category_id";
+        $statement = oci_parse($connection, $query);
+    
+        if (oci_execute($statement)) {
+            // Redirect to the same page to prevent form resubmission
+            header('Location: ' . $_SERVER['PHP_SELF']);
+            exit();
+        } else {
+            $e = oci_error($statement);
+            echo "Error updating category: " . $e['message'];
+        }
+    
+        oci_free_statement($statement);
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_category'])) {
+        $add_category_name = $_POST['addCategoryName'];
+    
+        $query = "INSERT INTO PRODUCTCATEGORY VALUES(SEQ_CATEGORY_ID.NEXTVAL, '$add_category_name', $trader_id)";
+        $statement = oci_parse($connection, $query);
+    
+        if (oci_execute($statement)) {
+            // Redirect to the same page to prevent form resubmission
+            header('Location: ' . $_SERVER['PHP_SELF']);
+            exit();
+        } else {
+            $e = oci_error($statement);
+            echo "<script>alert('Error inserting category: " . $e['message']."')";
+        }
+    
+        oci_free_statement($statement);
+    }
+
+    //SHOP INFORMATION EDIT
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit_shop'])) {
+        $edit_category_id = $_POST['editCategoryId'];
+        $edit_category_name = $_POST['editCategoryName'];
+    
+    
+        $query = "UPDATE PRODUCTCATEGORY SET CATEGORY_NAME = '$edit_category_name' WHERE CATEGORY_ID = $edit_category_id";
+        $statement = oci_parse($connection, $query);
+    
+        if (oci_execute($statement)) {
+            // Redirect to the same page to prevent form resubmission
+            header('Location: ' . $_SERVER['PHP_SELF']);
+            exit();
+        } else {
+            $e = oci_error($statement);
+            echo "Error updating category: " . $e['message'];
+        }
+    
+        oci_free_statement($statement);
+    }
+    ?>
 ?>
 
 <!DOCTYPE html>
@@ -604,18 +690,25 @@
                 <h1>Shop</h1>
                 <div class="shop-container">
                     <div class="shop-info">
-                        <div class="shop-image">
-                            <img id="shopImage" src="../resources/dummy images/dummy_product.png" alt="Shop Image">
-                        </div>
-                        <div class="shop-details">
-                            <h2 id="shopName">Shop Name</h2>
-                            <p id="shopAddress">Shop Address</p>
-                        </div>
+                        <?php 
+                            echo '<div class="shop-image">';
+                            echo '<img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
+                            echo '</div>';
+                            echo '<div class="shop-details">';
+                            echo '<h2 id="shopName">'.$shop_name.'</h2>';
+                            echo '<p id="shopAddress">'.$shop_address.'</p>';
+                            echo '</div>';
+                        ?>
                         <button type="button" id="editShopBtn" onclick="openEditPopup()">Edit</button>
                     </div>
                 </div>
 
                 <h1>Category</h1>
+
+                <?php
+                    echo '<button onclick="openAddCategoryPopup()">Add Category</button>';
+                ?>
+
                 <div class="category-table-container">
                     <table class="category-table">
                         <thead>
@@ -633,14 +726,13 @@
                                 oci_execute($statement4);
 
                                 while ($category = oci_fetch_assoc($statement4)) {
-
                                     echo '<tr>';
                                     echo '<td>'.$category['CATEGORY_ID'].'</td>';
                                     echo '<td>'.$category['CATEGORY_NAME'].'</td>';
                                     echo '<td>5</td>';
                                     echo '<td>';
-                                    echo '<button onclick="openEditCategoryPopup(this)">Edit</button>';
-                                    echo '<button onclick="deleteRow(this)">Delete</button>';
+                                    echo '<button onclick="openEditCategoryPopup(this, '.$category['CATEGORY_ID'].', \''.$category['CATEGORY_NAME'].'\')">Edit</button>';
+                                    echo '<button type="submit" name="delete_category">Delete</button>';
                                     echo '</td>';
                                     echo '</tr>';
 
@@ -671,25 +763,37 @@
                     </form>
                 </div>
             </div>
-            
-            <!-- Edit Category Popup Box -->
+
                 <div id="editCategoryPopup" class="popup">
                     <div class="popup-content category-popup-content">
                         <span class="close" onclick="closeEditCategoryPopup()">&times;</span>
-                        <form id="editCategoryForm">
+                        <form id="editCategoryForm" method="POST">
+                            <input type="hidden" id="editCategoryId" name="editCategoryId">
                             <label for="editCategoryName">Category Name:</label>
                             <input type="text" id="editCategoryName" name="editCategoryName">
-                            <button type="button" onclick="saveCategoryChanges()">Save</button>
+                            <button type="submit" name="edit_category" >Save</button>
                         </form>
                     </div>
                 </div>
-                <!--DO NOT EDIT ABOVE-->
-
                 
+                <!-- ADD CATEGORY POPUP -->
+                <div id="addCategoryPopup" class="popup">
+                    <div class="popup-content category-popup-content">
+                        <span class="close" onclick="closeAddCategoryPopup()">&times;</span>
+                        <form id="addCategoryForm" method="POST">
+                            <input type="hidden" id="addCategoryId" name="addCategoryId">
+                            <label for="addCategoryName">Category Name:</label>
+                            <input type="text" id="addCategoryName" name="addCategoryName">
+                            <button type="submit" name="add_category" >Save</button>
+                        </form>
+                    </div>
+                </div>
             
            
             <div id="discount" class="content">
                 <h1 class="text">Discount</h1>
+                <button class="add-product-btn"><a href="add-discount.php"><i class="fa-solid fa-plus"></i> Add Discount</a></button>
+
                 <div class="discount-table-container">
                     <table class="discount-table">
                         <thead>
@@ -711,6 +815,7 @@
                                 oci_execute($statement5);
 
                                 while($discount = oci_fetch_assoc($statement5)) {
+                                    $discount_id = $discount['DISCOUNT_ID'];
                                     echo '<tr>';
 
                                     $imageData = $discount['DISCOUNT_IMAGE']->load();
@@ -728,7 +833,7 @@
                                     echo '<td>'.$discount['DISCOUNT_PERCENTAGE'].'</td>';
                                     echo '<td>'.$discount['START_DATE'].'</td>';
                                     echo '<td>'.$discount['END_DATE'].'</td>';
-                                    echo '<td><button><a href="discount-edit.html">Edit</a></button></td>';
+                                    echo '<td><button><a href="edit-discount.php?discount_id='.$discount_id.'">Edit</a></button></td>';
                                     echo '<td><button><a href="discount-edit.html">Delete</button></a></td>';
                                     echo '</tr>';
                                 }
@@ -793,8 +898,9 @@
         showContent('dashboard'); // Default to dashboard if no tab is saved
     }
 });
+    
+function openEditPopup(button, shopId, shopName, shopAddress) {
 
-function openEditPopup() {
     document.getElementById("editPopup").style.display = "block";
 }
 
@@ -867,7 +973,10 @@ function saveChanges() {
 // Edit category functions
 let currentCategoryRow = null;
 
-function openEditCategoryPopup(button) {
+function openEditCategoryPopup(button, categoryId, categoryName) {
+    document.getElementById("editCategoryId").value = categoryId;
+    document.getElementById("editCategoryName").value = categoryName;
+
     // Get the row being edited and store it in the variable
     currentCategoryRow = button.parentNode.parentNode;
     // Get the category name from the row
@@ -876,6 +985,15 @@ function openEditCategoryPopup(button) {
     document.getElementById("editCategoryName").value = categoryName;
     // Display the popup
     document.getElementById("editCategoryPopup").style.display = "block";
+}
+
+function openAddCategoryPopup(button) {
+    document.getElementById("addCategoryPopup").style.display = "block";
+}
+
+function closeAddCategoryPopup() {
+    // Hide the popup
+    document.getElementById("addCategoryPopup").style.display = "none";
 }
 
 function closeEditCategoryPopup() {

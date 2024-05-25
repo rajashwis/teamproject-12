@@ -45,6 +45,70 @@
     $paypalURL = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
     $paypalID = 'sb-nv9tx30555823@business.example.com'; //Business Email
 
+    function getValidDays() {
+        $validDays = [];
+        $now = new DateTime();
+        $now->setTime(0, 0, 0);
+    
+        // Loop to find the next valid Wed, Thu, Fri
+        for ($i = 1; $i <= 14; $i++) {
+            $day = clone $now;
+            $day->modify("+$i days");
+            $dayName = $day->format('D');
+    
+            if (in_array($dayName, ['Wed', 'Thu', 'Fri'])) {
+                $validDays[] = $day;
+            }
+        }
+    
+        return $validDays;
+    }
+    
+    function generateDayOptions() {
+        $validDays = getValidDays();
+        $options = '';
+    
+        foreach ($validDays as $day) {
+            $formattedDay = $day->format('Y-m-d');
+            $dayName = $day->format('l, F j, Y');
+            $options .= "<option value=\"$formattedDay\">$dayName</option>";
+        }
+    
+        return $options;
+    }
+    
+    function generateTimeOptions($selectedDay = null) {
+        $timeSlots = ['10-13', '13-16', '16-19'];
+        $options = '';
+    
+        if ($selectedDay) {
+            $now = new DateTime();
+            $currentHour = (int)$now->format('H');
+            $currentDay = $now->format('Y-m-d');
+    
+            // If the selected day is the same as today, filter time slots
+            if ($selectedDay == $currentDay) {
+                foreach ($timeSlots as $slot) {
+                    $slotStartHour = (int)explode('-', $slot)[0];
+                    if ($slotStartHour > $currentHour + 24) {
+                        $options .= "<option value=\"$slot\">$slot</option>";
+                    }
+                }
+            } else {
+                foreach ($timeSlots as $slot) {
+                    $options .= "<option value=\"$slot\">$slot</option>";
+                }
+            }
+        } else {
+            foreach ($timeSlots as $slot) {
+                $options .= "<option value=\"$slot\">$slot</option>";
+            }
+        }
+    
+        return $options;
+    }
+    
+
 
 ?>
 <!DOCTYPE html>
@@ -179,17 +243,16 @@
         <div id="popup" class="popup">
             <form method="POST">
             <h2>Delivery Hours</h2><br/>
-                <label for="pickup-time">Collection Slot:<br/></label>
+                <label for="pickup-time">Select Day:<br/></label>
                 <select id="pickup-time" name="pickup-time">
-                    <option value=1 <?php if($collection_slot==1) {echo "selected";} ?>>Wednesday (10:00 - 13:00)</option>
-                    <option value=2 <?php if($collection_slot==2) {echo "selected";} ?>>Wednesday (13:00 - 16:00)</option>
-                    <option value=3 <?php if($collection_slot==3) {echo "selected";} ?>>Wednesday (16:00 - 19:00)</option>
-                    <option value=4 <?php if($collection_slot==4) {echo "selected";} ?>>Thursday (10:00 - 13:00)</option>
-                    <option value=5 <?php if($collection_slot==5) {echo "selected";} ?>>Thursday (13:00 - 16:00)</option>
-                    <option value=6 <?php if($collection_slot==6) {echo "selected";} ?>>Thursday(16:00 - 19:00)</option>
-                    <option value=7 <?php if($collection_slot==7) {echo "selected";} ?>>Friday (10:00 - 13:00)</option>
-                    <option value=8 <?php if($collection_slot==8) {echo "selected";} ?>>Friday (13:00 - 16:00)</option>
-                    <option value=9 <?php if($collection_slot==9) {echo "selected";} ?>>Friday (16:00 - 19:00)</option>
+                    <option value="">Select Day >></option>
+                    <?php echo generateDayOptions(); ?>
+                </select>
+
+                <label for="pickup-time">Select Time:<br/></label>
+                <select id="pickup-time" name="pickup-time">
+                    <option value="">Select Time >></option>
+                    <?php echo generateTimeOptions(); ?>
                 </select>
                 
                 <br><br>
