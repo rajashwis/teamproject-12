@@ -101,7 +101,6 @@
                         <p><?php echo $review['COMMENT_'];?></p>
                         <div class="additional-info-ctrl">
 
-                            <button class="edit">Edit</button>
                             <button class="delete">Delete</button>
                         </div>
                     </div>

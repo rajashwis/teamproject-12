@@ -20,6 +20,13 @@ $query = "SELECT * FROM WISHLISTPRODUCT WHERE WISHLIST_ID = $wishlist_id";
 $stid = oci_parse($connection, $query);
 oci_execute($stid);
 
+if (isset($_POST['add_to_cart'])) {
+
+  $product_id = $_POST['product_id'];
+  header('Location: ../cart/add_to_cart.php?product_id='.$product_id);
+  exit();     
+
+}
 
 ?>
 
@@ -109,8 +116,8 @@ oci_execute($stid);
         <?php echo $product['PRICE']; ?>
       </div>
       <div class="func-btn">
-        <button class="btn-add-to-cart">Add to Cart</button>
-        <button class="btn-order-now">Order Now</button>
+        <button type="submit" name="add_to_cart" class="btn-add-to-cart">Add to Cart</button>
+        <a href="delete-wishlist.php?delete=<?php echo $product['PRODUCT_ID']?>" onclick="return confirm('Are you sure you want to remove this from your wishlist?');"> <button type="submit" name="remove" class="btn-order-now">Remove</button></a>
       </div>
     </div>
 
@@ -125,31 +132,6 @@ oci_execute($stid);
   include '../component/footer.php';
   ?>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const minusBtns = document.querySelectorAll('.btn-minus');
-      const plusBtns = document.querySelectorAll('.btn-plus');
-      const quantityInputs = document.querySelectorAll('.quantity');
-
-      // Decrease quantity when minus button is clicked
-      minusBtns.forEach((btn, index) => {
-        btn.addEventListener('click', function () {
-          let currentValue = parseInt(quantityInputs[index].value);
-          if (currentValue > 1) {
-            quantityInputs[index].value = currentValue - 1;
-          }
-        });
-      });
-
-      // Increase quantity when plus button is clicked
-      plusBtns.forEach((btn, index) => {
-        btn.addEventListener('click', function () {
-          let currentValue = parseInt(quantityInputs[index].value);
-          quantityInputs[index].value = currentValue + 1;
-        });
-      });
-    });
-  </script>
 </body>
 
 </html>

@@ -143,7 +143,7 @@ oci_close($connection);
 </head>
 
 <body>
-    <!-- <?php //include "../components/header.php" ?> -->
+    <?php include "../components/header.php" ?>
     <main class="container">
         <div class="menu">
             <ul>
@@ -218,6 +218,7 @@ oci_close($connection);
             </form>
         </div>
     </main>
+    <br/><br/>
     <?php include "../components/footer.php" ?>
 
     <script>

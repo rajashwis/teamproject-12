@@ -198,15 +198,13 @@
                         $product_id = $discount_product['PRODUCT_ID'];
                         $discount_id = $discount_product['DISCOUNT_ID'];
 
-                        
-
                         if($discount_id) {
                             echo '<div class="card-price">'.$discount_product['DISCOUNTED_PRICE']. '<span>'.$product['PRICE'].'</span></div>';
                             $price = $discount_product['DISCOUNTED_PRICE'];
                             $totalPrice += ($quantity * $price);
                         }
                         else {
-                            echo '<div class="card-price">'.$discount_product['DISCOUNTED_PRICE'].'</div>';
+                            echo '<div class="card-price">'.$product['PRICE'].'</div>';
                             $price = $product['PRICE'];
                             $totalPrice += ($quantity * $price);
                         }
@@ -277,9 +275,10 @@
 
         <!-- Display the payment button. -->
         <input type="image" name="submit" border="0"
-        src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" alt="PayPal - The safer, easier way to pay online">
+        src="paypalbuy.png" width="300px" alt="PayPal - The safer, easier way to pay online">
         <img alt="" border="0" width="1" height="1" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" >
         </form>
+        <br/>
         
         <?php 
             if(isset($_POST['okBtn'])) {
@@ -292,91 +291,13 @@
 
 
         
-        <section class="payment-method">
-            <h2>Payment Method</h2><br/>
-            <div id="smart-button-container">
-                <div style="text-align: center;">
-                    <div id="paypal-button-container"></div>
-                </div>
-            </div>
-            <script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
-            <script>
-                function initPayPalButton() {
-                    paypal.Buttons({
-                        style: {
-                            shape: 'rect',
-                            color: 'gold',
-                            layout: 'vertical',
-                            label: 'paypal',
-                        },
-                        createOrder: function(data, actions) {
-                            return actions.order.create({
-                                purchase_units: [{"amount":{"currency_code": "USD", "value": 0.99}}]
-                            });
-                        },
-                        onApprove: function(data, actions) {
-                            return actions.order.capture().then(function(orderData) {
-                                console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-                                const element = document.getElementById('paypal-button-container');
-                                element.innerHTML = '';
-                                element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                            });
-                        },
-                        onError: function(err) {
-                            console.log(err);
-                        }
-                    }).render('#paypal-button-container');
-                }
-                initPayPalButton();
-            </script>
-        </section>
+      
     </main>
 
     <?php    include "../HN/footer.php"; ?>
 
 
-<script>
-        // Get the elements
-        const deliveryBtn = document.getElementById('deliveryBtn');
-        const overlay = document.getElementById('overlay');
-        const popup = document.getElementById('popup');
-        const closeBtn = document.getElementById('closeBtn');
 
-        // Function to show the popup
-        function showPopup() {
-            overlay.style.display = 'block';
-            popup.style.display = 'block';
-        }
-
-        // Function to hide the popup
-        function hidePopup() {
-            overlay.style.display = 'none';
-            popup.style.display = 'none';
-        }
-
-        // Event listeners
-        deliveryBtn.addEventListener('click', showPopup);
-        closeBtn.addEventListener('click', hidePopup);
-        overlay.addEventListener('click', hidePopup);
-
-
-        // JavaScript to handle increment and decrement functionality
-        function increment() {
-            var quantityElement = document.getElementById('quantity');
-            var quantity = parseInt(quantityElement.textContent);
-            quantity++;
-            quantityElement.textContent = quantity;
-        }
-
-        function decrement() {
-            var quantityElement = document.getElementById('quantity');
-            var quantity = parseInt(quantityElement.textContent);
-            if (quantity > 1) {
-                quantity--;
-                quantityElement.textContent = quantity;
-            }
-        }
-</script>
 
 <?php
         include "../components/footer.php";

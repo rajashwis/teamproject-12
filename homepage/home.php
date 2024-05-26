@@ -16,15 +16,9 @@
 
     if (isset($_POST['add_to_cart'])) {
 
-        if(!$user) {
-            header('LOCATION: ../signin/signin.html');
-        }
-
-        else {
-
-            header('Location: ../cart/add_to_cart.php?product_id = '.$product_id);
-            
-        }
+        $product_id = $_POST['product_id'];
+        header('Location: ../cart/add_to_cart.php?product_id='.$product_id);
+        exit();     
 
     }
 
@@ -97,9 +91,10 @@
                     echo '<h1><font color="black">'.$product['PRODUCT_NAME'].'</font></h1></a>';
                     echo '<p class="price"><s>'.$product['PRICE'].'</s><br>'.$product['DISCOUNTED_PRICE'].'<i class="fa-solid fa-tag"></i></p>';
                     echo '<p><a href="#"><font color="black">'.$category.'</font></a></p>';
-                    echo '<form method="POST" action="homepage.php">';
-                    echo '<p><button type="submit" name="homepage.php?product_id='.$product_id.'">Buy</button></p><br>';
-                    echo '</form>'
+                    echo '<form method="POST">';
+                    echo '<input type="hidden" name="product_id" value="'.$product_id.'"';
+                    echo '<p><button type="submit" name="add_to_cart">Add to Cart</button></p><br>';
+                    echo '</form>';
                 
                 ?>
             
@@ -185,7 +180,10 @@
                     echo '<h1><font color="black">'.$product['PRODUCT_NAME'].'</font></h1></a>';
                     echo '<p class="price"><s>'.$product['PRICE'].'</s><br>'.$product['DISCOUNTED_PRICE'].'<i class="fa-solid fa-tag"></i></p>';
                     echo '<p><a href="#"><font color="black">'.$category.'</font></a></p>';
-                    echo '<p><button>Buy</button></p><br>';
+                    echo '<form method="POST">';
+                    echo '<input type="hidden" name="product_id" value="'.$product_id.'"';
+                    echo '<p><button type="submit" name="add_to_cart">Add to Cart</button></p><br>';
+                    echo '</form>'; 
                     echo '</div>';
 
 
@@ -306,7 +304,10 @@
                     echo '<a href = "../category/categories.php?category='.$category.'">';
                     echo '<p><font color="black">'.$category.'</font></p>';
                     echo '</a>';
-                    echo '<p><button>Buy</button></p><br>';
+                    echo '<form method="POST">';
+                    echo '<input type="hidden" name="product_id" value="'.$product_id.'"';
+                    echo '<p><button type="submit" name="add_to_cart">Add to Cart</button></p><br>';
+                    echo '</form>';
                     echo '</div>';
                 }
 

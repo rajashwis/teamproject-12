@@ -622,7 +622,7 @@
                                 P.product_name,
                                 OP.item_quantity,
                                 CS.day_of_week,
-                                CS.time_slot,
+                                CS.time_,
                                 O.collection_date, 
                                 O.status
                             FROM 
