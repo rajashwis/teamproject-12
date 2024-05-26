@@ -6,10 +6,26 @@
     include "../connect.php";
 
     $user = $_SESSION['user_id']; 
+    $username = $_SESSION['username']; 
+    $cart_id = $_SESSION['cart_id'];
 
     if (isset($_GET['searchTerm'])) {
         $searchTerm = $_GET['searchTerm'];
         header('Location: ../product/search_sort_product.php?searchTerm='.$searchTerm.'');
+    }
+
+    if (isset($_POST['add_to_cart'])) {
+
+        if(!$user) {
+            header('LOCATION: ../signin/signin.html');
+        }
+
+        else {
+
+            header('Location: ../cart/add_to_cart.php?product_id = '.$product_id);
+            
+        }
+
     }
 
 ?>
@@ -73,13 +89,17 @@
                     $category = oci_fetch_assoc($stid1);
                     $category = $category['CATEGORY_NAME'];
 
+                    $quantity = 1;
+
                     echo '<div class="image-container">';
                     echo '<a href = "../product_detail/product_detail.php?product_id='.$product_id.'"> <img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
                     echo '</div>';
                     echo '<h1><font color="black">'.$product['PRODUCT_NAME'].'</font></h1></a>';
                     echo '<p class="price"><s>'.$product['PRICE'].'</s><br>'.$product['DISCOUNTED_PRICE'].'<i class="fa-solid fa-tag"></i></p>';
                     echo '<p><a href="#"><font color="black">'.$category.'</font></a></p>';
-                    echo '<p><button>Buy</button></p><br>';
+                    echo '<form method="POST" action="homepage.php">';
+                    echo '<p><button type="submit" name="homepage.php?product_id='.$product_id.'">Buy</button></p><br>';
+                    echo '</form>'
                 
                 ?>
             
@@ -305,9 +325,7 @@
                         <?php include '../components/footer.php'?> 
             </div>
 
-
-
-</script>
+            <script type="text/javascript" src="home.js"></script>
 </body>
 </html>
 

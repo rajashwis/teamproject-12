@@ -19,29 +19,6 @@
         $shop_id = $shop['SHOP_ID'];
         $shop_name = $shop['SHOP_NAME'];
         $shop_address = $shop['ADDRESS'];
-
-
-        if($shop['SHOP_IMAGE']) {
-            $imageData = $shop['SHOP_IMAGE']->load();
-        }
-
-        else {
-            $dummyFilePath = '../resources/dummy images/dummy_product.png'; // Path to your dummy image file
-            $imageData = file_get_contents($dummyFilePath);
-        }
-
-        // Encode the BLOB data as base64
-        $encodedImageData = base64_encode($imageData);
-
-        // Determine the image type based on the first few bytes of the image data
-        $header = substr($imageData, 0, 4);
-        $imageType = 'image/jpeg'; // default to JPEG
-        if (strpos($header, 'FFD8') === 0) {
-            $imageType = 'image/jpeg'; // JPEG
-        } elseif (strpos($header, '89504E47') === 0) {
-            $imageType = 'image/png'; // PNG
-        }
-       
     }
 
     else {
@@ -87,27 +64,6 @@
         oci_free_statement($statement);
     }
 
-    //SHOP INFORMATION EDIT
-
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit_shop'])) {
-        $edit_category_id = $_POST['editCategoryId'];
-        $edit_category_name = $_POST['editCategoryName'];
-    
-    
-        $query = "UPDATE PRODUCTCATEGORY SET CATEGORY_NAME = '$edit_category_name' WHERE CATEGORY_ID = $edit_category_id";
-        $statement = oci_parse($connection, $query);
-    
-        if (oci_execute($statement)) {
-            // Redirect to the same page to prevent form resubmission
-            header('Location: ' . $_SERVER['PHP_SELF']);
-            exit();
-        } else {
-            $e = oci_error($statement);
-            echo "Error updating category: " . $e['message'];
-        }
-    
-        oci_free_statement($statement);
-    }
     ?>
 ?>
 
@@ -501,6 +457,8 @@
                                 SELECT P.PRODUCT_ID, P.PRODUCT_NAME, COUNT(OP.PRODUCT_ID) AS ORDER_PRODUCT_COUNT
                                 FROM ORDERPRODUCT OP
                                 JOIN PRODUCT P ON P.PRODUCT_ID = OP.PRODUCT_ID
+                                JOIN SHOP S ON P.SHOP_ID = S.SHOP_ID
+                                WHERE S.TRADER_ID = $trader_id
                                 GROUP BY P.PRODUCT_ID, P.PRODUCT_NAME
                                 ORDER BY ORDER_PRODUCT_COUNT DESC
                             )
@@ -530,7 +488,7 @@
                                 } elseif (strpos($header, '89504E47') === 0) {
                                     $imageType = 'image/png'; // PNG
                                 }
-                                echo '<img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
+                                echo '<a href="edit-product.php?product_id='.$order_product_id.'"><img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image"></a>';
 
                                 // echo '<img src="../resources/products/bakery1.jpg" alt="Item 1">';
                                 echo '<span>'.$order_product['PRODUCT_NAME'].'</span>';
@@ -601,7 +559,7 @@
                             $statement2 = oci_parse($connection, $query2);
                             oci_execute($statement2);
                             $category = oci_fetch_assoc($statement2);
-                            $category = $category['CATEGORY_NAME'];
+                            $category_name = $category['CATEGORY_NAME'];
 
                             echo '<div class="product-card">';
                             $imageData = $product['PRODUCT_IMAGE']->load();
@@ -621,7 +579,7 @@
 
                             echo '<span>'.$product['PRODUCT_NAME'].'</span>';
                             echo '<span>Price: '.$product['PRICE'].'</span>';
-                            echo '<span>'.$category.'</span>';
+                            echo '<a href="?category='.$category['CATEGORY_ID'].'"><span>'.$category_name.'</span></a>';
                             echo '<span>Stock Available: '.$product['STOCK_AVAILABLE'].'</span>';
                             echo '</div>';
 
@@ -639,48 +597,57 @@
                             <tr>
                                 <th>Order ID</th>
                                 <th>Customer Name</th>
-                                <th>Date</th>
-                                <th>Price</th>
-                                <th>Delivery Status</th>
-                                <th>Order Details</th>
+                                <th>Product Name</th>
+                                <th>Item Quantity</th>
+                                <th>Collection Date</th>
+                                <th>Collection Time</th>
+                                <th>Status</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Customer Name</td>
-                                <td>2024-05-22</td>
-                                <td>$50</td>
-                                <td>Delivered</td>
-                                <td><button>View Order</button></td>
-                            </tr>
-                            
-                            <tr>
-                                <td>2</td>
-                                <td>Customer Name</td>
-                                <td>2024-05-22</td>
-                                <td>$50</td>
-                                <td>Delivered</td>
-                                <td><button>View Order</button></td>
-                            </tr>
 
-                            <tr>
-                                <td>3</td>
-                                <td>Customer Name</td>
-                                <td>2024-05-22</td>
-                                <td>$50</td>
-                                <td>Delivered</td>
-                                <td><button>View Order</button></td>
-                            </tr>
+                        <?php
 
-                            <tr>
-                                <td>4</td>
-                                <td>Customer Name</td>
-                                <td>2024-05-22</td>
-                                <td>$50</td>
-                                <td>Delivered</td>
-                                <td><button>View Order</button></td>
-                            </tr>
+                            $query = "SELECT
+                                O.order_id,
+                                u.first_name || ' ' || u.last_name AS customer_name,
+                                P.product_name,
+                                OP.item_quantity,
+                                CS.day_of_week,
+                                CS.time_,
+                                O.collection_date, 
+                                O.status
+                            FROM 
+                                Trader T
+                                JOIN Shop S ON T.trader_id = S.trader_id
+                                JOIN Product P ON S.shop_id = P.shop_id
+                                JOIN OrderProduct OP ON P.product_id = OP.product_id
+                                JOIN OrderDetail O ON OP.order_id = O.order_id
+                                JOIN Customer C ON O.customer_id = C.customer_id
+                                JOIN User_ U ON C.customer_id = U.user_id
+                                JOIN CollectionSlot CS ON O.collection_slot_id = CS.collection_slot_id
+                            WHERE 
+                                T.trader_id = $trader_id
+                            ORDER BY 
+                                O.order_id";
+
+                            $statement = oci_parse($connection, $query);
+                            oci_execute($statement);
+
+                            while($orderdetail = oci_fetch_assoc($statement)) {
+                                echo '<tr>';
+                                echo '<td>'.$orderdetail['ORDER_ID'].'</td>';
+                                echo '<td>'.$orderdetail['CUSTOMER_NAME'].'</td>';
+                                echo '<td>'.$orderdetail['PRODUCT_NAME'].'</td>';
+                                echo '<td>'.$orderdetail['ITEM_QUANTITY'].'</td>';
+                                echo '<td>'.$orderdetail['COLLECTION_DATE'].'</td>';
+                                echo '<td>'.$orderdetail['TIME_'].'</td>';
+                                echo '<td>'.$orderdetail['STATUS'].'</td>';
+                                echo '<td><a href="order-details.php?order_id='.$orderdetail['ORDER_ID'].'"><button>View Order</button></a></td>';
+                                echo '</tr>';
+                            }
+                        ?>
                         </tbody>
                     </table>
                 </div>
@@ -691,6 +658,20 @@
                 <div class="shop-container">
                     <div class="shop-info">
                         <?php 
+                            $imageData = $shop['SHOP_IMAGE']->load();
+
+                            // Encode the BLOB data as base64
+                            $encodedImageData = base64_encode($imageData);
+                    
+                            // Determine the image type based on the first few bytes of the image data
+                            $header = substr($imageData, 0, 4);
+                            $imageType = 'image/jpeg'; // default to JPEG
+                            if (strpos($header, 'FFD8') === 0) {
+                                $imageType = 'image/jpeg'; // JPEG
+                            } elseif (strpos($header, '89504E47') === 0) {
+                                $imageType = 'image/png'; // PNG
+                            }
+       
                             echo '<div class="shop-image">';
                             echo '<img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
                             echo '</div>';
@@ -699,7 +680,8 @@
                             echo '<p id="shopAddress">'.$shop_address.'</p>';
                             echo '</div>';
                         ?>
-                        <button type="button" id="editShopBtn" onclick="openEditPopup()">Edit</button>
+        
+                        <button type="button" id="editShopBtn"><a href="edit-shop.php?shop_id=<?php echo $shop_id;?>">Edit</a></button>
                     </div>
                 </div>
 
@@ -732,7 +714,10 @@
                                     echo '<td>5</td>';
                                     echo '<td>';
                                     echo '<button onclick="openEditCategoryPopup(this, '.$category['CATEGORY_ID'].', \''.$category['CATEGORY_NAME'].'\')">Edit</button>';
-                                    echo '<button type="submit" name="delete_category">Delete</button>';
+                                    ?>
+                                    <a href="delete-category.php?delete=<?php echo $category['CATEGORY_ID']?>" onclick="return confirm('Are you sure you want to delete this category?');"><button type="submit" class="btn-1">Delete</a></button>
+                                    <?php
+                                    // echo '<button type="submit" name="delete_category">Delete</button>';
                                     echo '</td>';
                                     echo '</tr>';
 
@@ -834,7 +819,9 @@
                                     echo '<td>'.$discount['START_DATE'].'</td>';
                                     echo '<td>'.$discount['END_DATE'].'</td>';
                                     echo '<td><button><a href="edit-discount.php?discount_id='.$discount_id.'">Edit</a></button></td>';
-                                    echo '<td><button><a href="discount-edit.html">Delete</button></a></td>';
+                                    ?>
+                                    <td><a href="delete-discount.php?delete=<?php echo $discount['DISCOUNT_ID']?>" onclick="return confirm('Are you sure you want to delete this discount?');" class="btn-1"><button type="submit">Delete</a></button></td>
+                                    <?php ;
                                     echo '</tr>';
                                 }
                                 

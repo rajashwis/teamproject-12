@@ -17,21 +17,19 @@
       exit();
     }
 
-    if(isset($_GET['discount_id'])) {
+    if(isset($_GET['shop_id'])) {
 
-        $discount_id = $_GET['discount_id'];
-        $query = "SELECT * FROM DISCOUNT WHERE DISCOUNT_ID = $discount_id";
+        $shop_id = $_GET['shop_id'];
+        $query = "SELECT * FROM SHOP WHERE SHOP_ID = $shop_id";
         $statement = oci_parse($connection, $query);
         oci_execute($statement);
 
-        $discount = oci_fetch_assoc($statement);
+        $shop = oci_fetch_assoc($statement);
 
-        $discount_percent = $discount['DISCOUNT_PERCENTAGE'];
-        $description = $discount['DESCRIPTION_'];
-        $start_date = $discount['START_DATE'];
-        $end_date = $discount['END_DATE'];
+        $shop_name = $shop['SHOP_NAME'];
+        $shop_address = $shop['ADDRESS'];
         
-        $imageData = $discount['DISCOUNT_IMAGE']->load();
+        $imageData = $shop['SHOP_IMAGE']->load();
 
         // Encode the BLOB data as base64
         $encodedImageData = base64_encode($imageData);
@@ -47,10 +45,8 @@
 
         if(isset($_POST['submit'])) {
 
-            $discount = $_POST['discount'];
-            $start_date = $_POST['start-date'];
-            $end_date = $_POST['end-date'];
-            $description = $_POST['description'];
+            $shop_name = $_POST['shop-name'];
+            $shop_address = $_POST['shop-address'];
     
              // Check if a file was uploaded
             if(isset($_FILES['imgUpload']) && $_FILES['imgUpload']['error'] == UPLOAD_ERR_OK) {
@@ -64,15 +60,13 @@
             }
 
     
-            $query = "UPDATE DISCOUNT 
+            $query = "UPDATE SHOP 
                     SET 
-                        DISCOUNT_PERCENTAGE = $discount, 
-                        START_DATE = TO_DATE('$start_date', 'YYYY-MM-DD'), 
-                        END_DATE = TO_DATE('$end_date', 'YYYY-MM-DD'), 
-                        DESCRIPTION_ = '$description',
-                        DISCOUNT_IMAGE = EMPTY_BLOB()
-                    WHERE DISCOUNT_ID = $discount_id
-                    RETURNING DISCOUNT_IMAGE INTO :image";
+                        SHOP_NAME = '$shop_name', 
+                        ADDRESS = '$shop_address',
+                        SHOP_IMAGE = EMPTY_BLOB()
+                    WHERE SHOP_ID = $shop_id
+                    RETURNING SHOP_IMAGE INTO :image";
             $statement = oci_parse($connection, $query);
             $blob = oci_new_descriptor($connection, OCI_D_LOB);
             oci_bind_by_name($statement, ':image', $blob, -1, OCI_B_BLOB);
@@ -81,8 +75,8 @@
             if($result && $blob->save($file)) {
                 oci_commit($connection);
                 oci_free_descriptor($blob);
-                echo "<script>alert('Discount Uploaded!')</script>";
-                header('Location: trader-dashboard.php#discount');
+                echo "<script>alert('Shop edited!')</script>";
+                header('Location: ' . $_SERVER['PHP_SELF']);
                 exit();
             }
         }
@@ -106,39 +100,24 @@
 
 
     <form class="discount-form" method="POST" enctype="multipart/form-data">
-        <h2><i class="fa-solid fa-tag"></i> Discount Details</h2>
+        <h2><i class="fa-solid fa-tag"></i> Shop Details</h2>
         
         <div class="discount-image">
             <?php echo '<img id=profileImg src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Banner Image">';?>
             <!-- <img id="profileImg" src="https://placehold.co/600x400" alt="Banner Image"> -->
             <input type="file" id="imgUpload" name="imgUpload" accept="image/*">
-            <label for="imgUpload">Upload Banner</label>
+            <label for="imgUpload">Upload Image</label>
+        </div>
+    
+
+        <div class="form-group">
+            <label for="shop-name">Shop Name</label>
+            <input type="text" id="shop-name" name="shop-name" value="<?php echo $shop_name; ?>" required>
         </div>
         
         <div class="form-group">
-            <label for="discount">Discount %</label>
-            <input type="number" id="discount" name="discount" value="<?php echo $discount_percent; ?>" required>
-        </div>
-
-        <div class="form-group">
-            <label for="description">Description</label>
-            <input type="text" id="discount" name="description" value="<?php echo $description; ?>" required>
-        </div>
-        
-        <?php
-        
-            $start_date_formatted = date('Y-m-d', strtotime($start_date));
-            $end_date_formatted = date('Y-m-d', strtotime($end_date));
-
-        ?>
-        <div class="form-group">
-            <label for="lastName">Start Date</label>
-            <input type="date" id="start-date" name="start-date" value="<?php echo $start_date_formatted; ?>" required>
-        </div>
-
-        <div class="form-group">
-            <label for="username">End Date</label>
-            <input type="date" id="end-date" name="end-date" value="<?php echo $end_date_formatted; ?>" required>
+            <label for="shop-address">Shop Address</label>
+            <input type="shop-address" id="shop-address" name="shop-address" value="<?php echo $shop_address; ?>" required>
         </div>
 
         <button type="submit" name="submit">Submit</button>

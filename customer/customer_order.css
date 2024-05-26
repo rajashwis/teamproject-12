@@ -1,0 +1,110 @@
+body{
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-family: Arial, sans-serif;
+}
+
+.menu {
+    width: 17%;
+    position: absolute;
+    left: 1%;
+    top:  23.5%;
+}
+
+.menu ul {
+    list-style-type: none;
+    border: 1px solid black;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+    width: 100%;
+    text-align: center;
+    border-radius: 3px;
+}
+
+.menu ul li {
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9f9f9;
+}
+
+.menu ul li:hover {
+    background-color: #f99f1b;
+    color: black;
+    transition: 0.3s;
+}
+
+.menu ul li a {
+    font-size: larger;
+    text-decoration: none;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 7px 20px;
+    /* font-weight: 600; */
+}
+
+.menu ul li a.active {
+    font-weight: bold;
+    color: #f99f1b;
+}
+
+.menu ul li a:hover {
+    color: white;
+}
+
+
+
+.position{
+    margin-top: 10%;
+}
+
+/* Orders */
+
+.order-table-container {
+    overflow-x: auto;
+    
+}
+
+.order-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.order-table th,
+.order-table td {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    width: 150px;
+}
+
+.order-table th {
+    background-color: #b0b0b0;
+}
+
+.order-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.order-table tbody tr:hover {
+    background-color: #ddd;
+}
+
+.order-table button{
+    border: 1px solid black;
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.order-table button:hover{
+    background-color: #bebebe;
+}

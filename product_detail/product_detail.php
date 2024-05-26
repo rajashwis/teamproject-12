@@ -44,11 +44,16 @@
             $rating = $_POST['rating'];
             $review = $_POST['review'];
 
-            echo "<script>alert('".$user.", ".$product_id."')</script>";
+            echo "<script>alert('".$rating.", ".$review."')</script>";
     
-            $query3 = "INSERT INTO REVIEW VALUES (SEQ_REVIEW_ID.NEXTVAL, $rating, $review, SYSDATE, $user, $product_id)";
+            $query3 = "INSERT INTO REVIEW VALUES (SEQ_REVIEW_ID.NEXTVAL, $rating, '$review', SYSDATE, $user, $product_id)";
             $statement3 = oci_parse($connection, $query3);
-            oci_execute($statement3);
+            $result = oci_execute($statement3);
+
+            if($result) {
+                header('Location: ?product_id=2');
+                exit();
+            }
             
         }
 
@@ -252,12 +257,25 @@
 
 
             <div class="rating">
-                <p>Rating 5.0 </p>
+                <?php
+                    $sql = "SELECT ROUND(AVG(rating), 2) AS average_rating
+                        FROM Review
+                        WHERE product_id = $product_id";
+                    $stmt = oci_parse($connection, $sql);
+                    oci_execute($stmt);
+
+                    $avg_rating = oci_fetch_assoc($stmt);
+                    $avg_rating = $avg_rating['AVERAGE_RATING'];
+
+                ?>
+                <p>Aervage Rating:  <?php echo $avg_rating?></p>
                 <div class="rating-row">
-                    <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
-                    <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
-                    <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
-                </div>
+                    <?php 
+                        for ($i = 1; $i <= $avg_rating; $i++) {
+                            echo '<span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>';
+                        }
+                    ?>
+                </div><br/>
                 <!--add review-->
                 <section class="add-review">
                     <button onclick="showReviewPopup()">Add Review</button>
@@ -286,76 +304,48 @@
 
 
             <hr class="comment-line">
-                <div class="comments">
-                    <div class="customer-profile">
+
+                <?php 
+                    $query = "SELECT U.FIRST_NAME || ' ' || U.LAST_NAME AS CUSTOMER_NAME, R.*
+                        FROM REVIEW R
+                        JOIN CUSTOMER C ON C.CUSTOMER_ID = R.CUSTOMER_ID
+                        JOIN USER_ U ON U.USER_ID = C.CUSTOMER_ID
+                        WHERE PRODUCT_ID = $product_id";
+                    $statement = oci_parse($connection, $query);
+                    oci_execute($statement);
+
+                    while($review = oci_fetch_assoc($statement)) {
+                    ?>
+                        <div class="comments">
+                        <div class="customer-profile">
                         <div class="profile-img">
                             <img src="../resources/user.jpg" alt="profile-img">
                         </div>
-                        <h5 class="customer-name">John Doe</h5>
-                    </div>
-                    <div class="customer-ratings">
+                        <h5 class="customer-name"><?php echo $review['CUSTOMER_NAME']?></h5>
+                        </div>
+                        <div class="customer-ratings">
                         <h5>Rate:</h5>
                         <div class="rating-rows">
-                            <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
-                            <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
-                            <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
-                            <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
-                            <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                            <?php 
+                                $stars = $review['RATING']; 
+                                
+                                for ($i = 1; $i <= $stars; $i++) {
+                                    echo '<span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>';
+                                }
+                            
+                            ?>
+                            
                         </div>
-                    </div>
-                    <div class="comment-text">
-                        <p>This is the user review for the elit. Illo culpa eligendi quibusdam vel consequuntur, non dicta nulla exercitationem! Laudantium libero quos rem perferendis mollitia beatae sequi laborum consequatur neque sunt recusandae, voluptate blanditiis. Consequuntur, sed? Aperiam  asperiores?</p>
-                    </div>
-                    <hr>
-                </div>
-                
-
-                <div class="comments">
-                    <div class="customer-profile">
-                        <div class="profile-img">
-                            <img src="../resources/user.jpg" alt="profile-img">
                         </div>
-                        <h5 class="customer-name">John Doe</h5>
-                    </div>
-                    <div class="customer-ratings">
-                        <h5>Rate:</h5>
-                        <div class="rating-rows">
-                            <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
-                            <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
-                            <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
-                            <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
-                            <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                        <div class="comment-text">
+                        <p><?php echo $review['COMMENT_'];?></p>
                         </div>
-                    </div>
-                    <div class="comment-text">
-                        <p>This is the user review for the product Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate voluptatem molestiae vel accusantium sequi dolorum dicta officiis, quibusdam aperiam exercitationem.culpa eligendi quibusdam vel consequuntur, non dicta nulla exercitationem! Laudantium libero quos rem perferendis mollitia beatae sequi laborum consequatur neque sunt recusandae, voluptate blanditiis. Consequuntur, sed? Aperiam  asperiores?</p>
-                    </div>
-                </div>
-
-
-
-            <!-- <div class="comments">
-                <div class="customer-profile">
-                    <div class="profile-img">
-                        <img src="../resources/user.jpg" alt="profile-img">
-                    </div>
-                    <h5 class="customer-name">John Doe</h5>
-                </div>
-                <div class="customer-ratings">
-                    <h5>Rate:</h5>
-                    <div class="rating-rows">
-                        <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
-                        <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
-                        <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
-                        <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
-                        <span class="star"><i class="fa fa-star-o" aria-hidden="true"></i></span>
-                    </div>
-                </div>
-                <div class="comment-box">
-                    <textarea placeholder="Add your comment here..."></textarea>
-                    <button class="add-comment-btn">Add Comment</button>
-                </div>
-            </div> -->
+                        <hr>
+                        </div>
+                <?php
+                    }
+                ?>
+    
         </div>
     </main>
 

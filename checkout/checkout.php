@@ -241,16 +241,16 @@
     
         <div id="overlay" class="overlay"></div>
         <div id="popup" class="popup">
-            <form method="POST">
+            <form method="POST" action="process_slot.php">
             <h2>Delivery Hours</h2><br/>
-                <label for="pickup-time">Select Day:<br/></label>
-                <select id="pickup-time" name="pickup-time">
+                <label for="day">Select Day:<br/></label>
+                <select id="pickup-time" name="day">
                     <option value="">Select Day >></option>
                     <?php echo generateDayOptions(); ?>
                 </select>
 
-                <label for="pickup-time">Select Time:<br/></label>
-                <select id="pickup-time" name="pickup-time">
+                <label for="time">Select Time:<br/></label>
+                <select id="pickup-time" name="time">
                     <option value="">Select Time >></option>
                     <?php echo generateTimeOptions(); ?>
                 </select>
@@ -260,7 +260,7 @@
             </form>
         </div>
 
-        <form action="<?php echo $paypalURL; ?>" method="post">s
+        <form action="<?php echo $paypalURL; ?>" method="post">
         <input type="hidden" name="business" value="<?php echo $paypalID;?>">
 
         <!-- Specify a Buy Now button. -->
@@ -269,11 +269,11 @@
         <input type="hidden" name="item_number" value="0001">
         <input type="hidden" name="amount" value="<?php echo $totalPrice;?>">
         <input type="hidden" name="currency_code" value="USD">
-        <input type="hidden" name="quantity" value="<?php echo $count;?>">
+        <input type="hidden" name="quantity" value="1">
 
         <!-- Specify URLs -->
-        <input type='hidden' name='cancel_return' value='http://localhost/teamproject-12/checkout/checkout1.php?order=paid'>
-        <input type='hidden' name='return' value='http://localhost/teamproject-12/checkout/checkout1.php'>
+        <input type='hidden' name='cancel_return' value='http://localhost/teamproject-12/checkout/checkout.php'>
+        <input type='hidden' name='return' value='http://localhost/teamproject-12/checkout/process_order.php?total_price=<?php echo $totalPrice;?>'>
 
         <!-- Display the payment button. -->
         <input type="image" name="submit" border="0"

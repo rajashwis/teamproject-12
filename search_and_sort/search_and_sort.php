@@ -28,8 +28,6 @@
         include '../components/header.php';
     ?>
 
-
-
     <main class="container">
 
         <div class="offer-banner">
