@@ -9,6 +9,8 @@ DROP SEQUENCE seq_shop_id;
 DROP SEQUENCE seq_category_id;
 DROP SEQUENCE seq_wishlist_id;
 DROP SEQUENCE seq_discount_id;
+DROP SEQUENCE seq_review_id;
+DROP SEQUENCE seq_payment_id;
 
 CREATE SEQUENCE seq_cart_id
     MINVALUE 1
@@ -95,5 +97,21 @@ CREATE SEQUENCE seq_discount_id
     MAXVALUE 999
     INCREMENT BY 1
     START WITH 1
+    NOCACHE
+    NOCYCLE;
+    
+CREATE SEQUENCE seq_review_id
+    MINVALUE 1001
+    MAXVALUE 9999
+    INCREMENT BY 1
+    START WITH 1001
+    NOCACHE
+    NOCYCLE;
+    
+CREATE SEQUENCE seq_payment_id
+    MINVALUE 1111
+    MAXVALUE 9999
+    INCREMENT BY 1
+    START WITH 1111
     NOCACHE
     NOCYCLE;

@@ -196,7 +196,7 @@ table {
 <div id="invoice-POS">
     <div id="mid">
         <div class="info">
-            <h2><img src="../resources/cfx1002.png" width="150px"></h2>
+            <h2><img src="../resources/cfxfaviconnew.png" width="150px"></h2>
             <p>
 
             <?php
