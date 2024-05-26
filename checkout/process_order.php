@@ -2,6 +2,12 @@
 session_start();
 include('../connect.php');
 
+// PHP Mailer and Composer
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php';
+
 if (isset($_GET['total_price'])) {
 
     $totalPrice = $_GET['total_price'];
@@ -94,6 +100,147 @@ if (isset($_GET['total_price'])) {
     if (!oci_execute($statement5)) {
         $error = oci_error($statement5);
         die("SQL Error: " . $error['message']);
+    }
+
+    // verification code to  verify trader...
+    $mail = new PHPMailer(true);
+    try {
+        //Server settings ..gmail.. ..cfxlocalhub@gmail.com is our official gmail for sending mails/newsletters
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'cfxlocalhub@gmail.com';
+        $mail->Password = 'grax abbj upqq uzhd'; // Using App-password of cfxlocalhub@gmail.com..
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+
+        
+        $mail->setFrom('cfxlocalhub@gmail.com', 'CFXsupport');
+        $mail->addAddress($email, $fname . ' ' . $lname);
+
+        // Mail output :
+        $mail->isHTML(true);
+        $mail->Subject = 'Invoice';
+        $mail->Body    = "
+        
+        <html>
+        <style>
+        body{
+            font-family: 'Sofia', sans-serif;
+        }
+        
+        .order-table-container {
+            overflow-x: auto;
+        }
+
+        .order-table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .order-table th,
+        .order-table td {
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .order-table th {
+            background-color: #b0b0b0;
+        }
+
+        .order-table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .order-table tbody tr:hover {
+            background-color: #ddd;
+        }
+
+        .order-table button{
+            border: 1px solid black;
+            cursor: pointer;
+            border-radius: 3px;
+            padding: 5px;
+        }
+
+        .order-table button:hover{
+            background-color: #bebebe;
+        }
+
+       </style>
+        <body>
+        Order ID : 786e8327edb<br>
+        Order Date : 1/23/24 <br>
+        <br>
+    
+            
+            <div class='order-table-container'>
+                <table class='order-table'>
+                    <thead>
+                        <tr>
+                            <th>Product ID</th>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>"?>
+                    <?php
+                    $query5 = "SELECT 
+                            od.order_id,
+                            cs.collection_slot_id,
+                            op.product_id,
+                            p.product_name,
+                            p.price AS product_price,
+                            op.item_quantity,
+                            (p.price * op.item_quantity) AS total_price
+                        FROM 
+                            OrderDetail od
+                        JOIN 
+                            OrderProduct op ON od.order_id = op.order_id
+                        JOIN 
+                            Product p ON op.product_id = p.product_id
+                        JOIN 
+                            CollectionSlot cs ON od.collection_slot_id = cs.collection_slot_id
+                        WHERE OD.ORDER_ID = SEQ_ORDER_ID.CURRVAL";
+                    $statement5 = oci_parse($connection, $query5);
+                    oci_execute($statement5);
+                    
+                    while($invoice = oci_fetch_assoc($statement5)) {
+                        echo '<tr>';
+                        echo '<td>'.$invoice['PRODUCT_ID'].'</td>';
+                        echo '<td>'.$invoice['PRODUCT_NAME'].'</td>';
+                        echo '<td>'.$invoice['ITEM_QUANTITY'].'</td>';
+                        echo '<td>'.$invoice['TOTAL PRICE'].'</td>';
+                        echo '</tr>';
+                    }
+                    
+                    ?>
+                    <?php
+                    "
+    
+                        
+                    
+                </table>
+            </div>
+        
+        <br>
+        Collection Slot<br>
+        Pick Up address : Address
+        
+        <p> Thank You for your business! Hope you enjoy your new product.
+
+        </body>
+        </html>
+        ";
+        
+
+        $mail->send();
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
 
     unset($_SESSION['date']);

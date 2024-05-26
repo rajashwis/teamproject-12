@@ -86,7 +86,14 @@ if(isset($_POST['submit']))
                 // Mail output :
                 $mail->isHTML(true);
                 $mail->Subject = 'Verification Code';
-                $mail->Body    = "Hi customer $fname,<br><br>Your verification code is: <b>$code</b><br><br>Thank you!";
+                $mail->Body = "
+                <div style='text-align: center; border: 2px solid orange; padding: 10px; font-family: \"Sofia\", sans-serif;'>
+                    <p>Hi $username,</p>
+                    <p>Your verification code is:</p>
+                    <div style='border: 1px solid orange; padding: 5px; display: inline-block;'>$code</div>
+                    <p>Thank You!</p>
+                </div>
+            ";
     
                 $mail->send();
     

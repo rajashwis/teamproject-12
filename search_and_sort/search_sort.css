@@ -1,3 +1,8 @@
+body{
+    font-family: Arial, sans-serif;
+    
+}
+
 .container {
     margin: 6% 0%;
 }
@@ -68,6 +73,13 @@
     transform: scale(1.5);
     margin-right: 5px;
     border: 2px solid black;
+}
+
+.sort-btn{
+    border: none;
+    padding: 10px;
+    background-color: #f99f1b;
+    border-radius: 5px;
 }
 
 /* .sort-by {
@@ -159,15 +171,14 @@
 
 .add-to-cart{
     background-color:  #f99f1b;
-    padding: 10px 20px;
+    padding: 10px;
     border-radius: 5px;
-    text-decoration: none;
     border: none;
+    
 }
 
 .add-to-cart:hover{
-    background-image: linear-gradient( 178.7deg,  rgba(126,184,253,1) 5.6%, rgba(2,71,157,1) 95.3% );
-    color: white;
+   background-color: #e39013;
 }
 .add-to-cart a {
     text-decoration: none;

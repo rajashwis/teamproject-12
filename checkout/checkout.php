@@ -289,6 +289,8 @@
             }
         ?>
 
+        
+
 
         
       
@@ -298,7 +300,48 @@
 
 
 
+    <script>
+        // Get the elements
+        const deliveryBtn = document.getElementById('deliveryBtn');
+        const overlay = document.getElementById('overlay');
+        const popup = document.getElementById('popup');
+        const closeBtn = document.getElementById('closeBtn');
 
+        // Function to show the popup
+        function showPopup() {
+            overlay.style.display = 'block';
+            popup.style.display = 'block';
+        }
+
+        // Function to hide the popup
+        function hidePopup() {
+            overlay.style.display = 'none';
+            popup.style.display = 'none';
+        }
+
+        // Event listeners
+        deliveryBtn.addEventListener('click', showPopup);
+        closeBtn.addEventListener('click', hidePopup);
+        overlay.addEventListener('click', hidePopup);
+
+
+        // JavaScript to handle increment and decrement functionality
+        function increment() {
+            var quantityElement = document.getElementById('quantity');
+            var quantity = parseInt(quantityElement.textContent);
+            quantity++;
+            quantityElement.textContent = quantity;
+        }
+
+        function decrement() {
+            var quantityElement = document.getElementById('quantity');
+            var quantity = parseInt(quantityElement.textContent);
+            if (quantity > 1) {
+                quantity--;
+                quantityElement.textContent = quantity;
+            }
+        }
+</script>
 <?php
         include "../components/footer.php";
     ?>

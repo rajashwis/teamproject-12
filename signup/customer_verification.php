@@ -10,7 +10,6 @@
     }
 
     $confirmation_id = $_SESSION['confirmation_id'];
-    echo "<script>alert('".$confirmation_id."')</script>";
 
     if(isset($_SESSION['confirmation_id'])) {
         $confirmation_id = $_SESSION['confirmation_id'];

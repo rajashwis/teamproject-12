@@ -19,8 +19,14 @@
         $statement = oci_parse($connection, $query);
         oci_execute($statement);
     }
-        
 
+    if (isset($_POST['add_to_cart'])) {
+
+        $product_id = $_POST['product_id'];
+        header('Location: ../cart/add_to_cart.php?product_id='.$product_id);
+        exit();     
+
+    }
 
 ?>
 
@@ -86,7 +92,7 @@
 
                 </div>
 
-                <input type="submit" value="submit">
+                <input class="sort-btn" type="submit" value="submit">
 
                 </form>
 
@@ -145,10 +151,11 @@
     
                         echo '<div class="image-container">';
                         echo '<div class="image-box">';
-                        echo '<a href = "../product_detail/product_detail.php?product_id='.$product_id.'"> <img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image"></a>';
+                        // echo '<!--<a href = "../product_detail/product_detail.php?product_id='.$product_id.'">--> <img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
+                        echo '<img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
                         echo '</div>';
                         echo '<div class="description-box">';
-                        echo '<h1>'.$product['PRODUCT_NAME'].'</h1>';
+                        
     
                         $query1 = "SELECT 
                             p.*, 
@@ -170,14 +177,38 @@
     
                         $product_id = $discount_product['PRODUCT_ID'];
                         $discount_id = $discount_product['DISCOUNT_ID'];
+
+                        if($discount_id) {
+
+                            echo '<p class="price"><s>'.$product['PRICE'].'</s><br>'.$discount_product['DISCOUNTED_PRICE'].' <i class="fa-solid fa-tag"></i></p>';
+                            echo '<div class="bakery">';
+                            // echo '<p>'.$product['PRODUCT_NAME'].'</p>';
+                            // echo '<p>'.$category.'</p>';
+                            echo '</div>';
+                            echo '<form method="POST">';
+                            echo '<input type="hidden" name="product_id" value="'.$product_id.'"';
+                            echo '<p><button class="add-to-cart" type="submit" name="add_to_cart">Add to Cart</button></p><br>';
+                            echo '</form>';
+                            echo '</div>';
+                            echo '</div>';
+
+                        }
+
+                        else {
+                            echo '<p class="price">'.$product['PRICE'].' <i class="fa-solid fa-tag"></i></p>';
+                            echo '<div class="bakery">';
+                            // echo '<p>'.$product['PRODUCT_NAME'].'</p>';
+                            // echo '<p>'.$category.'</p>';
+                            echo '</div>';
+                            echo '<form method="POST">';
+                            echo '<input type="hidden" name="product_id" value="'.$product_id.'"';
+                            echo '<p><button class="add-to-cart" type="submit" name="add_to_cart">Add to Cart</button></p><br>';
+                            echo '</form>';
+                            echo '</div>';
+                            echo '</div>';
+                        }
                         
-                        // echo '<p class="price"><s>$64.99</s><br>$49.99 <i class="fa-solid fa-tag"></i></p>';
-                        echo '<div class="bakery">';
-                        echo '<p>'.$category.'</p>';
-                        echo '</div>';
-                        echo '<button class="add-to-cart"><a href="cart.html">Add to Cart</a></button>';
-                        echo '</div>';
-                        echo '</div>';
+                        
                     }
                 }
 
@@ -206,7 +237,8 @@
 
                         echo '<div class="image-container">';
                         echo '<div class="image-box">';
-                        echo '<a href = "../product_detail/product_detail.php?product_id='.$product_id.'"> <img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image"></a>';
+                        // echo '<!--<a href = "../product_detail/product_detail.php?product_id='.$product_id.'">--> <img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
+                        echo '<img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
                         echo '</div>';
                         echo '<div class="description-box">';
                         echo '<h1>'.$product['PRODUCT_NAME'].'</h1>';
@@ -231,14 +263,38 @@
 
                         $product_id = $discount_product['PRODUCT_ID'];
                         $discount_id = $discount_product['DISCOUNT_ID'];
+
+                        if($discount_id) {
+
+                            echo '<p class="price"><s>'.$product['PRICE'].'</s><br>'.$discount_product['DISCOUNTED_PRICE'].' <i class="fa-solid fa-tag"></i></p>';
+                            echo '<div class="bakery">';
+                            // echo '<p>'.$product['PRODUCT_NAME'].'</p>';
+                            // echo '<p>'.$category.'</p>';
+                            echo '</div>';
+                            echo '<form method="POST">';
+                            echo '<input type="hidden" name="product_id" value="'.$product_id.'"';
+                            echo '<p><button class="add-to-cart" type="submit" name="add_to_cart">Add to Cart</button></p><br>';
+                            echo '</form>';
+                            echo '</div>';
+                            echo '</div>';
+
+                        }
+
+                        else {
+                            echo '<p class="price">'.$product['PRICE'].' <i class="fa-solid fa-tag"></i></p>';
+                            echo '<div class="bakery">';
+                            // echo '<p>'.$product['PRODUCT_NAME'].'</p>';
+                            // echo '<p>'.$category.'</p>';
+                            echo '</div>';
+                            echo '<form method="POST">';
+                            echo '<input type="hidden" name="product_id" value="'.$product_id.'"';
+                            echo '<p><button class="add-to-cart" type="submit" name="add_to_cart">Add to Cart</button></p><br>';
+                            echo '</form>';
+                            echo '</div>';
+                            echo '</div>';
+                        }
                         
-                        // echo '<p class="price"><s>$64.99</s><br>$49.99 <i class="fa-solid fa-tag"></i></p>';
-                        echo '<div class="bakery">';
-                        echo '<p>'.$category.'</p>';
-                        echo '</div>';
-                        echo '<button class="add-to-cart"><a href="cart.html">Add to Cart</a></button>';
-                        echo '</div>';
-                        echo '</div>';
+  
                     }
                 }
 

@@ -100,8 +100,8 @@
                     <div class="additional-info">
                         <p><?php echo $review['COMMENT_'];?></p>
                         <div class="additional-info-ctrl">
-
-                            <button class="delete">Delete</button>
+                            <a href="delete-review.php?delete=<?php echo $review['REVIEW_ID']?>" onclick="return confirm('Are you sure you want to remove this review?');"> <button type="submit" name="delete" class="delete">Delete</button></a>
+                            
                         </div>
                     </div>
                 </div>

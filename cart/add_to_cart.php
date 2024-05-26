@@ -31,7 +31,10 @@
             $row1 = oci_fetch_assoc($stid1);
 
             if($row1) {
-                echo "<script>alert('Product already in Cart!')</script>";
+                echo "<script>
+                        alert('Product already in cart!');
+                        window.location.href = '../homepage';
+                    </script>";
             }
 
             else {
