@@ -1,141 +1,125 @@
-* {
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f5f5f5;
 }
-
-body {
-    background-color: whitesmoke;
-}
-h1 {
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
-}
-
 .container {
-    position: relative;
-    padding-bottom: 60px; 
-    top: 10%;
-    margin-top: 300px;
+    width: 90%;
+    max-width: 700px; /* Adjusted max-width */
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 15px; /* Adjusted padding */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-top: 10%;
 }
-
-#checkoutBtn {
-    position: absolute;
-    bottom: 30px;
-    right: 40px;
-    padding: 13px 20px;
-    cursor: pointer;
-    background-color: #4CAF50; /* Add your preferred background color */
-    color: white;
-    border: none;
-}
-
-#checkoutBtn:hover {
-    background-color: #45a049;
-}
-
-
 .card {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border-radius: 10px;
-    padding: 23px 19px;
-    margin: 25px auto;
-    width: 53%;
-    box-shadow: 0 4px 8px #bbb;
+    flex-direction: column;
+    margin-bottom: 15px; /* Adjusted margin */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
     background-color: #fff;
 }
-
-.image-container {
-    height: 50%;
+.image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
-
-.image-container > img {
-    width: 50%;
-    object-fit: contain;
-    border-radius: 12px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.image-container > img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
 .content {
-    width: 69%;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    padding: 10px; /* Adjusted padding */
+}
+.content h3 {
+    margin: 0 0 5px; /* Adjusted margin */
+    font-size: 1em; /* Adjusted font-size */
+}
+.price {
+    margin: 5px 0; /* Adjusted margin */
+    font-size: 1em; /* Adjusted font-size */
+    color: #333;
 }
 
-.content > * {
-    font-family: Arial, Helvetica, sans-serif;
+.save-btn button{
+    border: none;
+    padding: 10px;
+    background-color: orange;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.content p {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 600;
-}
-
-.price p {
-    font-weight: 600;
+.save-btn button:hover{
+    background-color: rgb(212, 140, 6);
 }
 
 .quantity-control {
     display: flex;
+    align-items: center;
+    margin: 5px 0; /* Adjusted margin */
 }
-
-.quantity-control > input,
-.quantity-control > button {
-    background-color: #fff;
-    width: 33px;
-    height: 33px;
-    border: 1px solid black;
-    border-radius: 3px;
-    margin: 13px;
-}
-
-.quantity-control > input {
-    padding: 0px 13px;
-}
-
-.btn-remove {
-    background-image: radial-gradient(
-        circle 382px at 50% 50.2%,
-        rgba(73, 76, 212, 1) 0.1%,
-        rgba(3, 1, 50, 1) 100.2%
-    );
-    border-radius: 12px;
-    text-align: center;
-    width: 100px;
-    height: 40px;
+.quantity-control button {
+    background-color: orange;
     border: none;
     color: white;
-    font-size: 16px;
-    font-weight: 600;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 1em;
+    border-radius: 5px;
 }
-
-.btn-remove:hover {
-    background-color: #fbab7e;
-    background-image: linear-gradient(62deg, #fbab7e 0%, #f7ce68 100%);
+.quantity-control button:disabled {
+    background-color: #ccc;
 }
-
-.container button{
+.quantity-control input {
+    width: 50px; /* Adjusted width */
     text-align: center;
+    margin: 0 5px;
+    font-size: 1em;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.quantity::-webkit-outer-spin-button,
+.quantity::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.quantity {
+    -moz-appearance-: textfield;
 }
 
 
-.checkout{
-    position: relative;
-    width: 100px;
-    height: 40px;
-    bottom: 4px;
-    right: 10px;
+.btn-remove {
+    text-align: right;
 }
-
-
-
-
-@media (max-width: 1420px) {
+.btn-remove a {
+    color: #e74c3c;
+    text-decoration: none;
+    font-size: 0.9em; /* Adjusted font-size */
+}
+.checkout {
+    display: block;
+    width: 100%;
+    padding: 10px; /* Adjusted padding */
+    background-color: #27ae60;
+    color: #fff;
+    border: none;
+    font-size: 1em; /* Adjusted font-size */
+    cursor: pointer;
+    text-align: center;
+    border-radius: 8px;
+    margin-top: 15px; /* Adjusted margin */
+}
+@media (min-width: 768px) {
+    .card {
+        flex-direction: row;
+    }
+    .image-container {
+        flex: 1;
+    }
+    .content {
+        flex: 2;
+    }
 }

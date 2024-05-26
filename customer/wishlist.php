@@ -119,7 +119,7 @@ oci_execute($stid);
 
 
   <?php
-  include '../component/footer.php';
+  include '../components/footer.php';
   ?>
 
   <script>

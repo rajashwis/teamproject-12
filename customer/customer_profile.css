@@ -5,6 +5,7 @@ body{
 
 
 .container{
+    margin-top: 8%;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -18,8 +19,8 @@ body{
 
 .menu ul {
     list-style-type: none;
-    border: 1px solid black;
     padding: 0;
+    border: 1px solid black;
     display: flex;
     flex-direction: column;
     gap: 23px;

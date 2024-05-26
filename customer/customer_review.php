@@ -102,6 +102,10 @@ $user = $_SESSION['user_id'];
         </div>
     </div>
 
+    <?php 
+        include('../components/footer.php');
+    ?>
+
 
 </body>
 </html>
