@@ -613,7 +613,7 @@
             </li>
 
             <li class="profile-dropdown-list-item">
-                <a href="../customer/reviews.php">
+                <a href="../customer/customer_review.php">
                 <i class="fa-solid fa-star-half-stroke"></i>
                 My Reviews
                 </a>
