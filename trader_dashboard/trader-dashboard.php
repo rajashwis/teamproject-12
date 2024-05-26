@@ -11,11 +11,11 @@
     if(isset($_SESSION['trader_id'])) {
         $trader_id = $_SESSION['trader_id'];
 
-        $query = "SELECT * FROM SHOP WHERE TRADER_ID = $trader_id";
-        $statement = oci_parse($connection, $query);
-        oci_execute($statement);
+        $shop_query = "SELECT * FROM SHOP WHERE TRADER_ID = $trader_id";
+        $shop_statement = oci_parse($connection, $shop_query);
+        oci_execute($shop_statement);
 
-        $shop = oci_fetch_assoc($statement);
+        $shop = oci_fetch_assoc($shop_statement);
         $shop_id = $shop['SHOP_ID'];
         $shop_name = $shop['SHOP_NAME'];
         $shop_address = $shop['ADDRESS'];
@@ -444,9 +444,9 @@
                     <div>Total Orders: 1,200</div>
                     <div>Refunded: $500</div>
                 </div>
-                <div class="graph">
+                <!-- <div class="graph">
                     <canvas id="salesChart" width="400" height="200"></canvas>
-                </div>
+                </div> -->
         
                 <div class="top-items">
                     <h2>Top Selling Items</h2>
@@ -622,7 +622,7 @@
                                 P.product_name,
                                 OP.item_quantity,
                                 CS.day_of_week,
-                                CS.time_,
+                                CS.time_slot,
                                 O.collection_date, 
                                 O.status
                             FROM 
@@ -664,8 +664,15 @@
                 <h1>Shop</h1>
                 <div class="shop-container">
                     <div class="shop-info">
-                        <?php 
-                            $imageData = $shop['SHOP_IMAGE']->load();
+                        <?php                             
+                        
+                            if ($shop['SHOP_IMAGE'] !== null && $shop['SHOP_IMAGE']->load()) {
+                                $imageData = $shop['SHOP_IMAGE']->load();
+                            } else {
+                                // Use a dummy file if no file was uploaded
+                                $dummyFilePath = '../resources/user.jpg'; // Path to your dummy image file
+                                $imageData = file_get_contents($dummyFilePath);
+                            }
 
                             // Encode the BLOB data as base64
                             $encodedImageData = base64_encode($imageData);
@@ -710,7 +717,19 @@
                         </thead>
                         <tbody>
                             <?php 
-                                $query4 = "SELECT * FROM PRODUCTCATEGORY WHERE TRADER_ID = $trader_id";
+                            $query4 = "SELECT 
+                                        pc.*,
+                                        COUNT(p.PRODUCT_ID) AS NUMBER_OF_PRODUCTS
+                                    FROM 
+                                        PRODUCTCATEGORY pc
+                                    LEFT JOIN 
+                                        PRODUCT p ON pc.CATEGORY_ID = p.CATEGORY_ID
+                                    WHERE 
+                                        pc.TRADER_ID = $trader_id
+                                    GROUP BY 
+                                        pc.CATEGORY_ID, pc.CATEGORY_NAME, pc.TRADER_ID";
+
+                                //$query4 = "SELECT * FROM PRODUCTCATEGORY WHERE TRADER_ID = $trader_id";
                                 $statement4 = oci_parse($connection, $query4);
                                 oci_execute($statement4);
 
@@ -718,7 +737,7 @@
                                     echo '<tr>';
                                     echo '<td>'.$category['CATEGORY_ID'].'</td>';
                                     echo '<td>'.$category['CATEGORY_NAME'].'</td>';
-                                    echo '<td>5</td>';
+                                    echo '<td>'.$category['NUMBER_OF_PRODUCTS'].'</td>';
                                     echo '<td>';
                                     echo '<button onclick="openEditCategoryPopup(this, '.$category['CATEGORY_ID'].', \''.$category['CATEGORY_NAME'].'\')">Edit</button>';
                                     ?>
@@ -850,29 +869,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
     // Initialize the chart
-    var ctx = document.getElementById('salesChart').getContext('2d');
-    var salesChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-            datasets: [{
-                label: 'Sales ($)',
-                data: [0, 100, 300, 200, 250, 200, 300, 200, 450, 500, 550, 500],
-                backgroundColor: 'rgba(0, 181, 21, 0.2)',
-                borderColor: 'rgba(0, 181, 21, 1)',
-                borderWidth: 1,
-                fill: true,
-                tension: 0.4 // This makes the line curve
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
 
     // Show content based on the link clicked
     window.showContent = function(id) {

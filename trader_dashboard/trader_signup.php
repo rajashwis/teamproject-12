@@ -49,71 +49,93 @@
         $stmt = oci_parse($connection, $sql);
         $success = oci_execute($stmt);
 
-        if ($success) {
-            // Insert trader data into the database
-            $sql1 = "INSERT INTO Trader (trader_id, date_joined, verification_code, is_verified, is_approved) VALUES (SEQ_USER_ID.CURRVAL, SYSDATE, '$code', 0, 0)";
-            $stmt1 = oci_parse($connection, $sql1);
-            $success1 = oci_execute($stmt1);
+        if (!oci_execute($stmt)) {
+            $error = oci_error($stmt);
+            if (strpos($error['message'], 'ORA-00001') !== false) {
+                echo '<script>
+                    alert("A unique constraint violation occurred. Please ensure that all values are unique.");
+                    window.location.href = "signup.html";
+                </script>';
+                exit();
+            } else {
+                echo '<script>
+                    alert("An unexpected error occurred: ' . $error['message'] . '");
+                    window.location.href = "signup.html";
+                </script>';
+                exit();
+            }
+        }
 
-            if ($success1) {
-                // Insert shop data into the database
-                $sql2 = "INSERT INTO Shop VALUES (SEQ_SHOP_ID.NEXTVAL, '$sname', '$saddress', SYSDATE, 0, SEQ_USER_ID.CURRVAL)";
-                $stmt2 = oci_parse($connection, $sql2);
-                $success2 = oci_execute($stmt2);
+        else {
 
-                if ($success2) {
-                    // verification code to  verify trader...
-                    $mail = new PHPMailer(true);
-                    try {
-                        //Server settings ..gmail.. ..cfxlocalhub@gmail.com is our official gmail for sending mails/newsletters
-                        $mail->isSMTP();
-                        $mail->Host = 'smtp.gmail.com';
-                        $mail->SMTPAuth = true;
-                        $mail->Username = 'cfxlocalhub@gmail.com';
-                        $mail->Password = 'grax abbj upqq uzhd'; // Using App-password of cfxlocalhub@gmail.com..
-                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                        $mail->Port = 587;
-
-                        
-                        $mail->setFrom('cfxlocalhub@gmail.com', 'CFXsupport');
-                        $mail->addAddress($email, $fname . ' ' . $lname);
-
-                        // Mail output :
-                        $mail->isHTML(true);
-                        $mail->Subject = 'Verification Code';
-                        $mail->Body    = "Hi $fname,<br><br>Your verification code is: <b>$code</b><br><br>Thank you!";
-
-                        $mail->send();
-
-                        $query = "SELECT SEQ_USER_ID.CURRVAL FROM DUAL";
-                        $statement = oci_parse($connection, $query);
-                        oci_execute($statement);
-                        $currval = oci_fetch_assoc($statement);
-                        $currval = $currval['CURRVAL'];
-
-                        $query1 = "SELECT VERIFICATION_CODE FROM TRADER WHERE trader_id = $currval";
-                        $statement1 = oci_parse($connection, $query1);
-                        oci_execute($statement1);
-                        $confirm = oci_fetch_assoc($statement1);
-                        $confirmation_id = $confirm['VERIFICATION_CODE'];
-
-                        $_SESSION['trader_id'] = $currval;
-                        $_SESSION['confirmation_id'] = $confirmation_id;
-
-                        header("Location: ../trader interface/trader_verification.php");
-                        exit();
-                    } catch (Exception $e) {
-                        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            if ($success) {
+                // Insert trader data into the database
+                $sql1 = "INSERT INTO Trader (trader_id, date_joined, verification_code, is_verified, is_approved) VALUES (SEQ_USER_ID.CURRVAL, SYSDATE, '$code', 0, 0)";
+                $stmt1 = oci_parse($connection, $sql1);
+                $success1 = oci_execute($stmt1);
+    
+                if ($success1) {
+                    // Insert shop data into the database
+                    $sql2 = "INSERT INTO Shop (SHOP_ID, SHOP_NAME, ADDRESS, DATE_UPDATED, IS_APPROVED, TRADER_ID) VALUES (SEQ_SHOP_ID.NEXTVAL, '$sname', '$saddress', SYSDATE, 0, SEQ_USER_ID.CURRVAL)";
+                    $stmt2 = oci_parse($connection, $sql2);
+                    $success2 = oci_execute($stmt2);
+    
+                    if ($success2) {
+                        // verification code to  verify trader...
+                        $mail = new PHPMailer(true);
+                        try {
+                            //Server settings ..gmail.. ..cfxlocalhub@gmail.com is our official gmail for sending mails/newsletters
+                            $mail->isSMTP();
+                            $mail->Host = 'smtp.gmail.com';
+                            $mail->SMTPAuth = true;
+                            $mail->Username = 'cfxlocalhub@gmail.com';
+                            $mail->Password = 'grax abbj upqq uzhd'; // Using App-password of cfxlocalhub@gmail.com..
+                            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                            $mail->Port = 587;
+    
+                            
+                            $mail->setFrom('cfxlocalhub@gmail.com', 'CFXsupport');
+                            $mail->addAddress($email, $fname . ' ' . $lname);
+    
+                            // Mail output :
+                            $mail->isHTML(true);
+                            $mail->Subject = 'Verification Code';
+                            $mail->Body    = "Hi $fname,<br><br>Your verification code is: <b>$code</b><br><br>Thank you!";
+    
+                            $mail->send();
+    
+                            $query = "SELECT SEQ_USER_ID.CURRVAL FROM DUAL";
+                            $statement = oci_parse($connection, $query);
+                            oci_execute($statement);
+                            $currval = oci_fetch_assoc($statement);
+                            $currval = $currval['CURRVAL'];
+    
+                            $query1 = "SELECT VERIFICATION_CODE FROM TRADER WHERE trader_id = $currval";
+                            $statement1 = oci_parse($connection, $query1);
+                            oci_execute($statement1);
+                            $confirm = oci_fetch_assoc($statement1);
+                            $confirmation_id = $confirm['VERIFICATION_CODE'];
+    
+                            $_SESSION['trader_id'] = $currval;
+                            $_SESSION['confirmation_id'] = $confirmation_id;
+    
+                            header("Location: trader_verification.php");
+                            exit();
+                        } catch (Exception $e) {
+                            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                        }
+                    } else {
+                        echo "Error inserting shop data";
                     }
                 } else {
-                    echo "Error inserting shop data";
+                    echo "Error inserting trader data";
                 }
             } else {
-                echo "Error inserting trader data";
+                echo "Error inserting user data";
             }
-        } else {
-            echo "Error inserting user data";
         }
+
+       
 
         oci_close($connection);
     }

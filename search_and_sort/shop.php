@@ -145,8 +145,7 @@
     
                         echo '<div class="image-container">';
                         echo '<div class="image-box">';
-                        // echo '<!--<a href = "../product_detail/product_detail.php?product_id='.$product_id.'">--> <img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
-                        echo '<img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
+                        echo '<a href = "../product_detail/product_detail.php?product_id='.$product_id.'"> <img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image"></a>';
                         echo '</div>';
                         echo '<div class="description-box">';
                         echo '<h1>'.$product['PRODUCT_NAME'].'</h1>';
@@ -207,8 +206,7 @@
 
                         echo '<div class="image-container">';
                         echo '<div class="image-box">';
-                        // echo '<!--<a href = "../product_detail/product_detail.php?product_id='.$product_id.'">--> <img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
-                        echo '<img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image">';
+                        echo '<a href = "../product_detail/product_detail.php?product_id='.$product_id.'"> <img src="data:' . $imageType . ';base64,' . $encodedImageData . '" alt="Uploaded Image"></a>';
                         echo '</div>';
                         echo '<div class="description-box">';
                         echo '<h1>'.$product['PRODUCT_NAME'].'</h1>';

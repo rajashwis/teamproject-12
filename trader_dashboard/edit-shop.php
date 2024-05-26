@@ -29,7 +29,13 @@
         $shop_name = $shop['SHOP_NAME'];
         $shop_address = $shop['ADDRESS'];
         
-        $imageData = $shop['SHOP_IMAGE']->load();
+        if ($shop['SHOP_IMAGE'] !== null && $shop['SHOP_IMAGE']->load()) {
+            $imageData = $shop['SHOP_IMAGE']->load();
+        } else {
+            // Use a dummy file if no file was uploaded
+            $dummyFilePath = '../resources/user.jpg'; // Path to your dummy image file
+            $imageData = file_get_contents($dummyFilePath);
+        }
 
         // Encode the BLOB data as base64
         $encodedImageData = base64_encode($imageData);
@@ -76,7 +82,7 @@
                 oci_commit($connection);
                 oci_free_descriptor($blob);
                 echo "<script>alert('Shop edited!')</script>";
-                header('Location: ' . $_SERVER['PHP_SELF']);
+                header('Location: trader-dashboard.php#shop');
                 exit();
             }
         }

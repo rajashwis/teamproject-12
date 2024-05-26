@@ -10,8 +10,11 @@
     }
 
     else {
-      header('Location: ../homepage/');    
-      exit();
+        echo '<script>
+        alert("Sorry, you need to be logged in to access this!");
+        window.location.href = "../homepage/home.php";
+        </script>';
+        exit();
     }
 ?>
 
@@ -82,9 +85,5 @@
         </div>
     </div>
 </div>
-
-<?php 
-    include '../components/footer.php';
-?>
 </body>
 </html>

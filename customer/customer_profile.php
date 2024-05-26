@@ -16,7 +16,10 @@ if (isset($_SESSION['user_id'])) {
     $user_detail = oci_fetch_assoc($stid);
 
     if (!$user_detail) {
-        echo "Error!";
+        echo '<script>
+        alert("Error!");
+        window.location.href = "../homepage/home.php";
+        </script>';
         exit();
     }
 
@@ -29,7 +32,10 @@ if (isset($_SESSION['user_id'])) {
     }
 
 } else {
-    header('Location: ../homepage/');
+    echo '<script>
+    alert("Sorry, you need to be logged in to access this!");
+    window.location.href = "../homepage/home.php";
+    </script>';
     exit();
 }
 
@@ -137,7 +143,7 @@ oci_close($connection);
 </head>
 
 <body>
-    <?php include "../components/header.php" ?>
+    <!-- <?php //include "../components/header.php" ?> -->
     <main class="container">
         <div class="menu">
             <ul>

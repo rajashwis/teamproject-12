@@ -654,7 +654,7 @@
                     <li><a href="../search_and_sort/sort_category.php?sort-products=default"> CATEGORIES</a></li>
                     <li><a href="../search_and_sort/sort_discount.php?sort-products=default"> DISCOUNTS</a></li>
                     <li><a href="../components/aboutus.html"> ABOUT</a></li>
-                    <li class="bs-split"><a href="../trader_dashboard/trader_signin.html"> BECOME A SELLER</a></li>
+                    <li class="bs-split"><a href="../trader_dashboard/trader.php"> BECOME A SELLER</a></li>
                 </ul>
                 
             </nav>

@@ -3,11 +3,13 @@
 session_start();
 include "../connect.php";
 
-$trader = $_SESSION['trader_id'];
+if(isset($_SESSION['trader_id'])) {
+    $trader = $_SESSION['trader_id'];
 
-    if($trader){
-        header('Location: ../homepage/');    
-        exit();
+        if($trader){
+            header('Location: ../homepage/');    
+            exit();
+        }
     }
 
 if(isset($_POST['login']))
@@ -15,28 +17,57 @@ if(isset($_POST['login']))
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $query = "SELECT * FROM User_ WHERE email = '$email'";
+    $query = "SELECT * FROM User_ WHERE email = '$email' AND USER_ROLE ='Trader'";
     $statement = oci_parse($connection, $query);
     oci_execute($statement);
 
     $user = oci_fetch_assoc($statement);
 
     if ($user) {
-        $pass = $user['PASSWORD_'];
+        $trader_id = $user['USER_ID'];
+        $query1 = "SELECT * FROM TRADER WHERE TRADER_ID = $trader_id";
+        $statement1 = oci_parse($connection, $query1);
+        oci_execute($statement1);
 
-        if ($password == $pass) {
-            $user_id = $user['USER_ID'];
-            $_SESSION['trader_id'] = $user_id;
+        $trader = oci_fetch_assoc($statement1);
+        $verified = $trader['IS_VERIFIED'];
+        $approved = $trader['IS_APPROVED'];
 
-            header("Location: trader-dashboard.php");
+        if($verified == 0) {
+
+            echo '<script>
+            alert("Sorry, you are not verified yet! Please check your email for the verification code!");
+            window.location.href = "trader_signin.html";
+            </script>';
+            exit();
+
+        }
+        
+        if ($approved == 0) {
+            echo '<script>
+            alert("Sorry, you are not approved yet! Please wait for admin approval!");
+            window.location.href = "trader_signin.html";
+            </script>';
             exit();
         }
+
         else {
-            echo "<script>alert</script>";
-            echo("Incorrect password!");
+            $pass = $user['PASSWORD_'];
+
+            if ($password == $pass) {
+                $user_id = $user['USER_ID'];
+                $_SESSION['trader_id'] = $user_id;
+
+                header("Location: trader-dashboard.php");
+                exit();
+            }
+            else {
+                echo '<script>alert("Incorrect Password!")</script>';
+            }
         }
+        
     } else {
-        echo "Username not found!";
+        echo '<script>alert("Username not found!")</script>';
     }
 }
 

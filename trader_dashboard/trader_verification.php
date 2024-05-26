@@ -3,8 +3,8 @@
     session_start();
     include "../connect.php";
 
-    if(isset($_SESSION['user_id'])) {
-        $user = $_SESSION['user_id'];
+    if(isset($_SESSION['trader_id'])) {
+        $user = $_SESSION['trader_id'];
         header('Location: ../homepage/home.php');    
         exit();
     }
@@ -27,7 +27,7 @@
 
                 unset($_SESSION['confirmation_id']);
 
-                $_SESSION['user_id'] = $trader_id;
+                $_SESSION['trader_id'] = $trader_id;
                 header("Location: trader-dashboard.php");
             }
             else {
@@ -60,9 +60,9 @@
                     <input type="submit" name="submit" class="submit-button" value="Verify">
                 </form>
             </div>
-            <div class="dialog">
+            <!-- <div class="dialog">
                 Didn't recieve code? <a href="#">Resend Code</a>
-            </div>
+            </div> -->
         </div>
     </div>
 </body>

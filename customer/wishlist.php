@@ -9,7 +9,10 @@ $cart_id = $_SESSION['cart_id'];
 $wishlist_id = $_SESSION['wishlist_id'];
 
 if(!$user){
-    header('Location: ../login/login.php');    
+    echo '<script>
+    alert("Sorry, you need to be logged in to access this!");
+    window.location.href = "../homepage/home.php";
+    </script>';
     exit();
 }
 
@@ -119,7 +122,7 @@ oci_execute($stid);
 
 
   <?php
-  include '../components/footer.php';
+  include '../component/footer.php';
   ?>
 
   <script>

@@ -21,11 +21,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search and Sort Product</title>
-   
+    <link rel="stylesheet" href="search_and_sort.css">
 </head>
 <body>
     <?php
-        //include '../components/header.php';
+        include '../components/header.php';
     ?>
 
     <main class="container">
@@ -122,7 +122,7 @@
                     $product_id = $discount_product['PRODUCT_ID'];
                     $discount_id = $discount_product['DISCOUNT_ID'];
                     
-                    //echo '<p class="price"><s>$64.99</s><br>$49.99 <i class="fa-solid fa-tag"></i></p>';
+                    // echo '<p class="price"><s>$64.99</s><br>$49.99 <i class="fa-solid fa-tag"></i></p>';
                     echo '<div class="bakery">';
                     echo '<p>'.$category.'</p>';
                     echo '</div>';

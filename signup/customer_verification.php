@@ -32,7 +32,7 @@
                 echo "<script>alert('Confirmed!')</script>";
 
                 unset($_SESSION['confirmation_id']);
-                header("Location: ../login/login.html");
+                header("Location: ../signin/signin.html");
                 exit();
             }
             else {

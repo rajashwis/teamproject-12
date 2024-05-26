@@ -1,11 +1,22 @@
 <?php
 
-session_start();
-error_reporting(0);
+    session_start();
+    error_reporting(0);
 
-include "../connect.php";
+    include "../connect.php";
 
-$user = $_SESSION['user_id']; 
+    $user = $_SESSION['user_id']; 
+
+    if(isset($_SESSION['user_id'])) {
+        $customer_id = $_SESSION['user_id'];
+    }
+    else {
+        echo '<script>
+        alert("Sorry, you need to be logged in to access this!");
+        window.location.href = "../homepage/home.php";
+        </script>';
+        exit();
+    }
 
 ?>
 
@@ -46,7 +57,7 @@ $user = $_SESSION['user_id'];
                     JOIN PRODUCT P ON P.PRODUCT_ID = R.PRODUCT_ID
                     JOIN SHOP S ON P.SHOP_ID = S.SHOP_ID
                     JOIN CUSTOMER C ON C.CUSTOMER_ID = R.CUSTOMER_ID
-                    WHERE C.CUSTOMER_ID = $user";
+                    WHERE C.CUSTOMER_ID = $customer_id";
                 $statement = oci_parse($connection, $query);
                 oci_execute($statement);
 
@@ -101,10 +112,6 @@ $user = $_SESSION['user_id'];
 
         </div>
     </div>
-
-    <?php 
-        include('../components/footer.php');
-    ?>
 
 
 </body>
