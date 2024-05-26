@@ -478,7 +478,14 @@
 
                                 echo '<li class="item">';
 
-                                $imageData = $order_product_image['PRODUCT_IMAGE']->load();
+                                if ($order_product_image['PRODUCT_IMAGE'] !== null && $order_product_image['PRODUCT_IMAGE']->load()) {
+                                    $imageData = $order_product_image['PRODUCT_IMAGE']->load();
+                                } else {
+                                    // Use a dummy file if no file was uploaded
+                                    $dummyFilePath = '../resources/user.jpg'; // Path to your dummy image file
+                                    $imageData = file_get_contents($dummyFilePath);
+                                }
+
                                 $encodedImageData = base64_encode($imageData);
                                 // Determine the image type based on the first few bytes of the image data
                                 $header = substr($imageData, 0, 4);
